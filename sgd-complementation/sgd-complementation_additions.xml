@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!-- This file details any extensions needed to the data model to store data from this source, everything else is automatically generated from the model description so this is all we need to do to add to the model. -->
+
+<classes>
+<!-- add any <class> elements here -->
+
+  <class name="Gene" is-interface="true">
+    <collection name="complements"  referenced-type="Complement" reverse-reference="gene"/>
+  </class>
+
+  <class name="Complement" is-interface="true">
+    <attribute name="direction" type="java.lang.String"/>
+    <attribute name="notes" type="java.lang.String"/>
+    <attribute name="source" type="java.lang.String"/>
+    <attribute name="type" type="java.lang.String"/>
+    <reference name="publication" referenced-type="Publication"/>
+    <reference name="gene" referenced-type="Gene" reverse-reference="complements"/>
+    <reference name="complement" referenced-type="Gene"/>
+    <collection name="crossReferences" referenced-type="CrossReference"/> 	<collection name="dataSets" referenced-type="DataSet"/>
+
+
+  </class>
+
+</classes>

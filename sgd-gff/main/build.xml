@@ -1,0 +1,4 @@
+<project name="sgd-gff-tasks" default="default" basedir=".">
+  <description>build sgd-gff tasks</description>
+  <import file="../../../../imbuild/library.xml"/> 
+</project>

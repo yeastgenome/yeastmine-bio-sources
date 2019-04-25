@@ -1,0 +1,4 @@
+<project name="cglabrata-homologs-tasks" default="default" basedir=".">
+  <description>build cglabrata-homologs tasks</description>
+  <import file="../../../../imbuild/library.xml"/> 
+</project>

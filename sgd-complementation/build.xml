@@ -1,0 +1,5 @@
+<project name="sgd-complementation" default="default" basedir=".">
+  <description>build, test, package sgd-complementation</description>
+  
+  <import file="../../../imbuild/source.xml"/>
+</project>

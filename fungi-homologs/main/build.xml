@@ -1,0 +1,4 @@
+<project name="fungi-homologs-tasks" default="default" basedir=".">
+  <description>build fungi-homologs tasks</description>
+  <import file="../../../../imbuild/library.xml"/> 
+</project>

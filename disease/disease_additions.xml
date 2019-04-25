@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<classes>
+<class name="DiseaseAnnotation" extends="OntologyAnnotation" is-interface="true">
+  <collection name="evidence" referenced-type="DiseaseEvidence"/>
+</class>
+<class name="Gene" is-interface="true">
+  <collection name="diseaseAnnotation" referenced-type="DiseaseAnnotation"/>
+</class>
+<class name="DiseaseEvidenceCode" is-interface="true">
+  <attribute name="code" type="java.lang.String" />  
+</class>
+<class name="DOTerm" extends="OntologyTerm" is-interface="true"/>
+<class name="DiseaseEvidence" is-interface="true">
+  <collection name="with" referenced-type="BioEntity"/>
+   <attribute name="withText" type="java.lang.String"/>
+   <attribute name="annotType" type="java.lang.String"/>  
+  <reference name="code" referenced-type="DiseaseEvidenceCode"/>
+  <collection name="publications" referenced-type="Publication"/>
+</class>
+ <class name="DatabaseReference" is-interface="true">
+    <attribute name="identifier" type="java.lang.String"/>
+    <reference name="source" referenced-type="DataSource"/>
+    <reference name="subject" referenced-type="Publication" reverse-reference="crossReferences" />
+  </class>
+  <class name="Publication" is-interface="true">
+    <collection name="crossReferences" referenced-type="DatabaseReference" reverse-reference="subject"/>
+  </class>
+</classes>

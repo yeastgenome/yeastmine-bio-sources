@@ -1,0 +1,17 @@
+||:org.intermine.bio.dataconversion.CglabrataHomologsConverter
+java.lang.StringBuilder
+org.intermine.xml.full.Item
+org.intermine.bio.dataconversion.BioFileConverter
+org.intermine.util.FormattedTextParser
+org.intermine.objectstore.ObjectStoreException
+java.io.Reader
+java.util.Iterator
+java.util.HashMap
+java.util.Map
+org.apache.commons.lang.StringUtils
+[Ljava.lang.String;
+java.lang.Object
+java.lang.String
+java.lang.RuntimeException
+org.intermine.bio.dataconversion.CglabrataHomologsConverter
+java.lang.Exception

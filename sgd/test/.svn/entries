@@ -1,0 +1,58 @@
+10
+
+dir
+21795
+svn://subversion.flymine.org/branches/intermine_0_93/bio/sources/sgd/test
+svn://subversion.flymine.org
+
+
+
+2010-01-07T15:40:10.028250Z
+20462
+julie
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+37e1b716-f2f3-0310-95ce-c813c9c44928
+
+project.properties
+file
+
+
+
+
+2009-11-19T19:04:10.000000Z
+3a8460233ea3558259a90e4961a621cf
+2009-07-15T10:45:24.686665Z
+19393
+julie
+
+src
+dir
+
+resources
+dir
+
+build.xml
+file
+
+
+
+
+2009-11-19T19:04:10.000000Z
+9eb048a08523a01f8ad9050b8edc9e72
+2009-07-15T10:45:24.686665Z
+19393
+julie
+

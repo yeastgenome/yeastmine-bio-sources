@@ -1,0 +1,4 @@
+<project name="sgd-protein-ntermini-tasks" default="default" basedir=".">
+  <description>build sgd-protein-ntermini tasks</description>
+  <import file="../../../../imbuild/library.xml"/> 
+</project>

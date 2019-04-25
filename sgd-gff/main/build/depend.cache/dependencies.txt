@@ -1,0 +1,12 @@
+||:org.intermine.bio.dataconversion.SgdGffGFF3RecordHandler
+org.intermine.bio.dataconversion.SgdGffGFF3RecordHandler
+org.intermine.xml.full.Item
+java.util.List
+org.intermine.bio.dataconversion.GFF3RecordHandler
+org.apache.log4j.Logger
+java.util.HashMap
+java.util.Map
+org.intermine.bio.dataconversion.GFF3Converter
+org.apache.commons.lang.StringUtils
+org.intermine.bio.io.gff3.GFF3Record
+java.lang.String

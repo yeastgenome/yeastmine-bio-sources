@@ -1,0 +1,5 @@
+<project name="cgob-homologs" default="default" basedir=".">
+  <description>build, test, package cgob-homologs</description>
+  
+  <import file="../../../imbuild/source.xml"/>
+</project>

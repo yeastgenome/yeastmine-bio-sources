@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!-- This file details any extensions needed to the data model to store data from this source, everything else is automatically generated from the model description so this is all we need to do to add to the model. -->
+
+<classes>
+<!-- add any <class> elements here -->
+
+<class name="Protein" extends="BioEntity" is-interface="true">
+	<collection name="proteinProperties" referenced-type="ProteinProperty" reverse-reference="proteins"/>
+</class>
+
+<class name="ProteinProperty"  is-interface="true">
+	<attribute name="propertyName" type="java.lang.String"/>
+	<attribute name="isReversible" type="java.lang.String"/>
+	<attribute name="condition" type="java.lang.String"/>
+	<attribute name="location" type="java.lang.String"/>
+	<attribute name="source" type="java.lang.String"/>
+	<reference name="publication" referenced-type="Publication"/>
+	<collection name="proteins" referenced-type="Protein" reverse-reference="proteinProperties"/>
+</class>
+
+
+</classes>

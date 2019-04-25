@@ -1,0 +1,4 @@
+<project name="disease-tasks" default="default" basedir=".">
+  <description>build disease tasks</description>
+  <import file="../../../../imbuild/library.xml"/> 
+</project>
