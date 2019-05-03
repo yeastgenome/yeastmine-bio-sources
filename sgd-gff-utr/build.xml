@@ -1,5 +1,0 @@
-<project name="sgd-gff-utr" default="default" basedir=".">
-  <description>build, test, package sgd-gff-utr</description>
-  
-  <import file="../../../imbuild/source.xml"/>
-</project>

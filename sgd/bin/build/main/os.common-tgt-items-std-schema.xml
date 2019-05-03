@@ -11,30 +11,18 @@
     </table>
     <table name="Attribute">
         <column name="intermine_value" type="LONGVARCHAR"/>
-        <column name="id" type="INTEGER" required="true"/>
         <column name="name" type="LONGVARCHAR"/>
         <column name="itemId" type="INTEGER"/>
-        <unique name="Attribute_pkey">
-            <unique-column name="id"/>
-        </unique>
     </table>
     <table name="ReferenceList">
         <column name="refIds" type="LONGVARCHAR"/>
-        <column name="id" type="INTEGER" required="true"/>
         <column name="name" type="LONGVARCHAR"/>
         <column name="itemId" type="INTEGER"/>
-        <unique name="ReferenceList_pkey">
-            <unique-column name="id"/>
-        </unique>
     </table>
     <table name="Reference">
-        <column name="id" type="INTEGER" required="true"/>
         <column name="name" type="LONGVARCHAR"/>
         <column name="refId" type="LONGVARCHAR"/>
         <column name="itemId" type="INTEGER"/>
-        <unique name="Reference_pkey">
-            <unique-column name="id"/>
-        </unique>
     </table>
     <table name="intermine_metadata">
         <column name="key" type="LONGVARCHAR"/>

@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="bio-source-cgob-homologs-2.1.1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/cgob-homologs/build/libs/bio-source-cgob-homologs-2.1.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

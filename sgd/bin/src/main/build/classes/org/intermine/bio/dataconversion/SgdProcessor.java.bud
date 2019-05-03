@@ -1,0 +1,475 @@
+package org.intermine.bio.dataconversion;
+
+/*
+ * Copyright (C) 2002-2010 FlyMine
+ *
+ * This code may be freely distributed and modified under the
+ * terms of the GNU Lesser General Public Licence.  This should
+ * be distributed with the code.  See the LICENSE file for more
+ * information or http://www.gnu.org/copyleft/lesser.html.
+ *
+ */
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import org.apache.log4j.Logger;
+
+/**
+ * Queries the sgd oracle database and returns result sets
+ * @author Julie Sullivan
+ */
+public class SgdProcessor
+{
+    private static final Logger LOG = Logger.getLogger(SgdProcessor.class);  
+    private static final String SCHEMA_OWNER = "bud.";
+    
+    /**
+     * Return the results of running a query for genes
+     * @param connection the connection
+     * @return the results
+     * @throws SQLException if there is a database problem
+     */
+    protected ResultSet getChromosomalFeatureResults(Connection connection)
+        throws SQLException {
+    
+    		String query = "SELECT g.feature_no, g.feature_name, g.dbxref_id, g.gene_name, "
+             + " f.name_description, g.feature_type, f.headline, f.description, f.qualifier, f.feat_attribute, g.status "
+             + " FROM " + SCHEMA_OWNER + "feature g "
+             + " left outer join "+ SCHEMA_OWNER + "feat_annotation f on g.feature_no = f.feature_no"
+             + " where g.feature_type in (select col_value from "+ SCHEMA_OWNER+"web_metadata "
+             + " where application_name = 'Chromosomal Feature Search' "
+             + " and col_name = 'FEATURE_TYPE')";
+    	
+        LOG.info("executing: " + query);
+        Statement stmt = connection.createStatement();
+        ResultSet res = stmt.executeQuery(query);
+        return res;
+    }
+   
+    
+    /**
+     * Return the results of running a query for genes and chromosomes
+     * @param connection the connection
+     * @return the results
+     * modified to get Active only since the addition of seq_rel and release tables 9/7/11
+     * @throws SQLException if there is a database problem
+     */
+    protected ResultSet getChromosomalFeatureLocationResults(Connection connection)
+        throws SQLException {
+    	
+    	String query = "SELECT c.feature_no, c.feature_name AS identifier, c.feature_type, "
+             +" g.feature_no AS gene_feature_no, g.feature_name, l.strand, l.max_coord, l.min_coord, s.residues, s.seq_length "
+             + " FROM " + SCHEMA_OWNER + "feature g "
+             + " inner join " + SCHEMA_OWNER + "feat_relationship j on g.feature_no = j.child_feature_no "
+             + " inner join " + SCHEMA_OWNER + "feature c on j.parent_feature_no = c.feature_no "
+             + " left outer join " + SCHEMA_OWNER + "feat_location l on l.feature_no = g.feature_no"
+             + " left outer join "+ SCHEMA_OWNER + "seq s on g.feature_no = s.feature_no"
+             + " left outer join "+ SCHEMA_OWNER + "seq_rel sl on s.seq_no = sl.seq_no "
+             + " left outer join "+ SCHEMA_OWNER + "release r on r.release_no = sl.release_no "
+             + "  where g.feature_type in (select col_value from " + SCHEMA_OWNER + "web_metadata "
+             + " where application_name = 'Chromosomal Feature Search' "
+             + " and col_name = 'FEATURE_TYPE') "
+             + " AND (c.feature_type = 'chromosome' OR c.feature_type = 'plasmid') "
+             + " AND l.is_current = 'Y' and s.seq_type = 'genomic' and s.is_current = 'Y'"
+             +  " AND  r.sequence_release = (select max(sequence_release) from bud.release)";
+    
+    	LOG.info("executing: " + query);
+        Statement stmt = connection.createStatement();
+        ResultSet res = stmt.executeQuery(query);
+        return res;
+    }
+
+    
+    /**
+     * Return the results of running a query for genes and chromosomes
+     * @param connection the connection
+     * @return the results
+     * @throws SQLException if there is a database problem
+     */
+    protected ResultSet getChromosomeLocationResults(Connection connection)
+        throws SQLException {
+    	
+    	String query = "SELECT c.feature_no, c.feature_name AS identifier, c.feature_type, "
+             +" g.feature_no AS gene_feature_no "
+             + " FROM " + SCHEMA_OWNER + "feature g "
+             + " inner join " + SCHEMA_OWNER + "feat_relationship j on g.feature_no = j.child_feature_no "
+             + " inner join " + SCHEMA_OWNER + "feature c on j.parent_feature_no = c.feature_no "
+             + "  where g.feature_type in ('not physically mapped', 'not in systematic sequence of S288C' ) "
+             + " AND (c.feature_type = 'chromosome' OR c.feature_type = 'plasmid') ";
+    
+    	LOG.info("executing: " + query);
+        Statement stmt = connection.createStatement();
+        ResultSet res = stmt.executeQuery(query);
+        return res;
+    }
+    
+    
+    /**
+     *
+     * @param connection
+     * @param parent_id
+     * @return
+     * @throws SQLException
+     */
+    protected ResultSet getChildrenFeatureLocationResults(Connection connection)
+    throws SQLException {
+
+            String query = "SELECT  f1.feature_no as parent_id, f1.feature_type as parent_type, f2.feature_no as child_id, "
+                 	+"f2.feature_type as child_type, f2.feature_name as child_identifier, f2.dbxref_id as child_dbxrefid, "
+                    +" fL.max_coord, fL.min_coord, fl.strand, r.feature_name, s2.residues, s2.seq_length, f1.status as parent_status, f2.status as child_status "
+                    +" FROM  " + SCHEMA_OWNER + "feature f1," + SCHEMA_OWNER + "feature f2, "
+                    + SCHEMA_OWNER + "feat_relationship fr, " + SCHEMA_OWNER + "feat_location fl," + SCHEMA_OWNER + "seq s ," 
+                    +  SCHEMA_OWNER + "seq s2, " + SCHEMA_OWNER + "feature r,  " + SCHEMA_OWNER + "seq_rel sl,  " + SCHEMA_OWNER + "release r "
+                    +" WHERE  f1.feature_no = fr.parent_feature_no "
+                    +" AND fR.child_feature_no = f2.feature_no "
+                    +"AND fr.rank IN (2,4) "
+                    +"AND f2.feature_no = fl.feature_no "
+                    + "AND f2.feature_no = s2.feature_no "
+                    +"AND s.seq_no = FL.rootseq_no "
+                    +"AND s2.is_current = 'Y' " 
+                    +"AND s.is_current = 'Y' " 
+                    +"AND r.feature_no = s.feature_no "
+                	+ "AND s.seq_no = sl.seq_no "
+                	+ "AND r.release_no = sl.release_no "
+                	+ "AND r.sequence_release = (select max(sequence_release) from bud.release) "
+                    +"AND fl.is_current = 'Y' "
+                    +"AND f1.feature_type in (select col_value from "+ SCHEMA_OWNER+"web_metadata "
+                    + " where application_name = 'Chromosomal Feature Search' "
+                    + " and col_name = 'FEATURE_TYPE') ";
+    	                                
+            LOG.info("executing: " + query);
+            Statement stmt = connection.createStatement();
+            ResultSet res = stmt.executeQuery(query);
+            return res;
+    }
+
+   
+
+    /**
+     * Returns the results of running a query for genes and their sequences
+     * @param connection the connection
+     * @return the results
+     * @throws SQLException  if there is a database problem
+     */
+    protected ResultSet getChromosomeSequenceResults(Connection connection)
+    throws SQLException {
+    String query =  "SELECT g.feature_no, g.feature_name, g.feature_type, s.residues, s.seq_length "
+        + "FROM "+ SCHEMA_OWNER + "feature g, "+ SCHEMA_OWNER + "seq s  " 
+        + "WHERE s.seq_no in (select distinct rootseq_no from "+ SCHEMA_OWNER + "feat_location l, "+ SCHEMA_OWNER + "seq s, " 
+        + SCHEMA_OWNER + "release r," + SCHEMA_OWNER + "seq_rel sl "       
+        + "where s.seq_no = l.rootseq_no "
+        + "AND s.feature_no = l.feature_no "
+        + "AND s.seq_no = sl.seq_no "
+        + "AND sl.release_no = r.release_no "
+        + "AND r.sequence_release = (select max(sequence_release) from bud.release) "
+        + "AND s.is_current = 'Y') " 
+        + "AND g.feature_type in ('plasmid','chromosome') "
+        + "AND g.feature_no = s.feature_no";
+        
+    LOG.info("executing: " + query);
+    Statement stmt = connection.createStatement();
+    ResultSet res = stmt.executeQuery(query);
+    return res;
+}
+    
+    
+    
+    /**
+     * Return the results of running a query for protein sequences
+     * @param connection the connection
+     * @return the results
+     * @throws SQLException if there is a database problem
+     */
+    protected ResultSet getProteinResults(Connection connection)
+        throws SQLException {
+    	
+    	 String query =  "SELECT g.feature_no, g.dbxref_id, g.feature_name, g.gene_name, s.residues, s.seq_length - 1"
+    	        + " FROM "+ SCHEMA_OWNER + "feature g " 
+    	        + " inner join " + SCHEMA_OWNER + "seq s on g.feature_no = s.feature_no "
+    	        + " WHERE s.is_current = 'Y' "
+    	        + "AND s.seq_type = 'protein' ";
+       
+        LOG.info("executing: " + query);
+        Statement stmt = connection.createStatement();
+        ResultSet res = stmt.executeQuery(query);
+        return res;
+    }
+
+        
+    /**
+     * Return the results of running a query for all publications associated with chromosomal features  
+     * @param connection the connection
+     * @return the results
+     * @throws SQLException if there is a database problem
+     */
+    protected ResultSet getPubWithFeaturesResults(Connection connection)
+        throws SQLException {
+        String query = "SELECT  f.feature_no AS gene_feature_no , r.reference_no, "
+         +" r.pubmed, r.status, r.title, r.volume, r.page, r.year, r.issue,  r.citation, lg.literature_topic, j.abbreviation, r.dbxref_id "
+                + "FROM  "+ SCHEMA_OWNER + "reference r,  "+ SCHEMA_OWNER + "feature f,  "
+                + SCHEMA_OWNER + "litguide_feat lgf,  "+ SCHEMA_OWNER + "lit_guide lg, "+ SCHEMA_OWNER + "journal j "
+                + "WHERE f.feature_no = lgf.feature_no"
+                + "   AND lgf.lit_guide_no = lg.lit_guide_no"
+                + "   AND lg.reference_no = r.reference_no"
+                + " AND j.journal_no  (+) =   r.journal_no"
+                +" AND f.feature_type in (select col_value from "+ SCHEMA_OWNER+"web_metadata "
+                + " where application_name = 'Chromosomal Feature Search' "
+                + " and col_name = 'FEATURE_TYPE')"
+                +" ORDER by f.feature_no, r.reference_no";
+                
+        LOG.info("executing: " + query);
+        Statement stmt = connection.createStatement();
+        ResultSet res = stmt.executeQuery(query);
+        return res; // f.feature_name = 'HEM2' and
+    }
+    
+    /**
+     * Return the results of running a query for all publications.  
+     * @param connection the connection
+     * @return the results
+     * @throws SQLException if there is a database problem
+     */
+    protected ResultSet getPubAllResults(Connection connection)
+        throws SQLException {
+        String query = "SELECT  r.reference_no, "
+         +" r.pubmed, r.status, r.title, r.volume, r.page, r.year, r.issue,  r.citation, lg.literature_topic, j.abbreviation, a.abstract, r.dbxref_id "
+                + "FROM  "+ SCHEMA_OWNER + "reference r, "+ SCHEMA_OWNER + "lit_guide lg, "+ SCHEMA_OWNER + "journal j, "+ SCHEMA_OWNER + "abstract a  "
+                + "WHERE  lg.reference_no = r.reference_no"
+                + " AND j.journal_no  (+) =   r.journal_no"
+                + " AND a.reference_no (+) = r.reference_no"
+                +" ORDER by r.reference_no";
+                
+        LOG.info("executing: " + query);
+        Statement stmt = connection.createStatement();
+        ResultSet res = stmt.executeQuery(query);
+        return res; 
+    }
+    
+    /**
+     *  Returns the references that are not associated with features. They 
+     *  have LiteratureTopics associated with them.
+     * @param connection  the connection
+     * @return the results
+     * @throws SQLException if there is a database problem
+     *
+    protected ResultSet getPubWithoutFeaturesResults(Connection connection)
+    throws SQLException {
+    String query = "SELECT  r.reference_no, "
+     +" r.pubmed, r.status, r.title, r.volume, r.page, r.year, r.issue,  r.citation, lg.literature_topic, j.abbreviation "
+            + "FROM  "+ SCHEMA_OWNER + "reference r, "+ SCHEMA_OWNER + "lit_guide lg, "+ SCHEMA_OWNER + "journal j "
+            + "WHERE r.reference_no = lg.reference_no"
+            + " AND j.journal_no  (+) =   r.journal_no"
+            + "  AND lg.lit_guide_no NOT in (select lit_guide_no FROM "+SCHEMA_OWNER +"litguide_feat)"
+            +" ORDER by r.reference_no";
+            
+    LOG.info("executing: " + query);
+    Statement stmt = connection.createStatement();
+    ResultSet res = stmt.executeQuery(query);
+    return res;
+}*/
+    
+    
+    /**
+     * Return the results of running a query for all publications.  
+     * TODO only retreive publications for phenotype_annot_no
+     * @param connection the connection
+     * @return the results
+     * @throws SQLException if there is a database problem
+     */
+    protected ResultSet getPubForPhenotype(Connection connection)
+        throws SQLException {
+        String query = "SELECT  rl.primary_key AS pheno_annot_no , r.reference_no, "
+         +" r.pubmed, r.status, r.title, r.volume, r.page, r.year, r.issue,  r.citation, j.abbreviation, r.dbxref_id "
+                + "FROM  "+ SCHEMA_OWNER + "reference r,  "+ SCHEMA_OWNER + "ref_link rl,  "+ SCHEMA_OWNER + "journal j "
+                + "WHERE  rl.reference_no = r.reference_no"
+                + "   AND rl.tab_name = 'PHENO_ANNOTATION'"
+                + " AND j.journal_no  (+) =   r.journal_no"
+                +" ORDER by rl.primary_key, r.reference_no";
+                
+        LOG.info("executing: " + query);
+        Statement stmt = connection.createStatement();
+        ResultSet res = stmt.executeQuery(query);
+        return res; 
+    }
+    
+    /**
+     * Return the results of running a query for CDSs and their sequences
+     * @param connection the connection
+     * @return the results
+     * @throws SQLException if there is a database problem
+     */
+    protected ResultSet getInteractionResults(Connection connection)
+        throws SQLException {
+
+        String query = "SELECT interaction_no, feature_a, feature_b, experiment_type, interaction_type, "
+        	+" action, i.source, annotation_type, modification, phenotype, r.citation, i.pubmed, r.title, r.volume, r.page, r.year, r.issue, j.abbreviation, "
+        	+ " r.reference_no, substr(r.citation, 0, (instr(r.citation, ')',1,1) )) as first_author, r.dbxref_id  "
+            + " FROM "+ SCHEMA_OWNER + "interaction_mv i, "+ SCHEMA_OWNER + "reference r, "+ SCHEMA_OWNER + "journal j"
+            + " WHERE i.pubmed = r.pubmed and r.journal_no = j.journal_no ORDER by feature_a";
+        
+        LOG.info("executing: " + query);
+        Statement stmt = connection.createStatement();
+        ResultSet res = stmt.executeQuery(query);
+        return res;
+    }
+    
+    /**
+     * Return the results of running a query for CDSs and their sequences
+     * @param connection the connection
+     * @return the results
+     * @throws SQLException if there is a database problem
+     */
+    protected ResultSet getPhenotypeResults(Connection connection)
+        throws SQLException {
+         
+        String query = "SELECT  me.feature_no, pheno_annotations.pheno_annotation_no, "
+        + " phenotype_no.experiment_type,  experiment_no.experiment_comment, phenotype_no.mutant_type, phenotype_no.qualifier, phenotype_no.observable, "
+        + " expt_property_no.property_type, expt_property_no.property_value, "
+        + " expt_property_no.property_description, me.feature_type "
+
+        + " FROM BUD.feature me "
+        
+        + " INNER JOIN BUD.pheno_annotation pheno_annotations ON  pheno_annotations.feature_no = me.feature_no"
+        + " INNER JOIN BUD.phenotype phenotype_no ON phenotype_no.phenotype_no = pheno_annotations.phenotype_no "
+        + " LEFT JOIN BUD.experiment experiment_no ON experiment_no.experiment_no = pheno_annotations.experiment_no "
+        + " LEFT JOIN BUD.expt_exptprop expt_exptprops ON expt_exptprops.experiment_no = pheno_annotations.experiment_no "
+        + " LEFT JOIN BUD.expt_property expt_property_no ON expt_property_no.expt_property_no = expt_exptprops.expt_property_no " 
+        
+        + " ORDER BY me.feature_no, pheno_annotations.pheno_annotation_no";
+
+      
+        LOG.info("executing: " + query);        
+        Statement stmt = connection.createStatement();
+        ResultSet res = stmt.executeQuery(query);
+        return res;
+    }
+    
+    /**
+     * Return the results of getting aliases
+     * @param connection the connection
+     * @return the results
+     * @throws SQLException if there is a database problem
+     */
+    protected ResultSet getAliases(Connection connection)
+        throws SQLException {
+        
+        String query = "SELECT f.feature_no as gene_feature_no, alias_name, alias_type "
+        + "FROM "+ SCHEMA_OWNER + "alias a, "+ SCHEMA_OWNER + "feat_alias fa,"+ SCHEMA_OWNER + "feature f "
+        + " WHERE f.feature_type in (select col_value from "+ SCHEMA_OWNER+"web_metadata "
+        + " WHERE application_name = 'Chromosomal Feature Search' "
+        + " AND col_name = 'FEATURE_TYPE') "
+        + "AND fa.alias_no = a.alias_no "
+        + "AND fa.feature_no = f.feature_no order by f.feature_no asc";
+      
+        LOG.info("executing: " + query);        
+        Statement stmt = connection.createStatement();
+        ResultSet res = stmt.executeQuery(query);
+        return res;
+    }
+    
+    
+    /**
+     * Return the results of getting paralogs
+     * @param connection the connection
+     * @return the results
+     * @throws SQLException if there is a database problem
+     */
+    protected ResultSet getParalogs(Connection connection)
+        throws SQLException {
+    	 
+        String query = "SELECT parent_feature_no, child_feature_no, r.reference_no "
+        + "FROM "+ SCHEMA_OWNER + "feat_relationship fr, "+ SCHEMA_OWNER + "ref_link fl, "+ SCHEMA_OWNER + "reference  r "
+        + " WHERE relationship_type = 'pair' "
+        + " AND fl.tab_name = 'FEAT_RELATIONSHIP' "
+        + " AND fr.feat_relationship_no = fl.primary_key "
+        + " AND fl.reference_no = r.reference_no";
+      
+        LOG.info("executing: " + query);        
+        Statement stmt = connection.createStatement();
+        ResultSet res = stmt.executeQuery(query);
+        return res;
+    }
+    
+    
+    /**
+     * Return the results of getting cross-references from dbxref
+     * @param connection the connection
+     * @return the results
+     * @throws SQLException if there is a database problem
+     */
+    protected ResultSet getCrossReferences(Connection connection)
+    throws SQLException {
+
+    	String query = "select f.feature_no, dbx.dbxref_id,  dbx.source, dbx.dbxref_type"
+    		+ " FROM bud.feature f, bud.dbxref dbx, bud.dbxref_feat df, bud.dbxref_url du, bud.url u"
+    		+ " where f.feature_no = df.feature_no AND df.dbxref_no = dbx.dbxref_no AND dbx.dbxref_no = du.dbxref_no AND du.url_no = u.url_no"
+    		+ " AND f.feature_type in (select col_value from bud.web_metadata "
+    		+ " WHERE application_name = 'Chromosomal Feature Search' "
+    		+ " AND col_name = 'FEATURE_TYPE') "
+    		+ " and dbx.source != 'SGD'"  //in ('EBI', 'GenBank/EMBL/DDBJ', 'IUBMB', 'NCBI', 'TCDB', 'RNAcentral') "
+    		+ " group by f.feature_no, dbx.dbxref_id,  dbx.source, dbx.dbxref_type"
+    		+ " order by f.feature_no asc";
+
+    	LOG.info("executing: " + query);        
+    	Statement stmt = connection.createStatement();
+    	ResultSet res = stmt.executeQuery(query);
+    	return res;
+    }
+
+    
+    
+    /**
+     * Return the results of getting cross-references from dbxref
+     * @param connection the connection
+     * @return the results
+     * @throws SQLException if there is a database problem
+     */
+    protected ResultSet getUniProtCrossReference(Connection connection)
+    throws SQLException {
+
+    	String query = "select f.feature_no, dbx.dbxref_id,  dbx.source "
+    		+ " FROM bud.feature f, bud.dbxref dbx, bud.dbxref_feat df, bud.dbxref_url du, bud.url u"
+    		+ " where f.feature_no = df.feature_no AND df.dbxref_no = dbx.dbxref_no AND dbx.dbxref_no = du.dbxref_no AND du.url_no = u.url_no"
+    		+ " AND f.feature_type in (select col_value from bud.web_metadata "
+    		+ " WHERE application_name = 'Chromosomal Feature Search' "
+    		+ " AND col_name = 'FEATURE_TYPE') "
+    		+ " and dbx.source = 'EBI' and dbx.dbxref_type in ('UniProt/Swiss-Prot ID', 'UniProt/TrEMBL ID') "
+    		+ " group by f.feature_no, dbx.dbxref_id,  dbx.source"
+    		+ " order by f.feature_no asc";
+
+    	LOG.info("executing: " + query);        
+    	Statement stmt = connection.createStatement();
+    	ResultSet res = stmt.executeQuery(query);
+    	return res;
+    }
+    
+	
+    /**
+     * Return the results of getting cross-references from dbxref
+     * @param connection the connection
+     * @return the results
+     * @throws SQLException if there is a database problem
+     */
+    protected ResultSet getPathways(Connection connection)
+    throws SQLException {
+
+    	String query = "select f.feature_no, dbx.dbxref_id, dbxref_name "
+    		+ " FROM bud.feature f, bud.dbxref dbx, bud.dbxref_feat df, bud.dbxref_url du, bud.url u"
+    		+ " where f.feature_no = df.feature_no AND df.dbxref_no = dbx.dbxref_no AND dbx.dbxref_no = du.dbxref_no AND du.url_no = u.url_no"
+    		+ " AND f.feature_type in (select col_value from bud.web_metadata "
+    		+ " WHERE application_name = 'Chromosomal Feature Search' "
+    		+ " AND col_name = 'FEATURE_TYPE') "
+    		+ " and dbx.source = 'MetaCyc' "
+    		+ " order by f.feature_no asc";
+
+    	LOG.info("executing: " + query);        
+    	Statement stmt = connection.createStatement();
+    	ResultSet res = stmt.executeQuery(query);
+    	return res;
+    }
+
+    
+}

@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="go-annotation-db-tasks">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/go-annotation-db/src/main/dist/go-annotation-db-tasks.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

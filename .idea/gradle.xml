@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/cglabrata-homologs" />
+            <option value="$PROJECT_DIR$/cgob-homologs" />
+            <option value="$PROJECT_DIR$/disease" />
+            <option value="$PROJECT_DIR$/eco" />
+            <option value="$PROJECT_DIR$/fungi-homologs" />
+            <option value="$PROJECT_DIR$/go-annotation-db" />
+            <option value="$PROJECT_DIR$/go-slim" />
+            <option value="$PROJECT_DIR$/homolog-genes" />
+            <option value="$PROJECT_DIR$/pombe-homologs" />
+            <option value="$PROJECT_DIR$/sgd" />
+            <option value="$PROJECT_DIR$/sgd-complementation" />
+            <option value="$PROJECT_DIR$/sgd-gff" />
+            <option value="$PROJECT_DIR$/sgd-gff-utr" />
+            <option value="$PROJECT_DIR$/sgd-protein-ntermini" />
+            <option value="$PROJECT_DIR$/sgd-protein-properties" />
+            <option value="$PROJECT_DIR$/spell-expression" />
+          </set>
+        </option>
+        <option name="useQualifiedModuleNames" value="true" />
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

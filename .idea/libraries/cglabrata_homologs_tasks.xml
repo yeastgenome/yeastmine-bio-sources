@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="cglabrata-homologs-tasks">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/cglabrata-homologs/bin/main/dist/cglabrata-homologs-tasks.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,0 +1,35 @@
+rootProject.name = 'bio-sources'
+
+include ':bio-source-cglabrata-homologs',
+ ':bio-source-cgob-homologs',
+ ':bio-source-disease',
+ ':bio-source-eco',
+ ':bio-source-fungi-homologs',
+':bio-source-go-annotation-db',
+ ':bio-source-go-slim',
+ ':bio-source-homolog-genes',
+ ':bio-source-pombe-homologs',
+ ':bio-source-sgd-complementation',
+ ':bio-source-sgd-gff-utr',
+ ':bio-source-sgd-gff',
+ ':bio-source-sgd-protein-ntermini',
+ ':bio-source-sgd-protein-properties',
+ ':bio-source-sgd',
+ ':bio-source-spell-expression'
+
+project(':bio-source-cglabrata-homologs').projectDir = new File(settingsDir, './cglabrata-homologs')
+project(':bio-source-cgob-homologs').projectDir = new File(settingsDir, './cgob-homologs')
+project(':bio-source-disease').projectDir = new File(settingsDir, './disease')
+project(':bio-source-eco').projectDir = new File(settingsDir, './eco')
+project(':bio-source-fungi-homologs').projectDir = new File(settingsDir, './fungi-homologs')
+project(':bio-source-go-annotation-db').projectDir = new File(settingsDir, './go-annotation-db')
+project(':bio-source-go-slim').projectDir = new File(settingsDir, './go-slim')
+project(':bio-source-homolog-genes').projectDir = new File(settingsDir, './homolog-genes')
+project(':bio-source-pombe-homologs').projectDir = new File(settingsDir, './pombe-homologs')
+project(':bio-source-sgd-complementation').projectDir = new File(settingsDir, './sgd-complementation')
+project(':bio-source-sgd-gff-utr').projectDir = new File(settingsDir, './sgd-gff-utr')
+project(':bio-source-sgd-gff').projectDir = new File(settingsDir, './sgd-gff')
+project(':bio-source-sgd-protein-ntermini').projectDir = new File(settingsDir, './sgd-protein-ntermini')
+project(':bio-source-sgd-protein-properties').projectDir = new File(settingsDir, './sgd-protein-properties')
+project(':bio-source-sgd').projectDir = new File(settingsDir, './sgd')
+project(':bio-source-spell-expression').projectDir = new File(settingsDir, './spell-expression')

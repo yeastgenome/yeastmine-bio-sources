@@ -1,4 +1,0 @@
-<project name="cgob-homologs-tasks" default="default" basedir=".">
-  <description>build cgob-homologs tasks</description>
-  <import file="../../../../imbuild/library.xml"/> 
-</project>

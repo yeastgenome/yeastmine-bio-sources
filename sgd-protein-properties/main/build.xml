@@ -1,4 +1,0 @@
-<project name="sgd-protein-properties-tasks" default="default" basedir=".">
-  <description>build sgd-protein-properties tasks</description>
-  <import file="../../../../imbuild/library.xml"/> 
-</project>

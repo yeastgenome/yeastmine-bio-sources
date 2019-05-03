@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="homolog-genes-tasks">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/homolog-genes/bin/main/dist/homolog-genes-tasks.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

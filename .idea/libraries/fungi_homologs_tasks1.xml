@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="fungi-homologs-tasks1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/fungi-homologs/bin/main/dist/fungi-homologs-tasks.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

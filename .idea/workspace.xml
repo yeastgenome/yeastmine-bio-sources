@@ -1,0 +1,1012 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="19a8cd2b-3dbc-4d61-9b18-33c99e633ee7" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/cglabrata-homologs/.classpath" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cglabrata-homologs/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cglabrata-homologs/build.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cglabrata-homologs/build/main/cglabrata-homologs_keys.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cglabrata-homologs/build/main/default.intermine.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cglabrata-homologs/build/main/intermine.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cglabrata-homologs/build/main/log4j.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cglabrata-homologs/build/main/os.common-tgt-items-std-schema.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cglabrata-homologs/cglabrata-homologs_additions.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cglabrata-homologs/src/main/resources/cglabrata-homologs_additions.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cglabrata-homologs/main/build.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cglabrata-homologs/main/build/classes/org/intermine/bio/dataconversion/CglabrataHomologsConverter.class" beforeDir="false" afterPath="$PROJECT_DIR$/cglabrata-homologs/src/main/build/classes/org/intermine/bio/dataconversion/CglabrataHomologsConverter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cglabrata-homologs/main/build/depend.cache/dependencies.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cglabrata-homologs/src/main/build/depend.cache/dependencies.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cglabrata-homologs/main/dist/cglabrata-homologs-tasks.jar" beforeDir="false" afterPath="$PROJECT_DIR$/cglabrata-homologs/src/main/dist/cglabrata-homologs-tasks.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cglabrata-homologs/main/project.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cglabrata-homologs/main/resources/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cglabrata-homologs/main/src/org/intermine/bio/dataconversion/CglabrataHomologsConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/cglabrata-homologs/src/main/java/org/intermine/bio/dataconversion/CglabrataHomologsConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cglabrata-homologs/project.properties" beforeDir="false" afterPath="$PROJECT_DIR$/cglabrata-homologs/cglabrata-homologs.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cglabrata-homologs/resources/cglabrata-homologs_keys.properties" beforeDir="false" afterPath="$PROJECT_DIR$/cglabrata-homologs/src/main/resources/cglabrata-homologs_keys.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cglabrata-homologs/test/build.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cglabrata-homologs/test/project.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cgob-homologs/.classpath" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cgob-homologs/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cgob-homologs/build.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cgob-homologs/build/main/cgob-homologs_keys.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cgob-homologs/build/main/default.intermine.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cgob-homologs/build/main/intermine.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cgob-homologs/build/main/log4j.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cgob-homologs/build/main/os.common-tgt-items-std-schema.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cgob-homologs/cgob-homologs_additions.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cgob-homologs/src/main/resources/cgob-homologs_additions.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cgob-homologs/main/build.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cgob-homologs/main/build/classes/org/intermine/bio/dataconversion/CgobHomologsConverter.class" beforeDir="false" afterPath="$PROJECT_DIR$/cgob-homologs/src/main/build/classes/org/intermine/bio/dataconversion/CgobHomologsConverter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cgob-homologs/main/build/depend.cache/dependencies.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cgob-homologs/src/main/build/depend.cache/dependencies.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cgob-homologs/main/dist/cgob-homologs-tasks.jar" beforeDir="false" afterPath="$PROJECT_DIR$/cgob-homologs/src/main/dist/cgob-homologs-tasks.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cgob-homologs/main/project.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cgob-homologs/main/resources/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cgob-homologs/main/src/org/intermine/bio/dataconversion/CgobHomologsConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/cgob-homologs/src/main/java/org/intermine/bio/dataconversion/CgobHomologsConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cgob-homologs/project.properties" beforeDir="false" afterPath="$PROJECT_DIR$/cgob-homologs/cgob-homologs.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cgob-homologs/resources/cgob-homologs_keys.properties" beforeDir="false" afterPath="$PROJECT_DIR$/cgob-homologs/src/main/resources/cgob-homologs_keys.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cgob-homologs/test/build.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cgob-homologs/test/project.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/disease/.classpath" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/disease/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/disease/build.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/disease/build/main/default.intermine.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/disease/build/main/disease_keys.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/disease/build/main/intermine.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/disease/build/main/log4j.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/disease/build/main/os.common-tgt-items-std-schema.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/disease/disease_additions.xml" beforeDir="false" afterPath="$PROJECT_DIR$/disease/src/main/resources/disease_additions.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/disease/main/build.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/disease/main/build/classes/org/intermine/bio/dataconversion/DiseaseConverter$DoTermToGene.class" beforeDir="false" afterPath="$PROJECT_DIR$/disease/src/main/build/classes/org/intermine/bio/dataconversion/DiseaseConverter$DoTermToGene.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/disease/main/build/classes/org/intermine/bio/dataconversion/DiseaseConverter$Evidence.class" beforeDir="false" afterPath="$PROJECT_DIR$/disease/src/main/build/classes/org/intermine/bio/dataconversion/DiseaseConverter$Evidence.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/disease/main/build/classes/org/intermine/bio/dataconversion/DiseaseConverter.class" beforeDir="false" afterPath="$PROJECT_DIR$/disease/src/main/build/classes/org/intermine/bio/dataconversion/DiseaseConverter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/disease/main/build/classes/org/intermine/bio/dataconversion/DiseaseProcessor.class" beforeDir="false" afterPath="$PROJECT_DIR$/disease/src/main/build/classes/org/intermine/bio/dataconversion/DiseaseProcessor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/disease/main/build/depend.cache/dependencies.txt" beforeDir="false" afterPath="$PROJECT_DIR$/disease/src/main/build/depend.cache/dependencies.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/disease/main/dist/disease-tasks.jar" beforeDir="false" afterPath="$PROJECT_DIR$/disease/src/main/dist/disease-tasks.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/disease/main/project.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/disease/main/resources/disease_config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/disease/src/main/resources/disease_config.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/disease/main/src/org/intermine/bio/dataconversion/DiseaseConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/disease/src/main/java/org/intermine/bio/dataconversion/DiseaseConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/disease/main/src/org/intermine/bio/dataconversion/DiseaseProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/disease/src/main/java/org/intermine/bio/dataconversion/DiseaseProcessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/disease/project.properties" beforeDir="false" afterPath="$PROJECT_DIR$/disease/disease.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/disease/resources/disease_keys.properties" beforeDir="false" afterPath="$PROJECT_DIR$/disease/src/main/resources/disease_keys.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/disease/test/build.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/disease/test/project.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eco/.classpath" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eco/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eco/build.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eco/build/main/default.intermine.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eco/build/main/eco_keys.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eco/build/main/intermine.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eco/build/main/log4j.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eco/build/main/os.common-tgt-items-std-schema.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eco/eco_additions.xml" beforeDir="false" afterPath="$PROJECT_DIR$/eco/resources/eco_additions.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eco/project.properties" beforeDir="false" afterPath="$PROJECT_DIR$/eco/eco.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fungi-homologs/.classpath" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fungi-homologs/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fungi-homologs/build.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fungi-homologs/build/main/default.intermine.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fungi-homologs/build/main/fungi-homologs_keys.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fungi-homologs/build/main/intermine.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fungi-homologs/build/main/log4j.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fungi-homologs/build/main/os.common-tgt-items-std-schema.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fungi-homologs/fungi-homologs_additions.xml" beforeDir="false" afterPath="$PROJECT_DIR$/fungi-homologs/src/main/resources/fungi-homologs_additions.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fungi-homologs/main/build.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fungi-homologs/main/build/classes/org/intermine/bio/dataconversion/FungiHomologsConverter.class" beforeDir="false" afterPath="$PROJECT_DIR$/fungi-homologs/src/main/build/classes/org/intermine/bio/dataconversion/FungiHomologsConverter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fungi-homologs/main/build/depend.cache/dependencies.txt" beforeDir="false" afterPath="$PROJECT_DIR$/fungi-homologs/src/main/build/depend.cache/dependencies.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fungi-homologs/main/dist/fungi-homologs-tasks.jar" beforeDir="false" afterPath="$PROJECT_DIR$/fungi-homologs/src/main/dist/fungi-homologs-tasks.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fungi-homologs/main/project.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fungi-homologs/main/resources/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fungi-homologs/main/src/org/intermine/bio/dataconversion/FungiHomologsConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/fungi-homologs/src/main/java/org/intermine/bio/dataconversion/FungiHomologsConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fungi-homologs/project.properties" beforeDir="false" afterPath="$PROJECT_DIR$/fungi-homologs/fungi-homologs.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fungi-homologs/resources/fungi-homologs_keys.properties" beforeDir="false" afterPath="$PROJECT_DIR$/fungi-homologs/src/main/resources/fungi-homologs_keys.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fungi-homologs/test/build.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fungi-homologs/test/project.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go-annotation-db/.classpath" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go-annotation-db/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go-annotation-db/build.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go-annotation-db/build/main/default.intermine.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go-annotation-db/build/main/go-annotation-db_keys.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go-annotation-db/build/main/intermine.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go-annotation-db/build/main/log4j.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go-annotation-db/build/main/os.common-tgt-items-std-schema.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go-annotation-db/go-annotation-db_additions.xml" beforeDir="false" afterPath="$PROJECT_DIR$/go-annotation-db/src/main/resources/go-annotation-db_additions.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go-annotation-db/main/build.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go-annotation-db/main/build/classes/org/intermine/bio/dataconversion/GoAnnotationDbConverter$Evidence.class" beforeDir="false" afterPath="$PROJECT_DIR$/go-annotation-db/src/main/build/classes/org/intermine/bio/dataconversion/GoAnnotationDbConverter$Evidence.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go-annotation-db/main/build/classes/org/intermine/bio/dataconversion/GoAnnotationDbConverter$GoTermToGene.class" beforeDir="false" afterPath="$PROJECT_DIR$/go-annotation-db/src/main/build/classes/org/intermine/bio/dataconversion/GoAnnotationDbConverter$GoTermToGene.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go-annotation-db/main/build/classes/org/intermine/bio/dataconversion/GoAnnotationDbConverter.class" beforeDir="false" afterPath="$PROJECT_DIR$/go-annotation-db/src/main/build/classes/org/intermine/bio/dataconversion/GoAnnotationDbConverter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go-annotation-db/main/build/classes/org/intermine/bio/dataconversion/GoAnnotationDbProcessor.class" beforeDir="false" afterPath="$PROJECT_DIR$/go-annotation-db/src/main/build/classes/org/intermine/bio/dataconversion/GoAnnotationDbProcessor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go-annotation-db/main/build/depend.cache/dependencies.txt" beforeDir="false" afterPath="$PROJECT_DIR$/go-annotation-db/src/main/build/depend.cache/dependencies.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go-annotation-db/main/dist/go-annotation-db-tasks.jar" beforeDir="false" afterPath="$PROJECT_DIR$/go-annotation-db/src/main/dist/go-annotation-db-tasks.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go-annotation-db/main/project.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go-annotation-db/main/resources/go-annotation-db_config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/go-annotation-db/src/main/resources/go-annotation-db_config.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go-annotation-db/main/src/org/intermine/bio/dataconversion/GoAnnotationDbConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/go-annotation-db/src/main/java/org/intermine/bio/dataconversion/GoAnnotationDbConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go-annotation-db/main/src/org/intermine/bio/dataconversion/GoAnnotationDbProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/go-annotation-db/src/main/java/org/intermine/bio/dataconversion/GoAnnotationDbProcessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go-annotation-db/project.properties" beforeDir="false" afterPath="$PROJECT_DIR$/go-annotation-db/go-annotation-db.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go-annotation-db/resources/go-annotation-db_keys.properties" beforeDir="false" afterPath="$PROJECT_DIR$/go-annotation-db/src/main/resources/go-annotation-db_keys.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go-annotation-db/test/build.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go-annotation-db/test/project.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go-slim/.classpath" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go-slim/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go-slim/build.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go-slim/build/main/default.intermine.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go-slim/build/main/go-slim_keys.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go-slim/build/main/intermine.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go-slim/build/main/log4j.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go-slim/build/main/os.common-tgt-items-std-schema.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go-slim/go-slim_additions.xml" beforeDir="false" afterPath="$PROJECT_DIR$/go-slim/resources/go-slim_additions.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go-slim/project.properties" beforeDir="false" afterPath="$PROJECT_DIR$/go-slim/go-slim.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/homolog-genes/.classpath" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/homolog-genes/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/homolog-genes/build.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/homolog-genes/build/main/default.intermine.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/homolog-genes/build/main/homolog-genes_keys.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/homolog-genes/build/main/intermine.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/homolog-genes/build/main/log4j.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/homolog-genes/build/main/os.common-tgt-items-std-schema.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/homolog-genes/homolog-genes_additions.xml" beforeDir="false" afterPath="$PROJECT_DIR$/homolog-genes/src/main/resources/homolog-genes_additions.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/homolog-genes/main/build.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/homolog-genes/main/build/classes/org/intermine/bio/dataconversion/HomologGenesConverter.class" beforeDir="false" afterPath="$PROJECT_DIR$/homolog-genes/src/main/build/classes/org/intermine/bio/dataconversion/HomologGenesConverter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/homolog-genes/main/build/depend.cache/dependencies.txt" beforeDir="false" afterPath="$PROJECT_DIR$/homolog-genes/src/main/build/depend.cache/dependencies.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/homolog-genes/main/dist/homolog-genes-tasks.jar" beforeDir="false" afterPath="$PROJECT_DIR$/homolog-genes/src/main/dist/homolog-genes-tasks.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/homolog-genes/main/project.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/homolog-genes/main/resources/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/homolog-genes/main/src/org/intermine/bio/dataconversion/HomologGenesConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/homolog-genes/src/main/java/org/intermine/bio/dataconversion/HomologGenesConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/homolog-genes/project.properties" beforeDir="false" afterPath="$PROJECT_DIR$/homolog-genes/homolog-genes.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/homolog-genes/resources/homolog-genes_keys.properties" beforeDir="false" afterPath="$PROJECT_DIR$/homolog-genes/src/main/resources/homolog-genes_keys.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/homolog-genes/test/build.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/homolog-genes/test/project.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pombe-homologs/.classpath" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pombe-homologs/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pombe-homologs/build.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pombe-homologs/build/main/.pombe-homologs_keys.properties.swp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pombe-homologs/build/main/default.intermine.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pombe-homologs/build/main/intermine.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pombe-homologs/build/main/log4j.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pombe-homologs/build/main/os.common-tgt-items-std-schema.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pombe-homologs/build/main/pombe-homologs_keys.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pombe-homologs/main/build.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pombe-homologs/main/build/classes/org/intermine/bio/dataconversion/PombeHomologsConverter.class" beforeDir="false" afterPath="$PROJECT_DIR$/pombe-homologs/src/main/build/classes/org/intermine/bio/dataconversion/PombeHomologsConverter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pombe-homologs/main/build/depend.cache/dependencies.txt" beforeDir="false" afterPath="$PROJECT_DIR$/pombe-homologs/src/main/build/depend.cache/dependencies.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pombe-homologs/main/dist/pombe-homologs-tasks.jar" beforeDir="false" afterPath="$PROJECT_DIR$/pombe-homologs/src/main/dist/pombe-homologs-tasks.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pombe-homologs/main/project.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pombe-homologs/main/resources/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pombe-homologs/main/src/org/intermine/bio/dataconversion/PombeHomologsConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/pombe-homologs/src/main/java/org/intermine/bio/dataconversion/PombeHomologsConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pombe-homologs/pombe-homologs_additions.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pombe-homologs/src/main/resources/pombe-homologs_additions.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pombe-homologs/project.properties" beforeDir="false" afterPath="$PROJECT_DIR$/pombe-homologs/pombe-homologs.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pombe-homologs/resources/pombe-homologs_keys.properties" beforeDir="false" afterPath="$PROJECT_DIR$/pombe-homologs/src/main/resources/pombe-homologs_keys.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pombe-homologs/test/build.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pombe-homologs/test/project.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-complementation/.classpath" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-complementation/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-complementation/build.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-complementation/build/main/default.intermine.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-complementation/build/main/intermine.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-complementation/build/main/log4j.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-complementation/build/main/os.common-tgt-items-std-schema.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-complementation/build/main/sgd-complementation_keys.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-complementation/main/build.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-complementation/main/build/classes/org/intermine/bio/dataconversion/SgdComplementationConverter.class" beforeDir="false" afterPath="$PROJECT_DIR$/sgd-complementation/src/main/build/classes/org/intermine/bio/dataconversion/SgdComplementationConverter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-complementation/main/build/depend.cache/dependencies.txt" beforeDir="false" afterPath="$PROJECT_DIR$/sgd-complementation/src/main/build/depend.cache/dependencies.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-complementation/main/dist/sgd-complementation-tasks.jar" beforeDir="false" afterPath="$PROJECT_DIR$/sgd-complementation/src/main/dist/sgd-complementation-tasks.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-complementation/main/project.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-complementation/main/resources/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-complementation/main/src/org/intermine/bio/dataconversion/SgdComplementationConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/sgd-complementation/src/main/java/org/intermine/bio/dataconversion/SgdComplementationConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-complementation/project.properties" beforeDir="false" afterPath="$PROJECT_DIR$/sgd-complementation/sgd-complementation.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-complementation/resources/sgd-complementation_keys.properties" beforeDir="false" afterPath="$PROJECT_DIR$/sgd-complementation/src/main/resources/sgd-complementation_keys.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-complementation/sgd-complementation_additions.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sgd-complementation/src/main/resources/sgd-complementation_additions.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-complementation/test/build.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-complementation/test/project.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-gff-utr/.classpath" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-gff-utr/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-gff-utr/build.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-gff-utr/build/main/default.intermine.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-gff-utr/build/main/intermine.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-gff-utr/build/main/log4j.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-gff-utr/build/main/os.common-tgt-items-std-schema.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-gff-utr/build/main/sgd-gff-utr_keys.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-gff-utr/main/build.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-gff-utr/main/build/classes/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/sgd-gff-utr/src/main/build/classes/.classpath" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-gff-utr/main/build/classes/.project" beforeDir="false" afterPath="$PROJECT_DIR$/sgd-gff-utr/src/main/build/classes/.project" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-gff-utr/main/build/classes/org/intermine/bio/dataconversion/SgdGffUtrConverter.class" beforeDir="false" afterPath="$PROJECT_DIR$/sgd-gff-utr/src/main/build/classes/org/intermine/bio/dataconversion/SgdGffUtrConverter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-gff-utr/main/build/depend.cache/dependencies.txt" beforeDir="false" afterPath="$PROJECT_DIR$/sgd-gff-utr/src/main/build/depend.cache/dependencies.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-gff-utr/main/dist/sgd-gff-utr-tasks.jar" beforeDir="false" afterPath="$PROJECT_DIR$/sgd-gff-utr/src/main/dist/sgd-gff-utr-tasks.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-gff-utr/main/project.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-gff-utr/main/resources/sgd-gff-utr_config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/sgd-gff-utr/src/main/resources/sgd-gff-utr_config.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-gff-utr/main/src/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/sgd-gff-utr/src/main/java/.classpath" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-gff-utr/main/src/.project" beforeDir="false" afterPath="$PROJECT_DIR$/sgd-gff-utr/src/main/java/.project" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-gff-utr/main/src/org/intermine/bio/dataconversion/SgdGffUtrConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/sgd-gff-utr/src/main/java/org/intermine/bio/dataconversion/SgdGffUtrConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-gff-utr/project.properties" beforeDir="false" afterPath="$PROJECT_DIR$/sgd-gff-utr/sgd-gff-utr.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-gff-utr/resources/sgd-gff-utr_keys.properties" beforeDir="false" afterPath="$PROJECT_DIR$/sgd-gff-utr/src/main/resources/sgd-gff-utr_keys.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-gff-utr/sgd-gff-utr_additions.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sgd-gff-utr/src/main/resources/sgd-gff-utr_additions.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-gff-utr/test/build.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-gff-utr/test/project.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-gff/.classpath" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-gff/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-gff/build.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-gff/build/main/.sgd-gff_keys.properties.swp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-gff/build/main/default.intermine.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-gff/build/main/intermine.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-gff/build/main/log4j.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-gff/build/main/os.common-tgt-items-std-schema.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-gff/build/main/sgd-gff_keys.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-gff/main/build.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-gff/main/build/classes/org/intermine/bio/dataconversion/SgdGffGFF3RecordHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/sgd-gff/src/main/build/classes/org/intermine/bio/dataconversion/SgdGffGFF3RecordHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-gff/main/build/depend.cache/dependencies.txt" beforeDir="false" afterPath="$PROJECT_DIR$/sgd-gff/src/main/build/depend.cache/dependencies.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-gff/main/dist/sgd-gff-tasks.jar" beforeDir="false" afterPath="$PROJECT_DIR$/sgd-gff/src/main/dist/sgd-gff-tasks.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-gff/main/project.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-gff/main/src/org/intermine/bio/dataconversion/SgdGffGFF3RecordHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/sgd-gff/src/main/java/org/intermine/bio/dataconversion/SgdGffGFF3RecordHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-gff/project.properties" beforeDir="false" afterPath="$PROJECT_DIR$/sgd-gff/sgd-gff.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-gff/resources/sgd-gff_keys.properties" beforeDir="false" afterPath="$PROJECT_DIR$/sgd-gff/src/main/resources/sgd-gff_keys.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-gff/sgd-gff_additions.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sgd-gff/src/main/resources/sgd-gff_additions.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-gff/test/build.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-gff/test/project.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-protein-ntermini/.classpath" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-protein-ntermini/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-protein-ntermini/build.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-protein-ntermini/build/main/default.intermine.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-protein-ntermini/build/main/intermine.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-protein-ntermini/build/main/log4j.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-protein-ntermini/build/main/os.common-tgt-items-std-schema.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-protein-ntermini/build/main/sgd-protein-ntermini_keys.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-protein-ntermini/main/build.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-protein-ntermini/main/build/classes/org/intermine/bio/dataconversion/SgdProteinNterminiConverter.class" beforeDir="false" afterPath="$PROJECT_DIR$/sgd-protein-ntermini/src/main/build/classes/org/intermine/bio/dataconversion/SgdProteinNterminiConverter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-protein-ntermini/main/build/depend.cache/dependencies.txt" beforeDir="false" afterPath="$PROJECT_DIR$/sgd-protein-ntermini/src/main/build/depend.cache/dependencies.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-protein-ntermini/main/dist/sgd-protein-ntermini-tasks.jar" beforeDir="false" afterPath="$PROJECT_DIR$/sgd-protein-ntermini/src/main/dist/sgd-protein-ntermini-tasks.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-protein-ntermini/main/project.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-protein-ntermini/main/resources/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-protein-ntermini/main/src/org/intermine/bio/dataconversion/SgdProteinNterminiConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/sgd-protein-ntermini/src/main/java/org/intermine/bio/dataconversion/SgdProteinNterminiConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-protein-ntermini/project.properties" beforeDir="false" afterPath="$PROJECT_DIR$/sgd-protein-ntermini/sgd-protein-ntermini.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-protein-ntermini/resources/sgd-protein-ntermini_keys.properties" beforeDir="false" afterPath="$PROJECT_DIR$/sgd-protein-ntermini/src/main/resources/sgd-protein-ntermini_keys.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-protein-ntermini/sgd-protein-ntermini_additions.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sgd-protein-ntermini/src/main/resources/sgd-protein-ntermini_additions.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-protein-ntermini/test/build.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-protein-ntermini/test/project.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-protein-properties/.classpath" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-protein-properties/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-protein-properties/build.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-protein-properties/build/main/default.intermine.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-protein-properties/build/main/intermine.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-protein-properties/build/main/log4j.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-protein-properties/build/main/os.common-tgt-items-std-schema.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-protein-properties/build/main/sgd-protein-properties_keys.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-protein-properties/main/build.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-protein-properties/main/build/classes/org/intermine/bio/dataconversion/SgdProteinPropertiesConverter.class" beforeDir="false" afterPath="$PROJECT_DIR$/sgd-protein-properties/src/main/build/classes/org/intermine/bio/dataconversion/SgdProteinPropertiesConverter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-protein-properties/main/build/depend.cache/dependencies.txt" beforeDir="false" afterPath="$PROJECT_DIR$/sgd-protein-properties/src/main/build/depend.cache/dependencies.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-protein-properties/main/dist/sgd-protein-properties-tasks.jar" beforeDir="false" afterPath="$PROJECT_DIR$/sgd-protein-properties/src/main/dist/sgd-protein-properties-tasks.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-protein-properties/main/project.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-protein-properties/main/resources/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-protein-properties/main/src/org/intermine/bio/dataconversion/SgdProteinPropertiesConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/sgd-protein-properties/src/main/java/org/intermine/bio/dataconversion/SgdProteinPropertiesConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-protein-properties/project.properties" beforeDir="false" afterPath="$PROJECT_DIR$/sgd-protein-properties/sgd-protein-properties.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-protein-properties/resources/sgd-protein-properties_keys.properties" beforeDir="false" afterPath="$PROJECT_DIR$/sgd-protein-properties/src/main/resources/sgd-protein-properties_keys.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-protein-properties/sgd-protein-properties_additions.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sgd-protein-properties/src/main/resources/sgd-protein-properties_additions.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-protein-properties/test/build.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd-protein-properties/test/project.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/.checkstyle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/.classpath" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/.svn/entries" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/.svn/text-base/.checkstyle.svn-base" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/.svn/text-base/.classpath.svn-base" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/.svn/text-base/.project.svn-base" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/.svn/text-base/build.xml.svn-base" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/.svn/text-base/project.properties.svn-base" beforeDir="false" afterPath="$PROJECT_DIR$/sgd/sgd.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/.svn/text-base/sgd_additions.xml.svn-base" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/bin/build/main/.sgd_keys.properties.swp" beforeDir="false" afterPath="$PROJECT_DIR$/sgd/bin/build/main/.sgd_keys.properties.swp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/bin/build/main/default.intermine.properties" beforeDir="false" afterPath="$PROJECT_DIR$/sgd/bin/build/main/default.intermine.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/bin/build/main/intermine.properties" beforeDir="false" afterPath="$PROJECT_DIR$/sgd/bin/build/main/intermine.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/bin/build/main/os.common-tgt-items-std-schema.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sgd/bin/build/main/os.common-tgt-items-std-schema.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/bin/build/main/sgd_keys.properties" beforeDir="false" afterPath="$PROJECT_DIR$/sgd/bin/build/main/sgd_keys.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/bin/main/build/depend.cache/dependencies.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/bin/main/dist/sgd-tasks.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/build.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/build/main/.sgd_keys.properties.swp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/build/main/default.intermine.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/build/main/intermine.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/build/main/log4j.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/build/main/os.common-tgt-items-std-schema.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/build/main/sgd_keys.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/main/.svn/dir-prop-base" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/main/.svn/entries" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/main/.svn/text-base/build.xml.svn-base" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/main/.svn/text-base/project.properties.svn-base" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/main/build.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/main/build/classes/org/intermine/bio/dataconversion/SgdConverter.class" beforeDir="false" afterPath="$PROJECT_DIR$/sgd/src/main/build/classes/org/intermine/bio/dataconversion/SgdConverter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/main/build/classes/org/intermine/bio/dataconversion/SgdConverter.java.b4PSi" beforeDir="false" afterPath="$PROJECT_DIR$/sgd/src/main/build/classes/org/intermine/bio/dataconversion/SgdConverter.java.b4PSi" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/main/build/classes/org/intermine/bio/dataconversion/SgdConverter.java.bud" beforeDir="false" afterPath="$PROJECT_DIR$/sgd/src/main/build/classes/org/intermine/bio/dataconversion/SgdConverter.java.bud" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/main/build/classes/org/intermine/bio/dataconversion/SgdConverter.java.nex2" beforeDir="false" afterPath="$PROJECT_DIR$/sgd/src/main/build/classes/org/intermine/bio/dataconversion/SgdConverter.java.nex2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/main/build/classes/org/intermine/bio/dataconversion/SgdProcessor.class" beforeDir="false" afterPath="$PROJECT_DIR$/sgd/src/main/build/classes/org/intermine/bio/dataconversion/SgdProcessor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/main/build/classes/org/intermine/bio/dataconversion/SgdProcessor.java.bud" beforeDir="false" afterPath="$PROJECT_DIR$/sgd/src/main/build/classes/org/intermine/bio/dataconversion/SgdProcessor.java.bud" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/main/build/classes/org/intermine/bio/dataconversion/SgdProcessor.java.nex2" beforeDir="false" afterPath="$PROJECT_DIR$/sgd/src/main/build/classes/org/intermine/bio/dataconversion/SgdProcessor.java.nex2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/main/build/depend.cache/dependencies.txt" beforeDir="false" afterPath="$PROJECT_DIR$/sgd/src/main/build/depend.cache/dependencies.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/main/dist/sgd-tasks.jar" beforeDir="false" afterPath="$PROJECT_DIR$/sgd/src/main/dist/sgd-tasks.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/main/lib/.svn/entries" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/main/project.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/main/resources/.svn/entries" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/main/src/.svn/entries" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/main/src/org/.svn/entries" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/main/src/org/intermine/.svn/entries" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/main/src/org/intermine/bio/.svn/entries" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/main/src/org/intermine/bio/dataconversion/.svn/entries" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/main/src/org/intermine/bio/dataconversion/.svn/text-base/SgdConverter.java.svn-base" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/main/src/org/intermine/bio/dataconversion/.svn/text-base/SgdProcessor.java.svn-base" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/main/src/org/intermine/bio/dataconversion/.svn/tmp/SgdConverter.java.tmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/main/src/org/intermine/bio/dataconversion/.svn/tmp/SgdProcessor.java.tmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/main/src/org/intermine/bio/dataconversion/SgdConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/sgd/src/main/java/org/intermine/bio/dataconversion/SgdConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/main/src/org/intermine/bio/dataconversion/SgdProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/sgd/src/main/java/org/intermine/bio/dataconversion/SgdProcessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/project.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/resources/.svn/entries" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/resources/.svn/text-base/sgd_keys.properties.svn-base" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/resources/sgd_keys.properties" beforeDir="false" afterPath="$PROJECT_DIR$/sgd/src/main/resources/sgd_keys.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/sgd_additions.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sgd/src/main/resources/sgd_additions.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/test/.svn/dir-prop-base" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/test/.svn/entries" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/test/.svn/text-base/build.xml.svn-base" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/test/.svn/text-base/project.properties.svn-base" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/test/build.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/test/project.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/test/resources/.svn/entries" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/test/src/.svn/entries" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/test/src/org/.svn/entries" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/test/src/org/intermine/.svn/entries" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/test/src/org/intermine/bio/.svn/entries" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/test/src/org/intermine/bio/dataconversion/.svn/entries" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/test/src/org/intermine/bio/dataconversion/.svn/text-base/SgdConverterTest.java.svn-base" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/test/src/org/intermine/bio/dataconversion/.svn/text-base/TestSgdProcessor.java.svn-base" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/test/src/org/intermine/bio/dataconversion/SgdConverterTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/sgd/src/test/java/org/intermine/bio/dataconversion/SgdConverterTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sgd/test/src/org/intermine/bio/dataconversion/TestSgdProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/sgd/src/test/java/org/intermine/bio/dataconversion/TestSgdProcessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spell-expression/.classpath" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spell-expression/.project" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spell-expression/build.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spell-expression/build/main/default.intermine.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spell-expression/build/main/intermine.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spell-expression/build/main/log4j.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spell-expression/build/main/os.common-tgt-items-std-schema.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spell-expression/build/main/spell-expression_keys.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spell-expression/main/build.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spell-expression/main/build/classes/org/intermine/bio/dataconversion/SpellExpressionConverter.class" beforeDir="false" afterPath="$PROJECT_DIR$/spell-expression/src/main/build/classes/org/intermine/bio/dataconversion/SpellExpressionConverter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spell-expression/main/build/classes/org/intermine/bio/dataconversion/SpellExpressionProcessor.class" beforeDir="false" afterPath="$PROJECT_DIR$/spell-expression/src/main/build/classes/org/intermine/bio/dataconversion/SpellExpressionProcessor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spell-expression/main/build/depend.cache/dependencies.txt" beforeDir="false" afterPath="$PROJECT_DIR$/spell-expression/src/main/build/depend.cache/dependencies.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spell-expression/main/dist/spell-expression-tasks.jar" beforeDir="false" afterPath="$PROJECT_DIR$/spell-expression/src/main/dist/spell-expression-tasks.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spell-expression/main/project.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spell-expression/main/resources/readme" beforeDir="false" afterPath="$PROJECT_DIR$/spell-expression/src/main/resources/readme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spell-expression/main/src/org/intermine/bio/dataconversion/SpellExpressionConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/spell-expression/src/main/java/org/intermine/bio/dataconversion/SpellExpressionConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spell-expression/main/src/org/intermine/bio/dataconversion/SpellExpressionProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/spell-expression/src/main/java/org/intermine/bio/dataconversion/SpellExpressionProcessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spell-expression/project.properties" beforeDir="false" afterPath="$PROJECT_DIR$/spell-expression/spell-expression.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spell-expression/resources/spell-expression_keys.properties" beforeDir="false" afterPath="$PROJECT_DIR$/spell-expression/src/main/resources/spell-expression_keys.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spell-expression/spell-expression_additions.xml" beforeDir="false" afterPath="$PROJECT_DIR$/spell-expression/src/main/resources/spell-expression_additions.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spell-expression/test/build.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spell-expression/test/project.properties" beforeDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/out/" />
+    <ignored path="$PROJECT_DIR$/.gradle/" />
+    <ignored path="$PROJECT_DIR$/build/" />
+    <ignored path="$PROJECT_DIR$/cglabrata-homologs/.gradle/" />
+    <ignored path="$PROJECT_DIR$/cglabrata-homologs/build/" />
+    <ignored path="$PROJECT_DIR$/cgob-homologs/.gradle/" />
+    <ignored path="$PROJECT_DIR$/cgob-homologs/build/" />
+    <ignored path="$PROJECT_DIR$/disease/.gradle/" />
+    <ignored path="$PROJECT_DIR$/disease/build/" />
+    <ignored path="$PROJECT_DIR$/eco/.gradle/" />
+    <ignored path="$PROJECT_DIR$/eco/build/" />
+    <ignored path="$PROJECT_DIR$/fungi-homologs/.gradle/" />
+    <ignored path="$PROJECT_DIR$/fungi-homologs/build/" />
+    <ignored path="$PROJECT_DIR$/go-annotation-db/.gradle/" />
+    <ignored path="$PROJECT_DIR$/go-annotation-db/build/" />
+    <ignored path="$PROJECT_DIR$/go-slim/.gradle/" />
+    <ignored path="$PROJECT_DIR$/go-slim/build/" />
+    <ignored path="$PROJECT_DIR$/homolog-genes/.gradle/" />
+    <ignored path="$PROJECT_DIR$/homolog-genes/build/" />
+    <ignored path="$PROJECT_DIR$/pombe-homologs/.gradle/" />
+    <ignored path="$PROJECT_DIR$/pombe-homologs/build/" />
+    <ignored path="$PROJECT_DIR$/sgd/.gradle/" />
+    <ignored path="$PROJECT_DIR$/sgd/build/" />
+    <ignored path="$PROJECT_DIR$/sgd-complementation/.gradle/" />
+    <ignored path="$PROJECT_DIR$/sgd-complementation/build/" />
+    <ignored path="$PROJECT_DIR$/sgd-gff/.gradle/" />
+    <ignored path="$PROJECT_DIR$/sgd-gff/build/" />
+    <ignored path="$PROJECT_DIR$/sgd-gff-utr/.gradle/" />
+    <ignored path="$PROJECT_DIR$/sgd-gff-utr/build/" />
+    <ignored path="$PROJECT_DIR$/sgd-protein-ntermini/.gradle/" />
+    <ignored path="$PROJECT_DIR$/sgd-protein-ntermini/build/" />
+    <ignored path="$PROJECT_DIR$/sgd-protein-properties/.gradle/" />
+    <ignored path="$PROJECT_DIR$/sgd-protein-properties/build/" />
+    <ignored path="$PROJECT_DIR$/spell-expression/.gradle/" />
+    <ignored path="$PROJECT_DIR$/spell-expression/build/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DefaultGradleProjectSettings">
+    <option name="isMigrated" value="true" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view />
+      </state>
+    </system>
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sgd-gff-utr/src/main/resources/sgd-gff-utr_additions.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-7">
+              <caret line="4" column="38" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sgd-protein-ntermini/src/main/resources/sgd-protein-ntermini_additions.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-7">
+              <caret line="4" column="38" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sgd-protein-properties/src/main/resources/sgd-protein-properties_additions.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-7">
+              <caret line="4" column="38" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/spell-expression/src/main/resources/spell-expression_additions.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-7">
+              <caret line="4" column="38" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/yeastmine-global_additions.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="35" column="64" selection-start-line="35" selection-start-column="64" selection-end-line="35" selection-end-column="64" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sgd/src/main/java/org/intermine/bio/dataconversion/SgdConverter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="237">
+              <caret line="3047" column="47" selection-start-line="3047" selection-start-column="47" selection-end-line="3047" selection-end-column="47" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sgd/src/main/java/org/intermine/bio/dataconversion/SgdProcessor.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="290">
+              <caret line="114" selection-start-line="114" selection-end-line="128" selection-end-column="78" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/spell-expression/src/main/java/org/intermine/bio/dataconversion/SpellExpressionConverter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-16">
+              <caret line="358" column="7" selection-start-line="358" selection-start-column="7" selection-end-line="359" selection-end-column="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sgd/sgd.properties">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret line="8" selection-start-line="8" selection-end-line="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sgd/src/main/resources/sgd_keys.properties">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>XElementCombinatorialRepeats</find>
+      <find>Telomere</find>
+      <find>fiveprimeutrintrons</find>
+      <find>Pseudogene</find>
+      <find>CDSs</find>
+      <find>ProteinAb</find>
+      <find>CDS</find>
+      <find>Protein</find>
+      <find>Transcript</find>
+      <find>Gene</find>
+      <find>&quot;Gene&quot;</find>
+      <find>getChild</find>
+      <find>getReferenceName</find>
+      <find>Publication</find>
+      <find>&quot;Publication&quot;</find>
+      <find>bioEntities</find>
+      <find>&quot;Protein&quot;</find>
+    </findStrings>
+    <replaceStrings>
+      <replace />
+    </replaceStrings>
+    <dirStrings>
+      <dir>$PROJECT_DIR$/cglabrata-homologs</dir>
+    </dirStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/disease/src/main/java/org/intermine/bio/dataconversion/DiseaseConverter.java" />
+        <option value="$PROJECT_DIR$/go-annotation-db/src/main/java/org/intermine/bio/dataconversion/GoAnnotationDbConverter.java" />
+        <option value="$PROJECT_DIR$/settings.gradle" />
+        <option value="$PROJECT_DIR$/gradle.properties" />
+        <option value="$PROJECT_DIR$/build.gradle" />
+        <option value="$PROJECT_DIR$/cglabrata-homologs/src/main/resources/cglabrata-homologs_additions.xml" />
+        <option value="$PROJECT_DIR$/cgob-homologs/src/main/resources/cgob-homologs_additions.xml" />
+        <option value="$PROJECT_DIR$/disease/src/main/resources/disease_additions.xml" />
+        <option value="$PROJECT_DIR$/eco/resources/eco_additions.xml" />
+        <option value="$PROJECT_DIR$/fungi-homologs/src/main/resources/fungi-homologs_additions.xml" />
+        <option value="$PROJECT_DIR$/go-annotation-db/src/main/resources/go-annotation-db_additions.xml" />
+        <option value="$PROJECT_DIR$/go-slim/resources/go-slim_additions.xml" />
+        <option value="$PROJECT_DIR$/homolog-genes/src/main/resources/homolog-genes_additions.xml" />
+        <option value="$PROJECT_DIR$/pombe-homologs/src/main/resources/pombe-homologs_additions.xml" />
+        <option value="$PROJECT_DIR$/sgd/src/main/resources/sgd_additions.xml" />
+        <option value="$PROJECT_DIR$/sgd-complementation/src/main/resources/sgd-complementation_additions.xml" />
+        <option value="$PROJECT_DIR$/sgd-gff/src/main/resources/sgd-gff_additions.xml" />
+        <option value="$PROJECT_DIR$/sgd-gff-utr/src/main/resources/sgd-gff-utr_additions.xml" />
+        <option value="$PROJECT_DIR$/sgd-protein-ntermini/src/main/resources/sgd-protein-ntermini_additions.xml" />
+        <option value="$PROJECT_DIR$/sgd-protein-properties/src/main/resources/sgd-protein-properties_additions.xml" />
+        <option value="$PROJECT_DIR$/spell-expression/src/main/resources/spell-expression_additions.xml" />
+        <option value="$PROJECT_DIR$/spell-expression/src/main/java/org/intermine/bio/dataconversion/SpellExpressionConverter.java" />
+        <option value="$PROJECT_DIR$/sgd/src/main/java/org/intermine/bio/dataconversion/SgdProcessor.java" />
+        <option value="$PROJECT_DIR$/sgd/src/main/java/org/intermine/bio/dataconversion/SgdConverter.java" />
+        <option value="$PROJECT_DIR$/yeastmine-global_additions.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectConfigurationFiles">
+    <option name="files">
+      <list>
+        <option value="$PROJECT_DIR$/.idea/gradle.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="2082" />
+    <option name="y" value="271" />
+    <option name="width" value="1819" />
+    <option name="height" value="1139" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="yeastmine-bio-sources" type="b2602c69:ProjectViewProjectNode" />
+              <item name="yeastmine-bio-sources" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+            </path>
+            <path>
+              <item name="yeastmine-bio-sources" type="b2602c69:ProjectViewProjectNode" />
+              <item name="yeastmine-bio-sources" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="sgd" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+            </path>
+            <path>
+              <item name="yeastmine-bio-sources" type="b2602c69:ProjectViewProjectNode" />
+              <item name="yeastmine-bio-sources" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="sgd" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="yeastmine-bio-sources" type="b2602c69:ProjectViewProjectNode" />
+              <item name="yeastmine-bio-sources" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="sgd" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="yeastmine-bio-sources" type="b2602c69:ProjectViewProjectNode" />
+              <item name="yeastmine-bio-sources" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="sgd" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="yeastmine-bio-sources" type="b2602c69:ProjectViewProjectNode" />
+              <item name="yeastmine-bio-sources" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="sgd" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="dataconversion" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="yeastmine-bio-sources" type="b2602c69:ProjectViewProjectNode" />
+              <item name="yeastmine-bio-sources" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="sgd" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="yeastmine-bio-sources" type="b2602c69:ProjectViewProjectNode" />
+              <item name="yeastmine-bio-sources" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="spell-expression" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+            </path>
+            <path>
+              <item name="yeastmine-bio-sources" type="b2602c69:ProjectViewProjectNode" />
+              <item name="yeastmine-bio-sources" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="spell-expression" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="yeastmine-bio-sources" type="b2602c69:ProjectViewProjectNode" />
+              <item name="yeastmine-bio-sources" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="spell-expression" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="yeastmine-bio-sources" type="b2602c69:ProjectViewProjectNode" />
+              <item name="yeastmine-bio-sources" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="spell-expression" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="yeastmine-bio-sources" type="b2602c69:ProjectViewProjectNode" />
+              <item name="yeastmine-bio-sources" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="spell-expression" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="dataconversion" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration" cleanupOnStartRun="true">
+    <configuration>$USER_HOME$/.subversion</configuration>
+    <supportedVersion>125</supportedVersion>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="19a8cd2b-3dbc-4d61-9b18-33c99e633ee7" name="Default Changelist" comment="" />
+      <created>1556236169186</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1556236169186</updated>
+      <workItem from="1556236173010" duration="1286000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="1286000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="2082" y="271" width="1819" height="1139" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2532358" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="8" sideWeight="0.49915588" visible="true" weight="0.330468" />
+      <window_info anchor="bottom" id="Database Changes" order="9" />
+      <window_info anchor="bottom" id="Terminal" order="10" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5008441" side_tool="true" visible="true" weight="0.330468" />
+      <window_info anchor="bottom" id="Build" order="12" sideWeight="0.4994618" weight="0.40095237" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Theme Preview" order="4" />
+      <window_info anchor="right" id="Maven" order="5" />
+      <window_info anchor="right" id="Capture Analysis" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info anchor="right" id="Database" order="8" />
+      <window_info anchor="right" id="Gradle" order="9" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/disease/src/main/java/org/intermine/bio/dataconversion/DiseaseConverter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="97">
+          <caret line="639" column="51" selection-start-line="639" selection-start-column="51" selection-end-line="639" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/go-annotation-db/src/main/java/org/intermine/bio/dataconversion/GoAnnotationDbConverter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="279" column="59" selection-start-line="279" selection-start-column="59" selection-end-line="279" selection-end-column="59" />
+          <folding>
+            <element signature="e#1511#1527#0" expanded="true" />
+            <element signature="e#1625#1641#0" expanded="true" />
+            <element signature="e#1707#1723#0" expanded="true" />
+            <element signature="e#1784#1800#0" expanded="true" />
+            <element signature="e#1865#1881#0" expanded="true" />
+            <element signature="e#2020#2036#0" expanded="true" />
+            <element signature="e#2081#2089#0" expanded="true" />
+            <element signature="e#2094#2121#0" expanded="true" />
+            <element signature="e#2186#2202#0" expanded="true" />
+            <element signature="e#2260#2276#0" expanded="true" />
+            <element signature="e#2394#2423#0" expanded="true" />
+            <element signature="e#2505#2528#0" expanded="true" />
+            <element signature="e#2592#2609#0" expanded="true" />
+            <element signature="e#9040#9048#0" expanded="true" />
+            <element signature="e#12302#12310#0" expanded="true" />
+            <element signature="e#22631#22639#0" expanded="true" />
+            <element signature="e#23522#23549#0" expanded="true" />
+            <element signature="e#23612#23639#0" expanded="true" />
+            <element signature="e#23707#23734#0" expanded="true" />
+            <element signature="e#23801#23828#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pombe-homologs/src/main/resources/pombe-homologs_keys.properties">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/go-slim/go-slim.properties">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/settings.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="35" selection-start-line="35" selection-end-line="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gradle.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/go-slim/build.gradle">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sgd/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="12" selection-start-column="12" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="69" column="7" selection-start-line="69" selection-start-column="7" selection-end-line="69" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cglabrata-homologs/src/main/resources/cglabrata-homologs_additions.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="42" selection-start-line="4" selection-start-column="42" selection-end-line="4" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cgob-homologs/src/main/resources/cgob-homologs_additions.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="9" selection-start-line="3" selection-start-column="9" selection-end-line="3" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/disease/src/main/resources/disease_additions.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="38" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eco/resources/eco_additions.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="38" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fungi-homologs/src/main/resources/fungi-homologs_additions.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="38" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/go-annotation-db/src/main/resources/go-annotation-db_additions.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="38" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/go-slim/resources/go-slim_additions.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="38" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/homolog-genes/src/main/resources/homolog-genes_additions.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="38" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pombe-homologs/src/main/resources/pombe-homologs_additions.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="38" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sgd/src/main/resources/sgd_additions.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="9" selection-start-line="1" selection-start-column="9" selection-end-line="1" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sgd-complementation/src/main/resources/sgd-complementation_additions.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="38" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sgd-gff/src/main/resources/sgd-gff_additions.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-7">
+          <caret line="4" column="38" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sgd-gff-utr/src/main/resources/sgd-gff-utr_additions.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-7">
+          <caret line="4" column="38" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sgd-protein-ntermini/src/main/resources/sgd-protein-ntermini_additions.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-7">
+          <caret line="4" column="38" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sgd-protein-properties/src/main/resources/sgd-protein-properties_additions.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-7">
+          <caret line="4" column="38" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spell-expression/src/main/resources/spell-expression_additions.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-7">
+          <caret line="4" column="38" selection-start-line="4" selection-start-column="38" selection-end-line="4" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spell-expression/src/main/java/org/intermine/bio/dataconversion/SpellExpressionConverter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-16">
+          <caret line="358" column="7" selection-start-line="358" selection-start-column="7" selection-end-line="359" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sgd/sgd.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sgd/src/main/resources/sgd_keys.properties">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sgd/src/main/java/org/intermine/bio/dataconversion/SgdProcessor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="114" selection-start-line="114" selection-end-line="128" selection-end-column="78" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sgd/src/main/java/org/intermine/bio/dataconversion/SgdConverter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="237">
+          <caret line="3047" column="47" selection-start-line="3047" selection-start-column="47" selection-end-line="3047" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/yeastmine-global_additions.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="35" column="64" selection-start-line="35" selection-start-column="64" selection-end-line="35" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

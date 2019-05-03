@@ -1,4 +1,0 @@
-<project name="homolog-genes-tasks" default="default" basedir=".">
-  <description>build homolog-genes tasks</description>
-  <import file="../../../../imbuild/library.xml"/> 
-</project>

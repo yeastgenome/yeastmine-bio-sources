@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="bio-source-cglabrata-homologs-2.1.1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/cglabrata-homologs/build/libs/bio-source-cglabrata-homologs-2.1.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

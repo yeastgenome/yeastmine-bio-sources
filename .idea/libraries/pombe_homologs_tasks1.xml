@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="pombe-homologs-tasks1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/pombe-homologs/bin/main/dist/pombe-homologs-tasks.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
