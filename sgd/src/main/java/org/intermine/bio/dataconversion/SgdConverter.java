@@ -73,6 +73,7 @@ public class SgdConverter extends BioDBConverter {
 	private Item organism;
 	private Map<String, String> featureMap = new HashMap();
 	private static final boolean TEST_LOCAL = false;
+	private String licence;
 
 
 	private static final SgdProcessor PROCESSOR = new SgdProcessor();
@@ -116,7 +117,7 @@ public class SgdConverter extends BioDBConverter {
 		processAliases(connection);
 		processCrossReferences(connection);
 		processGeneLocations(connection);
-		//processGeneChildrenLocations(connection);
+		processGeneChildrenLocations(connection);
 		processProteins(connection);
 		
 		processAllPubs(connection);           						
@@ -3081,6 +3082,25 @@ public class SgdConverter extends BioDBConverter {
 	public String getDataSetTitle(String taxonId) {
 		return DATASET_TITLE;
 	}
+
+	/**
+	 * Set the data licence for these data.
+	 *
+	 * @param licence should be URI to data licence.
+	 */
+	public void setLicence(String licence) {
+		this.licence = licence;
+	}
+
+	/**
+	 * Get the data licence for these data.
+	 *
+	 * @return URI to data licence.
+	 */
+	public String getLicence() {
+		return licence;
+	}
+
 
 
 }

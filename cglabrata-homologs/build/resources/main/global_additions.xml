@@ -83,13 +83,18 @@
 	<collection name="transcripts" referenced-type="Transcript" reverse-reference="introns"/>
 	<collection name="genes" referenced-type="Gene" reverse-reference="introns"/>
 </class>
+
 <class name="CDS" extends="SequenceFeature" is-interface="true">
 	<reference name="plasmid" referenced-type="Plasmid" reverse-reference="CDSs"/>
+	<reference name="pseudogene" referenced-type="Pseudogene" reverse-reference="CDSs"/>
+	<reference name="blockedreadingframe" referenced-type="BlockedReadingFrame" reverse-reference="CDSs"/>
+	<reference name="transposableelementgene" referenced-type="TransposableElementGene" reverse-reference="CDSs"/>
 	<reference name="plasmidLocation" referenced-type="Location"/>
 	<reference name="protein" referenced-type="Protein" reverse-reference="CDSs"/>
-	<reference name="gene" referenced-type="Gene" reverse-reference="CDSs"/>
+	<reference name="orf" referenced-type="ORF" reverse-reference="CDSs"/>
 	<reference name="transcript" referenced-type="Transcript" reverse-reference="CDSs"/>
 </class>
+
 <class name="MRNA" extends="Transcript" is-interface="true">
 	<attribute name="fivePrimeDataSet" type="java.lang.String"/>
 	<attribute name="note" type="java.lang.String"/>
@@ -111,6 +116,8 @@
 </class>
 <class name="SnRNAGene" extends="NcRNAGene" is-interface="true"></class>
 <class name="ORF" extends="ProteinCodingGene" is-interface="true">
+	<reference name="regulationSummary" referenced-type="RegulationSummary"/>
+	<collection name="CDSs" referenced-type="CDS" reverse-reference="orf"/>
 	<collection name="plus1translationalframeshifts" referenced-type="Plus1TranslationalFrameshift" reverse-reference="orf"/>
 	<collection name="inteinencodingregions" referenced-type="InteinEncodingRegion" reverse-reference="orf"/>
 	<collection name="uORFs" referenced-type="uORF" reverse-reference="orf"/>
@@ -357,7 +364,6 @@
 	<collection name="exons" referenced-type="Exon" reverse-reference="gene"/>
 	<collection name="pathways" referenced-type="Pathway" reverse-reference="genes"/>
 	<collection name="UTRs" referenced-type="UTR" reverse-reference="gene"/>
-	<collection name="CDSs" referenced-type="CDS" reverse-reference="gene"/>
 	<collection name="expressionScores" referenced-type="ExpressionScore"/>
 	<collection name="phenotypes" referenced-type="Phenotype" reverse-reference="genes"/>
 	<collection name="transcripts" referenced-type="Transcript" reverse-reference="gene"/>
@@ -507,6 +513,7 @@
 	<reference name="matingtyperegion" referenced-type="MatingTypeRegion" reverse-reference="Z2_regions"/>
 </class>
 <class name="Pseudogene" extends="ProteinCodingGene" is-interface="true">
+	<collection name="CDSs" referenced-type="CDS" reverse-reference="pseudogene"/>
 	<collection name="plus1translationalframeshifts" referenced-type="Plus1TranslationalFrameshift" reverse-reference="pseudogene"/>
 </class>
 <class name="ARS" extends="OriginOfReplication" is-interface="true">
@@ -587,7 +594,9 @@
 <class name="uORF" extends="SequenceFeature" is-interface="true">
 	<reference name="orf" referenced-type="ORF" reverse-reference="uORFs"/>
 </class>
-<class name="BlockedReadingFrame" extends="Gene" is-interface="true"/>	
+<class name="BlockedReadingFrame" extends="Gene" is-interface="true">
+	<collection name="CDSs" referenced-type="CDS" reverse-reference="blockedreadingframe"/>
+</class>
 <class name="PublicationAnnotation" is-interface="true">
 	<reference name="publication" referenced-type="Publication"/>
 	<collection name="literatureTopics" referenced-type="LiteratureTopic"/>

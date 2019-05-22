@@ -79,6 +79,8 @@ public class DiseaseConverter extends BioDBConverter {
 	private Map<String, Item> genes = new HashMap();
 	private static final Integer TAXON_ID = 4932;
 	private static final Integer HUMAN_TAXON_ID = 9606;
+
+	private String licence;
 	//private Item organism;
 
 
@@ -656,6 +658,24 @@ public class DiseaseConverter extends BioDBConverter {
 	@Override
 	public String getDataSetTitle(String taxonId) {
 		return DATASET_TITLE;
+	}
+
+	/**
+	 * Set the data licence for these data.
+	 *
+	 * @param licence should be URI to data licence.
+	 */
+	public void setLicence(String licence) {
+		this.licence = licence;
+	}
+
+	/**
+	 * Get the data licence for these data.
+	 *
+	 * @return URI to data licence.
+	 */
+	public String getLicence() {
+		return licence;
 	}
 
 }

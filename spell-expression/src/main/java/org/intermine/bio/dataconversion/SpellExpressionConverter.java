@@ -43,6 +43,7 @@ public class SpellExpressionConverter extends BioDBConverter {
 	private ArrayList<String> filenames = new ArrayList();
 	private static final String TAXON_ID = "4932";
 	private Item organism;
+	private String licence;
 
 	/**
 	 * Construct a new SpellExpressionConverter.
@@ -378,4 +379,25 @@ public class SpellExpressionConverter extends BioDBConverter {
 	public String getDataSetTitle(String taxonId) {
 		return DATASET_TITLE;
 	}
+
+	/**
+	 * Set the data licence for these data.
+	 *
+	 * @param licence should be URI to data licence.
+	 */
+	public void setLicence(String licence) {
+		this.licence = licence;
+	}
+
+	/**
+	 * Get the data licence for these data.
+	 *
+	 * @return URI to data licence.
+	 */
+	public String getLicence() {
+		return licence;
+	}
+
+
+
 }
