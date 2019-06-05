@@ -86,12 +86,12 @@
 
 <class name="CDS" extends="SequenceFeature" is-interface="true">
 	<reference name="plasmid" referenced-type="Plasmid" reverse-reference="CDSs"/>
-	<reference name="pseudogene" referenced-type="Pseudogene" reverse-reference="CDSs"/>
+	<reference name="pseudogene" referenced-type="Pseudogene"/>
 	<reference name="blockedreadingframe" referenced-type="BlockedReadingFrame" reverse-reference="CDSs"/>
-	<reference name="transposableelementgene" referenced-type="TransposableElementGene" reverse-reference="CDSs"/>
+	<reference name="transposableelementgene" referenced-type="TransposableElementGene"/>
 	<reference name="plasmidLocation" referenced-type="Location"/>
 	<reference name="protein" referenced-type="Protein" reverse-reference="CDSs"/>
-	<reference name="orf" referenced-type="ORF" reverse-reference="CDSs"/>
+	<reference name="orf" referenced-type="ORF"/>
 	<reference name="transcript" referenced-type="Transcript" reverse-reference="CDSs"/>
 </class>
 
@@ -115,9 +115,9 @@
 	<attribute name="name" type="java.lang.String"/>
 </class>
 <class name="SnRNAGene" extends="NcRNAGene" is-interface="true"></class>
-<class name="ORF" extends="ProteinCodingGene" is-interface="true">
+<class name="ORF" extends="Gene" is-interface="true">
 	<reference name="regulationSummary" referenced-type="RegulationSummary"/>
-	<collection name="CDSs" referenced-type="CDS" reverse-reference="orf"/>
+	<!--<collection name="CDSs" referenced-type="CDS" reverse-reference="orf"/>-->
 	<collection name="plus1translationalframeshifts" referenced-type="Plus1TranslationalFrameshift" reverse-reference="orf"/>
 	<collection name="inteinencodingregions" referenced-type="InteinEncodingRegion" reverse-reference="orf"/>
 	<collection name="uORFs" referenced-type="uORF" reverse-reference="orf"/>
@@ -223,6 +223,8 @@
 </class>
 <class name="SequenceFeature" extends="BioEntity" is-interface="true">
 	<attribute name="briefDescription" type="java.lang.String"/>
+	<attribute name="functionSummary" type="java.lang.String"/>
+	<reference name="regulationSummary" referenced-type="RegulationSummary"/>
 	<attribute name="score" type="java.lang.Double"/>
 	<attribute name="scoreType" type="java.lang.String"/>
 	<attribute name="description" type="java.lang.String"/>
@@ -355,7 +357,7 @@
 	<reference name="downstreamIntergenicRegion" referenced-type="IntergenicRegion"/>
 	<reference name="plasmid" referenced-type="Plasmid" reverse-reference="genes"/>
 	<reference name="plasmidLocation" referenced-type="Location"/>
-	<reference name="regulationSummary" referenced-type="RegulationSummary"/>
+	<!--<reference name="regulationSummary" referenced-type="RegulationSummary"/>-->
 	<collection name="complements" referenced-type="Complement" reverse-reference="gene"/>
 	<collection name="flankingRegions" referenced-type="GeneFlankingRegion" reverse-reference="gene"/>
 	<collection name="introns" referenced-type="Intron" reverse-reference="genes"/>
@@ -369,8 +371,23 @@
 	<collection name="transcripts" referenced-type="Transcript" reverse-reference="gene"/>
 	<collection name="regulatoryRegions" referenced-type="RegulatoryRegion" reverse-reference="gene"/>
 	<collection name="publicationAnnotations" referenced-type="PublicationAnnotation" reverse-reference="genes"/>
+	<collection name="diseaseAnnotation" referenced-type="DiseaseAnnotation"/>
 	<collection name="diseases" referenced-type="Disease" reverse-reference="genes"/>
 	<collection name="goAnnotation" referenced-type="GOAnnotation"/>
+</class>
+<class name="DiseaseAnnotation" extends="OntologyAnnotation" is-interface="true">
+  <collection name="evidence" referenced-type="DiseaseEvidence"/>
+</class>
+<class name="DiseaseEvidenceCode" is-interface="true">
+  <attribute name="code" type="java.lang.String" />  
+</class>
+<class name="DOTerm" extends="OntologyTerm" is-interface="true"/>
+<class name="DiseaseEvidence" is-interface="true">
+  <collection name="with" referenced-type="BioEntity"/>
+   <attribute name="withText" type="java.lang.String"/>
+   <attribute name="annotType" type="java.lang.String"/>  
+  <reference name="code" referenced-type="DiseaseEvidenceCode"/>
+  <collection name="publications" referenced-type="Publication"/>
 </class>
 <class name="CentromereDNAElementII" extends="SequenceFeature" is-interface="true">
 	<reference name="centromere" referenced-type="Centromere" reverse-reference="centromereDNAElementIIs"/>
@@ -512,8 +529,8 @@
 <class name="Z2_region" extends="SequenceFeature" is-interface="true">
 	<reference name="matingtyperegion" referenced-type="MatingTypeRegion" reverse-reference="Z2_regions"/>
 </class>
-<class name="Pseudogene" extends="ProteinCodingGene" is-interface="true">
-	<collection name="CDSs" referenced-type="CDS" reverse-reference="pseudogene"/>
+<class name="Pseudogene" extends="Gene" is-interface="true">
+	<!--<collection name="CDSs" referenced-type="CDS" reverse-reference="pseudogene"/>-->
 	<collection name="plus1translationalframeshifts" referenced-type="Plus1TranslationalFrameshift" reverse-reference="pseudogene"/>
 </class>
 <class name="ARS" extends="OriginOfReplication" is-interface="true">
@@ -594,7 +611,7 @@
 <class name="uORF" extends="SequenceFeature" is-interface="true">
 	<reference name="orf" referenced-type="ORF" reverse-reference="uORFs"/>
 </class>
-<class name="BlockedReadingFrame" extends="Gene" is-interface="true">
+<class name="BlockedReadingFrame" extends="SequenceFeature" is-interface="true">
 	<collection name="CDSs" referenced-type="CDS" reverse-reference="blockedreadingframe"/>
 </class>
 <class name="PublicationAnnotation" is-interface="true">
@@ -706,5 +723,7 @@
 	<attribute name="score" type="java.lang.Float"/>
 	<reference name="expressioncondition" referenced-type="ExpressionCondition"/>
 </class>
-<class name="TRNAGene" extends="NcRNAGene" is-interface="true"></class>
+
+<class name="TRNAGene" extends="NcRNAGene" is-interface="true"> </class>
+
 </model>

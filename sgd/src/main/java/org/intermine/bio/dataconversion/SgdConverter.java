@@ -181,6 +181,7 @@ public class SgdConverter extends BioDBConverter {
 				String symbol = res.getString("gene_name");
 				String name = res.getString("name_description");
 				String feature_type = res.getString("feature_type");
+				System.out.println("feature TYpe got from SQL is " + feature_type);
 				String headline = res.getString("headline");
 				String description = res.getString("description");
 				String qualifier = res.getString("qualifier");
@@ -193,62 +194,63 @@ public class SgdConverter extends BioDBConverter {
 				} else if (feature_type.equalsIgnoreCase("pseudogene")) {
 					item = createItem("Pseudogene");
 				} else if (feature_type
-						.equalsIgnoreCase("transposable_element_gene")) {
+						.equalsIgnoreCase("transposable element gene")) {
 					item = createItem("TransposableElementGene");
 				} else if (feature_type
 						.equalsIgnoreCase("not physically mapped")) {
 					item = createItem("NotPhysicallyMapped");
 				} else if (feature_type
-						.equalsIgnoreCase("long_terminal_repeat")) {
+						.equalsIgnoreCase("long terminal repeat")) {
 					item = createItem("LongTerminalRepeat");
 				} else if (feature_type.equalsIgnoreCase("ARS")) {
 					item = createItem("ARS");
-				} else if (feature_type.equalsIgnoreCase("tRNA_gene")) {
+				} else if (feature_type.equalsIgnoreCase("tRNA gene")) {
 					item = createItem("TRNAGene");
-				} else if (feature_type.equalsIgnoreCase("snoRNA_gene")) {
+				} else if (feature_type.equalsIgnoreCase("snoRNA gene")) {
 					item = createItem("SnoRNAGene");
 				} else if (feature_type.equalsIgnoreCase("not in systematic sequence of S288C")) {
 					item = createItem("NotInSystematicSequenceOfS288C");
-				} else if (feature_type.equalsIgnoreCase("LTR_retrotransposon")) {
+				} else if (feature_type.equalsIgnoreCase("LTR retrotransposon")) {
 					item = createItem("Retrotransposon");
-				} else if (feature_type.equalsIgnoreCase("X_element_combinatorial_repeats")) {
+				} else if (feature_type.equalsIgnoreCase("X element combinatorial repeats")) {
 					item = createItem("XElementCombinatorialRepeat");
-				} else if (feature_type.equalsIgnoreCase("X_element")) {
+				} else if (feature_type.equalsIgnoreCase("X element")) {
 					item = createItem("XElement");
 				} else if (feature_type.equalsIgnoreCase("telomere")) {
 					item = createItem("Telomere");
-				} else if (feature_type.equalsIgnoreCase("telomeric_repeat")) {
+				} else if (feature_type.equalsIgnoreCase("telomeric repeat")) {
 					item = createItem("TelomericRepeat");
-				} else if (feature_type.equalsIgnoreCase("rRNA_gene")) {
+				} else if (feature_type.equalsIgnoreCase("rRNA gene")) {
 					item = createItem("RRNAGene");
-				} else if (feature_type.equalsIgnoreCase("Y_prime_element")) {
+				} else if (feature_type.equalsIgnoreCase("Y prime element")) {
 					item = createItem("YPrimeElement");
 				} else if (feature_type.equalsIgnoreCase("centromere")) {
 					item = createItem("Centromere");
-				} else if (feature_type.equalsIgnoreCase("ncRNA_gene")) {
+				} else if (feature_type.equalsIgnoreCase("ncRNA gene")) {
 					item = createItem("NcRNAGene");
-				} else if (feature_type.equalsIgnoreCase("snRNA_gene")) {
+				} else if (feature_type.equalsIgnoreCase("snRNA gene")) {
 					item = createItem("SnRNAGene");
-				}else if (feature_type.equalsIgnoreCase("blocked_reading_frame")) {
+				}else if (feature_type.equalsIgnoreCase("blocked reading frame")) {
 					item = createItem("BlockedReadingFrame");
-				}else if (feature_type.equalsIgnoreCase("origin_of_replication")) {
+				}else if (feature_type.equalsIgnoreCase("origin of replication")) {
 					item = createItem("OriginOfReplication");
-				}else if (feature_type.equalsIgnoreCase("matrix_attachment_site")) {
+				}else if (feature_type.equalsIgnoreCase("matrix attachment site")) {
 					item = createItem("MatrixAttachmentSite");
-				}else if (feature_type.equalsIgnoreCase("telomerase_RNA_gene")) {
+				}else if (feature_type.equalsIgnoreCase("telomerase RNA gene")) {
 					item = createItem("TelomeraseRNAGene");
-				}else if (feature_type.equalsIgnoreCase("gene_group")) {
+				}else if (feature_type.equalsIgnoreCase("gene group")) {
 					item = createItem("GeneGroup");
-				}else if (feature_type.equalsIgnoreCase("silent_mating_type_cassette_array")) {
+				}else if (feature_type.equalsIgnoreCase("silent mating type cassette array")) {
 					item = createItem("SilentMatingTypeCassetteArray");
-				}else if (feature_type.equalsIgnoreCase("mating_type_region")) {
+				}else if (feature_type.equalsIgnoreCase("mating type region")) {
 					item = createItem("MatingTypeRegion");
-				}else if (feature_type.equalsIgnoreCase("intein_encoding_region")) {
+				}else if (feature_type.equalsIgnoreCase("intein encoding region")) {
 					item = createItem("InteinEncodingRegion");
 				}
 
 				// set for all types, so you can use LSF to query for these
 				// different type of objects in a template.
+				System.out.println("feature Type is...."+ feature_type);
 				item.setAttribute("featureType", feature_type);
 				item.setAttribute("primaryIdentifier", primaryIdentifier);
 				if (StringUtils.isNotEmpty(name)) item.setAttribute("name", name);
@@ -992,7 +994,7 @@ public class SgdConverter extends BioDBConverter {
 
 		if (type.equalsIgnoreCase("ARS_consensus_sequence") && ptype.equalsIgnoreCase("ARS")) {
 			name = "ars";
-		}else if (type.equalsIgnoreCase("CDS") && ptype.equalsIgnoreCase("blocked_reading_frame")) {
+		}else if (type.equalsIgnoreCase("CDS") && ptype.equalsIgnoreCase("blocked reading frame")) {
 			name = "blockedreadingframe";
 		}else if (type.equalsIgnoreCase("CDS") && ptype.equalsIgnoreCase("ORF")) {
 			name = "orf";
@@ -1000,7 +1002,7 @@ public class SgdConverter extends BioDBConverter {
 			name = "orf";
 		}else if (type.equalsIgnoreCase("CDS") && ptype.equalsIgnoreCase("pseudogene")) {
 			name = "pseudogene";
-		} else if (type.equalsIgnoreCase("CDS") && ptype.equalsIgnoreCase("transposable_element_gene")) {
+		} else if (type.equalsIgnoreCase("CDS") && ptype.equalsIgnoreCase("transposable element gene")) {
 			name = "transposableelementgene";
 		}else if (type.equalsIgnoreCase("centromere_DNA_Element_I")) {
 			name = "centromere";
@@ -1018,29 +1020,29 @@ public class SgdConverter extends BioDBConverter {
 			name = "ncrna_gene";
 		} else if (type.equalsIgnoreCase("intron") && ptype.equalsIgnoreCase("ORF")) {
 			name = "orf";
-		}else if (type.equalsIgnoreCase("intron") && ptype.equalsIgnoreCase("rRNA_gene")) {
+		}else if (type.equalsIgnoreCase("intron") && ptype.equalsIgnoreCase("rRNA gene")) {
 			name = "rrna_gene";
-		}else if (type.equalsIgnoreCase("intron") && ptype.equalsIgnoreCase("snoRNA_gene")) {
+		}else if (type.equalsIgnoreCase("intron") && ptype.equalsIgnoreCase("snoRNA gene")) {
 			name = "snorna_gene";
-		}else if (type.equalsIgnoreCase("intron") && ptype.equalsIgnoreCase("tRNA_gene")) {
+		}else if (type.equalsIgnoreCase("intron") && ptype.equalsIgnoreCase("tRNA gene")) {
 			name = "trna_gene";
 		} else if (type.equalsIgnoreCase("non_transcribed_region")) {
 			name = "ncrna_gene";
-		}else if (type.equalsIgnoreCase("noncoding_exon") && ptype.equalsIgnoreCase("ncRNA_gene")) {
+		}else if (type.equalsIgnoreCase("noncoding_exon") && ptype.equalsIgnoreCase("ncRNA gene")) {
 			name = "ncrna_gene";
-		} else if (type.equalsIgnoreCase("noncoding_exon") && ptype.equalsIgnoreCase("rRNA_gene")) {
+		} else if (type.equalsIgnoreCase("noncoding_exon") && ptype.equalsIgnoreCase("rRNA gene")) {
 			name = "ncrna_gene";
-		} else if (type.equalsIgnoreCase("noncoding_exon") && ptype.equalsIgnoreCase("snoRNA_gene")) {
+		} else if (type.equalsIgnoreCase("noncoding_exon") && ptype.equalsIgnoreCase("snoRNA gene")) {
 			name = "ncrna_gene";
-		} else if (type.equalsIgnoreCase("noncoding_exon") && ptype.equalsIgnoreCase("snRNA_gene")) {
+		} else if (type.equalsIgnoreCase("noncoding_exon") && ptype.equalsIgnoreCase("snRNA gene")) {
 			name = "ncrna_gene";
-		} else if (type.equalsIgnoreCase("noncoding_exon") && ptype.equalsIgnoreCase("tRNA_gene")) {
+		} else if (type.equalsIgnoreCase("noncoding_exon") && ptype.equalsIgnoreCase("tRNA gene")) {
 			name = "ncrna_gene";
 		} else if (type.equalsIgnoreCase("plus_1_translational_frameshift") && ptype.equalsIgnoreCase("ORF")) {
 			name = "orf";
 		} else if (type.equalsIgnoreCase("plus_1_translational_frameshift") && ptype.equalsIgnoreCase("pseudogene")) {
 			name = "pseudogene";
-		} else if (type.equalsIgnoreCase("plus_1_translational_frameshift") && ptype.equalsIgnoreCase("transposable_element_gene")) {
+		} else if (type.equalsIgnoreCase("plus_1_translational_frameshift") && ptype.equalsIgnoreCase("transposable element gene")) {
 			name = "transposableelementgene";
 		} else if (type.equalsIgnoreCase("telomeric_repeat") && ptype.equalsIgnoreCase("telomere")) {
 			name = "telomere";
@@ -1052,27 +1054,27 @@ public class SgdConverter extends BioDBConverter {
 			name = "telomere";
 		}   else if (type.equalsIgnoreCase("Y_prime_element") && ptype.equalsIgnoreCase("telomere")) {
 			name = "telomere";
-		}  else if (type.equalsIgnoreCase("noncoding_exon") && ptype.equalsIgnoreCase("telomerase_RNA_gene")) {
+		}  else if (type.equalsIgnoreCase("noncoding_exon") && ptype.equalsIgnoreCase("telomerase RNA gene")) {
 			name = "ncrna_gene";
-		}else if (type.equalsIgnoreCase("W_region") && ptype.equalsIgnoreCase("silent_mating_type_cassette_array")) {
+		}else if (type.equalsIgnoreCase("W_region") && ptype.equalsIgnoreCase("silent mating type cassette array")) {
 			name = "matingtyperegion";
-		}else if (type.equalsIgnoreCase("W_region") && ptype.equalsIgnoreCase("mating_type_region")) {
+		}else if (type.equalsIgnoreCase("W_region") && ptype.equalsIgnoreCase("mating type region")) {
 			name = "matingtyperegion";
-		}else if (type.equalsIgnoreCase("Y_region") && ptype.equalsIgnoreCase("mating_type_region")) {
+		}else if (type.equalsIgnoreCase("Y_region") && ptype.equalsIgnoreCase("mating type region")) {
 			name = "matingtyperegion";
-		}else if (type.equalsIgnoreCase("X_region") && ptype.equalsIgnoreCase("silent_mating_type_cassette_array")) {
+		}else if (type.equalsIgnoreCase("X_region") && ptype.equalsIgnoreCase("silent mating type cassette array")) {
 			name = "matingtyperegion";
-		}else if (type.equalsIgnoreCase("Y_region") && ptype.equalsIgnoreCase("silent_mating_type_cassette_array")) {
+		}else if (type.equalsIgnoreCase("Y_region") && ptype.equalsIgnoreCase("silent mating type cassette array")) {
 			name = "matingtyperegion";
-		}else if (type.equalsIgnoreCase("X_region") && ptype.equalsIgnoreCase("mating_type_region")) {
+		}else if (type.equalsIgnoreCase("X_region") && ptype.equalsIgnoreCase("mating type region")) {
 			name = "matingtyperegion";
-		}else if (type.equalsIgnoreCase("Z1_region") && ptype.equalsIgnoreCase("silent_mating_type_cassette_array")) {
+		}else if (type.equalsIgnoreCase("Z1_region") && ptype.equalsIgnoreCase("silent mating type cassette array")) {
 			name = "matingtyperegion";
-		}else if (type.equalsIgnoreCase("Z1_region") && ptype.equalsIgnoreCase("mating_type_region")) {
+		}else if (type.equalsIgnoreCase("Z1_region") && ptype.equalsIgnoreCase("mating type region")) {
 			name = "matingtyperegion";
-		}else if (type.equalsIgnoreCase("Z2_region") && ptype.equalsIgnoreCase("silent_mating_type_cassette_array")) {
+		}else if (type.equalsIgnoreCase("Z2_region") && ptype.equalsIgnoreCase("silent mating type cassette array")) {
 			name = "matingtyperegion";
-		}else if (type.equalsIgnoreCase("Z2_region") && ptype.equalsIgnoreCase("mating_type_region")) {
+		}else if (type.equalsIgnoreCase("Z2_region") && ptype.equalsIgnoreCase("mating type region")) {
 			name = "matingtyperegion";
 		}
 
