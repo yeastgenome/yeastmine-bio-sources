@@ -207,5 +207,5 @@ failures.list
 *.jks
 *.iml
 out/
-.gradle/4.1/*
+.gradle/
 .idea/

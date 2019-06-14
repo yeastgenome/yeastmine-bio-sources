@@ -237,7 +237,9 @@ public class DiseaseConverter extends BioDBConverter {
 						goevidence.addCollection(new ReferenceList("with", with));
 					}
 				}*/
-				goevidence.setAttribute("withText", evidence.withText);
+				if(!StringUtils.isEmpty(evidence.withText)) {
+					goevidence.setAttribute("withText", evidence.withText);
+				}
 				store(goevidence);
 				evidenceRefIds.add(goevidence.getIdentifier());
 				goAnnotationRefId = evidence.getStoredAnnotationId();
