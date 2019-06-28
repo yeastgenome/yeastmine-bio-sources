@@ -33,3 +33,5 @@ project(':bio-source-sgd-protein-ntermini').projectDir = new File(settingsDir, '
 project(':bio-source-sgd-protein-properties').projectDir = new File(settingsDir, './sgd-protein-properties')
 project(':bio-source-sgd').projectDir = new File(settingsDir, './sgd')
 project(':bio-source-spell-expression').projectDir = new File(settingsDir, './spell-expression')
+include ':bio-source-homologene'
+project(':bio-source-homologene').projectDir = new File(settingsDir, './homologene')
