@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="sgd-gff-tasks">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/sgd-gff/bin/bin/main/dist/sgd-gff-tasks.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

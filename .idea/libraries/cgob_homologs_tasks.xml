@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="cgob-homologs-tasks">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/cgob-homologs/bin/bin/main/dist/cgob-homologs-tasks.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="spell-expression-tasks">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/spell-expression/bin/main/dist/spell-expression-tasks.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

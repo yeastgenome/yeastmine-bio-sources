@@ -1,8 +1,8 @@
-    
 bin/
 dist/
 client-dist/
 build/
+*/build/
 client-build/
 *.log
 *.log.*
@@ -200,7 +200,6 @@ malariamine/
 # IDEs
 nbproject/
 nb-build.xml
-.idea/
 apache-tomcat*
 prefixed
 failures.list

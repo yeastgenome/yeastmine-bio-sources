@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="sgd-protein-ntermini-tasks2">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/sgd-protein-ntermini/bin/main/dist/sgd-protein-ntermini-tasks.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

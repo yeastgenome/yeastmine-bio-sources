@@ -285,6 +285,7 @@
 	<attribute name="phenotype" type="java.lang.String"/>
 	<attribute name="role2" type="java.lang.String"/>
 	<attribute name="type" type="java.lang.String"/>
+	<attribute name="note" type="java.lang.String"/>
 	<attribute name="confidenceText" type="java.lang.String"/>
 	<attribute name="role1" type="java.lang.String"/>
 	<attribute name="name" type="java.lang.String"/>
@@ -357,7 +358,6 @@
 	<reference name="downstreamIntergenicRegion" referenced-type="IntergenicRegion"/>
 	<reference name="plasmid" referenced-type="Plasmid" reverse-reference="genes"/>
 	<reference name="plasmidLocation" referenced-type="Location"/>
-	<!--<reference name="regulationSummary" referenced-type="RegulationSummary"/>-->
 	<collection name="complements" referenced-type="Complement" reverse-reference="gene"/>
 	<collection name="flankingRegions" referenced-type="GeneFlankingRegion" reverse-reference="gene"/>
 	<collection name="introns" referenced-type="Intron" reverse-reference="genes"/>
@@ -612,6 +612,7 @@
 	<reference name="orf" referenced-type="ORF" reverse-reference="uORFs"/>
 </class>
 <class name="BlockedReadingFrame" extends="SequenceFeature" is-interface="true">
+	<attribute name="phenotypeSummary" type="java.lang.String"/>
 	<collection name="CDSs" referenced-type="CDS" reverse-reference="blockedreadingframe"/>
 </class>
 <class name="PublicationAnnotation" is-interface="true">
@@ -706,6 +707,7 @@
 	<attribute name="identifier" type="java.lang.String"/>
 	<attribute name="name" type="java.lang.String"/>
 	<collection name="genes" referenced-type="Gene" reverse-reference="diseases"/>
+	<collection name="publications" referenced-type="Publication"/>
 	<collection name="dataSets" referenced-type="DataSet"/>
 </class>
 <class name="ProteinDomain" is-interface="true">
@@ -725,5 +727,7 @@
 </class>
 
 <class name="TRNAGene" extends="NcRNAGene" is-interface="true"> </class>
+
+	<class name="RNA" extends="BioEntity" is-interface="true"/>
 
 </model>

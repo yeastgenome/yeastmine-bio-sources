@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="disease-tasks">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/disease/src/main/dist/disease-tasks.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
