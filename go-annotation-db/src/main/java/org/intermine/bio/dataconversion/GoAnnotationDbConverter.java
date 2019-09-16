@@ -205,7 +205,8 @@ public class GoAnnotationDbConverter extends BioDBConverter
 				if (allEvidenceForAnnotation == null ) { //|| !StringUtils.isEmpty(withText)
 					String goTermIdentifier = newGoTerm(goId, dataSource, dataSourceCode);
 					Evidence evidence = new Evidence(newStrEvidence, pubRefId, withText, organism,
-							dataSource, dataSourceCode); 
+							dataSource, dataSourceCode);
+					System.out.print("evidence");
 					allEvidenceForAnnotation = new LinkedHashSet<Evidence>();
 					allEvidenceForAnnotation.add(evidence);
 					goTermGeneToEvidence.put(key, allEvidenceForAnnotation);
