@@ -142,14 +142,14 @@
 </class>
 <class name="DiseaseAnnotation" extends="OntologyAnnotation" is-interface="true">
 	</class>
-<class name="DiseaseEvidence" is-interface="true">
+<class name="DiseaseEvidence"  extends="OntologyEvidence" is-interface="true">
 		<collection name="with" referenced-type="BioEntity"/>
 		<attribute name="withText" type="java.lang.String"/>
 		<attribute name="annotType" type="java.lang.String"/>
 		<reference name="code" referenced-type="DiseaseEvidenceCode"/>
 		<collection name="publications" referenced-type="Publication"/>
 	</class>
-<class name="DiseaseEvidenceCode" is-interface="true">
+<class name="DiseaseEvidenceCode"  extends="OntologyAnnotationEvidenceCode" is-interface="true">
 		<attribute name="code" type="java.lang.String"/>
 	</class>
 <class name="ECOTerm" extends="OntologyTerm" is-interface="true"/>
@@ -199,12 +199,12 @@
 <class name="GOAnnotation" extends="OntologyAnnotation" is-interface="true">
 	<attribute name="annotationExtension" type="java.lang.String"/>
 </class>
-<class name="GOEvidence" is-interface="true">
+<class name="GOEvidence" extends="OntologyEvidence" is-interface="true">
 	<reference name="code" referenced-type="GOEvidenceCode"/>
 	<collection name="with" referenced-type="BioEntity"/>
 	<collection name="publications" referenced-type="Publication"/>
 </class>
-<class name="GOEvidenceCode" is-interface="true">
+<class name="GOEvidenceCode" extends="OntologyAnnotationEvidenceCode" is-interface="true">
 	<attribute name="withText" type="java.lang.String"/>
 	<attribute name="annotType" type="java.lang.String"/>
 	<attribute name="code" type="java.lang.String"/>
