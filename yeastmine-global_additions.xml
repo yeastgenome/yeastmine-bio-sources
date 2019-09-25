@@ -401,6 +401,8 @@
 
 	<class name="OntologyAnnotationEvidenceCode" is-interface="true">
 		<attribute name="code" type="java.lang.String"/>
+		<attribute name="withText" type="java.lang.String"/>
+		<attribute name="annotType" type="java.lang.String"/>
 		<attribute name="name" type="java.lang.String"/>
 		<attribute name="url" type="java.lang.String"/>
 	</class>
