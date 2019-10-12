@@ -120,7 +120,7 @@ public class SgdConverter extends BioDBConverter {
 		processGeneChildrenLocations(connection);
 		processProteins(connection);
 		
-		processAllPubs(connection);           						
+		processAllPubs(connection);
 		processPubsWithFeatures(connection); 
 		
 		processProteinAbundance(connection);

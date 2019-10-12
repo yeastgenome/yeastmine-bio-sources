@@ -42,14 +42,14 @@
 	<collection name="locatedFeatures" referenced-type="Location" reverse-reference="locatedOn"/>
 </class>
 <class name="BiologicalRegion" extends="SequenceFeature" is-interface="true"/>
-	<class name="BlockedReadingFrame" extends="SequenceFeature" is-interface="true">
-	<attribute name="phenotypeSummary" type="java.lang.String"/>
-	<collection name="CDSs" referenced-type="CDS" reverse-reference="blockedreadingframe"/>
+	<class name="BlockedReadingFrame" extends="ProteinCodingGene" is-interface="true">
+	<!--<attribute name="phenotypeSummary" type="java.lang.String"/>
+	<collection name="CDSs" referenced-type="CDS" reverse-reference="blockedreadingframe"/>-->
 </class>
-	<class name="CDS" extends="SequenceFeature" is-interface="true">
+	<class name="CDS" extends="BiologicalRegion" is-interface="true">
 	<reference name="plasmid" referenced-type="Plasmid" reverse-reference="CDSs"/>
 	<reference name="pseudogene" referenced-type="Pseudogene"/>
-	<reference name="blockedreadingframe" referenced-type="BlockedReadingFrame" reverse-reference="CDSs"/>
+	<reference name="blockedreadingframe" referenced-type="BlockedReadingFrame"/>
 	<reference name="transposableelementgene" referenced-type="TransposableElementGene"/>
 	<reference name="plasmidLocation" referenced-type="Location"/>
 	<reference name="protein" referenced-type="Protein" reverse-reference="CDSs"/>
@@ -373,7 +373,7 @@
 </class>
 
 <class name="NotInSystematicSequenceOfS288C" extends="Gene" is-interface="true"/>
-<class name="ORF" extends="Gene" is-interface="true">
+<class name="ORF" extends="ProteinCodingGene" is-interface="true">
 	<reference name="regulationSummary" referenced-type="RegulationSummary"/>
 	<!--<collection name="CDSs" referenced-type="CDS" reverse-reference="orf"/>-->
 	<collection name="plus1translationalframeshifts" referenced-type="Plus1TranslationalFrameshift" reverse-reference="orf"/>

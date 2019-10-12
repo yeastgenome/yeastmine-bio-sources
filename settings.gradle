@@ -19,7 +19,7 @@ include ':bio-source-cglabrata-homologs',
  ':bio-source-mgi-identifiers',
  ':bio-source-rgd-identifiers',
  ':bio-source-omim',
- ':bio-source-treefam',
+ ':bio-source-treefam', ':bio-source-homologene',
  ':bio-source-panther',
  ':bio-source-homologene',
  ':bio-source-ensembl-compara', ':bio-source-go-slim'
@@ -56,6 +56,7 @@ project(':bio-source-rgd-identifiers').projectDir = new File(settingsDir, './rgd
 project(':bio-source-omim').projectDir = new File(settingsDir, './omim')
 project(':bio-source-treefam').projectDir = new File(settingsDir, './treefam')
 project(':bio-source-panther').projectDir = new File(settingsDir, './panther')
+project(':bio-source-homologene').projectDir = new File(settingsDir, './homologene')
 project(':bio-source-ensembl-compara').projectDir = new File(settingsDir, './ensembl-compara')
 
 
