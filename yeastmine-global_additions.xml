@@ -485,7 +485,7 @@
 	<reference name="pseudogene" referenced-type="Pseudogene" reverse-reference="plus1translationalframeshifts"/>
 	<reference name="orf" referenced-type="ORF" reverse-reference="plus1translationalframeshifts"/>
 </class>
-<class name="Protein" is-interface="true">
+<class name="Protein" extends="BioEntity" is-interface="true">
 		<attribute name="symbol" type="java.lang.String"/>
 		<attribute name="pI" type="java.lang.Float"/>
 		<attribute name="molecularWeight" type="java.lang.Double"/>
