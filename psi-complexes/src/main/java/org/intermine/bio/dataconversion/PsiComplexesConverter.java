@@ -339,15 +339,17 @@ public class PsiComplexesConverter extends BioFileConverter
             // if no SGD identifier, eg. for small molecules, accession and identifier are equal
             primaryIdentifier = accession;
         }
+        System.out.println("primary Identifier....."+ primaryIdentifier);
         String refId = interactors.get(primaryIdentifier);
         if (refId == null) {
             String typeTermIdentifier = participant.getInteractorType().getMIIdentifier();
             String interactorType = INTERACTOR_TYPES.get(typeTermIdentifier);
             if (interactorType == null) {
                 // see #1168
-                LOG.error("Unknown interactor type: " + typeTermIdentifier);
+                LOG.error("Unknown interactor type: " + interactorType);
                 interactorType = DEFAULT_INTERACTOR_TYPE;
             }
+            System.out.println("Interactor Type....."+ primaryIdentifier);
             Item protein = createItem(interactorType);
             protein.setAttribute("primaryIdentifier", primaryIdentifier);
             if (PROTEIN.equals(typeTermIdentifier)) {

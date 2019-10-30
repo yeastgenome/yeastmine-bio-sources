@@ -127,7 +127,6 @@ public class TreefamConverter extends BioFileConverter
             String[] configs = new String[2];
             configs[0] = col;
             configs[1] = value;
-
             config.put(taxonId, configs);
         }
     }
