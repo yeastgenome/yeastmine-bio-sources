@@ -671,10 +671,9 @@ public class SgdProcessor
 	protected ResultSet getRegulationData(Connection connection)
 			throws SQLException {
 
-		String query = "select target_id, target_gene_name, regulator_id, regulator_gene_name, regulator_type, regulation_type, direction, annotation_type, pmid,"
+		String query = "select target_id, regulator_id, regulator_type, regulation_type, direction, annotation_type, pmid,"
 				+ " rdb.dbentity_id as refNo, e.format_name, g.display_name as happens_during, s.display_name as source, t.format_name as strain_background"
 				+ " from nex.dbentity db"
-				+ " inner join nex.locusdbentity ldb on db.dbentity_id = ldb.dbentity_id"
 				+ " inner join nex.regulationannotation ra on db.dbentity_id = ra.regulator_id"
 				+ " inner join nex.referencedbentity rdb on rdb.dbentity_id = ra.reference_id"
 				+ " inner join nex.dbentity db2 on ra.target_id = db2.dbentity_id"
