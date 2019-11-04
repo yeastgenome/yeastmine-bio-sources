@@ -407,8 +407,8 @@ public class SgdConverter extends BioDBConverter {
 			String strainBackground = res.getString("strain_background");	
 			String source = res.getString("source");
 
-			System.out.println(" Regulator  Gene " +  res.getString("regulator_gene_name");
-			System.out.println(" Target  Gene " +  res.getString("target_gene_name");
+			System.out.println(" Regulator  Gene " +  res.getString("regulator_gene_name"));
+			System.out.println(" Target  Gene " +  res.getString("target_gene_name"));
 
 			getRegulation(factorGene, targetGene, evidenceCode, condition,  regulationDirection,  pmid,
 					refNo, source, strainBackground,regulationType,regulatorType, annotationType);
