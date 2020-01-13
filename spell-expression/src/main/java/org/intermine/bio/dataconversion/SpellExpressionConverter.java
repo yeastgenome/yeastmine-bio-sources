@@ -143,7 +143,7 @@ public class SpellExpressionConverter extends BioDBConverter {
 			Item dataset = getDataSet(pubmedID, fileName, geoID, platformID,
 					channelCount, datasetName, description, numCond, numGenes,
 					author, allAuthors, title, journal, pubYear, tags);		
-			System.out.println("gene: "+geneName + "    condDesc: "+ condDesc + " data_table: " + dataTable);
+			//System.out.println("gene: "+geneName + "    condDesc: "+ condDesc + " data_table: " + dataTable);
 			
 			// add score to gene - using the condition and dataset info
 			getConditionScore(dataset, condDesc, dataTable, geneName);
@@ -262,7 +262,7 @@ public class SpellExpressionConverter extends BioDBConverter {
 			         item.addToCollection("expressiondatasettags", dtag.getIdentifier());
 				
 			}
-			System.out.println("pubmed: "+pubmedID + "    geoID: "+ geoID + " datasetName: " + datasetName);								
+			//System.out.println("pubmed: "+pubmedID + "    geoID: "+ geoID + " datasetName: " + datasetName);
 			datasets.put(fileName, item);
 		}
 
@@ -290,7 +290,6 @@ public class SpellExpressionConverter extends BioDBConverter {
 
 			String cond = expconditions[i];
 			String condscore = scores[i];
-			System.out.println("cond:" + cond + "   score:"+ condscore);
 			
 			Item dcond = conditions.get(cond);
 			if (dcond == null) {

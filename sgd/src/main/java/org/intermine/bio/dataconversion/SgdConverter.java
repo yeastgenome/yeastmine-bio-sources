@@ -72,7 +72,7 @@ public class SgdConverter extends BioDBConverter {
 	private static final String TAXON_ID = "4932";
 	private Item organism;
 	private Map<String, String> featureMap = new HashMap();
-	private static final boolean TEST_LOCAL = true;
+	private static final boolean TEST_LOCAL = false;
 	private String licence;
 
 
@@ -135,11 +135,10 @@ public class SgdConverter extends BioDBConverter {
 		processRegulation(connection);
 		processRegulationSummary(connection);
 
+		processPathways(connection);
+		storePathways();
 
 		if(TEST_LOCAL) {
-
-			processPathways(connection);
-			storePathways();
 
 			processPhysicalInteractions(connection);
 			processGeneticInteractions(connection);
@@ -181,7 +180,6 @@ public class SgdConverter extends BioDBConverter {
 				String symbol = res.getString("gene_name");
 				String name = res.getString("name_description");
 				String feature_type = res.getString("feature_type");
-				System.out.println("feature TYpe got from SQL is " + feature_type);
 				String headline = res.getString("headline");
 				String description = res.getString("description");
 				String qualifier = res.getString("qualifier");
@@ -250,7 +248,6 @@ public class SgdConverter extends BioDBConverter {
 
 				// set for all types, so you can use LSF to query for these
 				// different type of objects in a template.
-				System.out.println("feature Type is...."+ feature_type);
 				item.setAttribute("featureType", feature_type);
 				item.setAttribute("primaryIdentifier", primaryIdentifier);
 				if (StringUtils.isNotEmpty(name)) item.setAttribute("name", name);
@@ -608,10 +605,11 @@ public class SgdConverter extends BioDBConverter {
 			String dbxref_name = res.getString("display_name"); //pathway identifier i.e. short name
 			String summary_type = res.getString("summary_type");
 			String text = res.getString("text");
+			String refNo = res.getString("reference_id"); // refs for pathways
 
 			Item item = genes.get(geneFeatureNo);
 			if (item != null) {
-				getPathway(item.getIdentifier(), dbxref_id, dbxref_name, summary_type, text);
+				getPathway(item.getIdentifier(), dbxref_id, dbxref_name, summary_type, text, refNo);
 			}
 		}
 	}
@@ -1927,17 +1925,18 @@ public class SgdConverter extends BioDBConverter {
 			String referenceNo = res.getString("dbentity_id");
 			String pubMedId = res.getString("pmid");
 			String title = res.getString("title");
+            String volume = res.getString("volume");
+            String pages = res.getString("page");
+            String year = res.getString("year");
+            String issue = res.getString("issue");
 			String citation = res.getString("citation");
 			String topic = res.getString("topic");
 			String journal = res.getString("med_abbr");
-			String volume = res.getString("volume");
-			String pages = res.getString("page");
-			String year = res.getString("year");
-			String issue = res.getString("issue");
-			String abst = res.getString("fulltext_status");
+			String abstractText = res.getString("text");
 			String dbxrefid = res.getString("sgdid");
 			String date_created = res.getString("date_created");
 
+			System.out.println(abstractText);
 			if (firstrow) {
 				prevReferenceNo = referenceNo;
 				firstrow = false;
@@ -1963,11 +1962,12 @@ public class SgdConverter extends BioDBConverter {
 			prevYear = year;
 			prevIssue = issue;
 			prevPages = pages;
-			prevAbst = abst;
+			prevAbst = abstractText;
 			prevDbxRef = dbxrefid;
 			prevDateCreated = date_created;
 
 		}
+
 		// process the very last reference group
 		getPub(prevReferenceNo, prevTitle, prevPubMedId, prevCitation, hm,
 				prevJournal, prevVolume, prevPages, prevYear, prevIssue,
@@ -2699,7 +2699,7 @@ public class SgdConverter extends BioDBConverter {
 	}
 
 
-	private String getPathway(String geneIdentifier, String id, String name, String summaryType, String text)
+	private String getPathway(String geneIdentifier, String id, String name, String summaryType, String text, String refNo)
 			throws ObjectStoreException {
 
 		Item crf = pathways.get(id);
@@ -2709,13 +2709,26 @@ public class SgdConverter extends BioDBConverter {
 			crf.setAttribute("identifier", id);
 			crf.setAttribute("name", name);
 			crf.setAttribute("summaryType", summaryType);
-			crf.setAttribute("text", text);
+			if (!StringUtils.isEmpty(text)) { crf.setAttribute("text", text);}
+
+			Item publication = publications.get(refNo);
+			if(publication == null) {
+				publication = createItem("Publication");
+				publications.put(refNo, publication);
+			}
+			crf.addToCollection("publications", publication);
 
 			pathways.put(id, crf);
 
 			crf.addToCollection("genes", geneIdentifier);
 
 		}else{
+			Item publication = publications.get(refNo);
+			if(publication == null) {
+				publication = createItem("Publication");
+				publications.put(refNo, publication);
+			}
+			crf.addToCollection("publications", publication);
 			crf.addToCollection("genes", geneIdentifier);
 		}
 
@@ -2879,7 +2892,7 @@ public class SgdConverter extends BioDBConverter {
 
 	private void getPub(String referenceNo, String title, String pubMedId,
 			String citation, ArrayList hm, String journal, String volume,
-			String pages, String year, String issue, String abst, String dbxrefid, String datecreated)
+			String pages, String year, String issue, String abstractText, String dbxrefid, String datecreated)
 					throws ObjectStoreException {
 
 		Item storedRef = publications.get(referenceNo);
@@ -2915,8 +2928,8 @@ public class SgdConverter extends BioDBConverter {
 			if (StringUtils.isNotEmpty(issue)) {
 				item.setAttribute("issue", issue);
 			}
-			if (StringUtils.isNotEmpty(abst)) {
-				item.setAttribute("summary", abst);
+			if (StringUtils.isNotEmpty(abstractText)) {
+				item.setAttribute("abstractText", abstractText);
 			}
 			if (StringUtils.isNotEmpty(datecreated)) {
 				item.setAttribute("dateCreated", datecreated);

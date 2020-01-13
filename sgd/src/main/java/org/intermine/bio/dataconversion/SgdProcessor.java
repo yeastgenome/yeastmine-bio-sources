@@ -126,7 +126,8 @@ public class SgdProcessor
 				+ " and    a2.dbentity_id = d2.dbentity_id "
 				+ " and    d2.dbentity_id = ld.dbentity_id "
 				+ " and    a.taxonomy_id = t.taxonomy_id "
-				+ " and    t.display_name = 'Saccharomyces cerevisiae S288c'";
+				+ " and    t.taxid = 'TAX:559292'";
+				//+ " and    t.display_name = 'Saccharomyces cerevisiae S288c'";
 
 		LOG.info("executing: " + query);
 		Statement stmt = connection.createStatement();
@@ -338,7 +339,7 @@ public class SgdProcessor
 	protected ResultSet getPubAllResults(Connection connection)
 			throws SQLException {
 
-		String query = "select r.dbentity_id, r.pmid, r.fulltext_status, r.title, r.volume, r.page, r.year, r.issue,"
+		String query = "select r.dbentity_id, r.pmid, r.title, r.volume, r.page, r.year, r.issue,"
 				+	" r.citation, la.topic, j.med_abbr, rd.text, db.sgdid, db.date_created"
 				+ " from nex.dbentity db"
 				+ " inner join nex.referencedbentity r on db.dbentity_id = r.dbentity_id"
@@ -647,13 +648,21 @@ public class SgdProcessor
 	protected ResultSet getPathways(Connection connection)
 			throws SQLException {
 
-		String query = "select distinct db.dbentity_id, biocyc_id, db2.display_name, ps.summary_type, ps.text "
+		/*String query = "select distinct db.dbentity_id, biocyc_id, db2.display_name, ps.summary_type, ps.text "
 				+ " from nex.dbentity db, nex.pathwaydbentity pdf, nex.pathwayannotation pa, nex.dbentity db2, nex.pathwaysummary ps "
 				+ " where db.dbentity_id = pa.dbentity_id "
 				+ " and ps.pathway_id = pdf.dbentity_id "
 				+ " and pa.pathway_id = pdf.dbentity_id "
 				+ " and pdf.dbentity_id = db2.dbentity_id " 
-				+ " order by 1";
+				+ " order by 1";*/
+
+		String query = "select distinct db.dbentity_id, biocyc_id, db2.display_name, ps.summary_type, ps.text, pa.reference_id" +
+				" from nex.dbentity db" +
+				" inner join nex.pathwayannotation pa on db.dbentity_id = pa.dbentity_id" +
+				" inner join nex.pathwaydbentity pdf on pdf.dbentity_id = pa.pathway_id" +
+				" inner join nex.dbentity db2 on db2.dbentity_id = pdf.dbentity_id" +
+				" left join nex.pathwaysummary ps on ps.pathway_id = pdf.dbentity_id" +
+				" order by 1";
 
 		LOG.info("executing: " + query);        
 		Statement stmt = connection.createStatement();
