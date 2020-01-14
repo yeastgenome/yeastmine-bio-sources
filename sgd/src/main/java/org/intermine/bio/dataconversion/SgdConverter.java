@@ -905,7 +905,7 @@ public class SgdConverter extends BioDBConverter {
 
 			String geneChildFeatureNo = res.getString("child_id");
 			String childFeatureType = res.getString("child_type").trim();
-
+			
 			String chromosome_no = res.getString("format_name"); //root chr.number
 			//String secondaryIdentifier = res.getString("child_identifier"); //child identifier is wrong -- fix it 11/13
 			String primaryIdentifier = res.getString("child_sgdid")+"_C"; // SXX
@@ -1012,7 +1012,7 @@ public class SgdConverter extends BioDBConverter {
 			name = "ncrna_gene";
 		} else if (type.equalsIgnoreCase("five_prime_UTR_intron")) {
 			name = "orf";
-		}else if (type.equalsIgnoreCase("intein encoding region")) {
+		}else if (type.equalsIgnoreCase("intein_encoding_region")) {
 			name = "orf";
 		}else if (type.equalsIgnoreCase("internal_transcribed_spacer_region")) {
 			name = "ncrna_gene";
@@ -1633,7 +1633,7 @@ public class SgdConverter extends BioDBConverter {
 			item = createItem("CentromereDNAElementII");
 		} else if (childType.equalsIgnoreCase("centromere_DNA_Element_III")) {
 			item = createItem("CentromereDNAElementIII");
-		} else if (childType.equalsIgnoreCase("intein encoding region")) {
+		} else if (childType.equalsIgnoreCase("intein_encoding_region")) {
 			item = createItem("InteinEncodingRegion");
 		} else if (childType.equalsIgnoreCase("ARS_consensus_sequence")) {
 			item = createItem("ARSConsensusSequence");
