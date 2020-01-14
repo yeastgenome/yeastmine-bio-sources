@@ -905,7 +905,7 @@ public class SgdConverter extends BioDBConverter {
 
 			String geneChildFeatureNo = res.getString("child_id");
 			String childFeatureType = res.getString("child_type").trim();
-			
+
 			String chromosome_no = res.getString("format_name"); //root chr.number
 			//String secondaryIdentifier = res.getString("child_identifier"); //child identifier is wrong -- fix it 11/13
 			String primaryIdentifier = res.getString("child_sgdid")+"_C"; // SXX
@@ -1936,7 +1936,6 @@ public class SgdConverter extends BioDBConverter {
 			String dbxrefid = res.getString("sgdid");
 			String date_created = res.getString("date_created");
 
-			System.out.println(abstractText);
 			if (firstrow) {
 				prevReferenceNo = referenceNo;
 				firstrow = false;
