@@ -61,6 +61,7 @@ public class SgdConverter extends BioDBConverter {
 	private Map<String, Item> experimenttype = new HashMap();
 	private Map<String, Item> interactiondetectionmethods = new HashMap();
 	private Map<String, Item> pathways = new HashMap();
+	private Map<String, Item> pathwaysummarys = new HashMap();
 	private Map<String, Item> phenotypes = new HashMap();
 	private Map<String, HashMap<String, String>> phenotypeannots = new HashMap();
 	private Map<String, String> datasources = new HashMap();
@@ -113,17 +114,17 @@ public class SgdConverter extends BioDBConverter {
 
 		processChromosomeSequences(connection);
 		processGenes(connection);
-		processNISS(connection);
+		/*processNISS(connection);
 		processAliases(connection);
 		processCrossReferences(connection);
 		processGeneLocations(connection);
 		processGeneChildrenLocations(connection);
-		processProteins(connection);
+		processProteins(connection);*/
 		
 		processAllPubs(connection);
 		processPubsWithFeatures(connection); 
 		
-		processProteinAbundance(connection);
+		/*processProteinAbundance(connection);
 		processProteinHalfLife(connection);
 		processProteinDomains(connection);
 		processProteinModifications(connection);
@@ -133,9 +134,10 @@ public class SgdConverter extends BioDBConverter {
 		
 		processFunctionSummary(connection);
 		processRegulation(connection);
-		processRegulationSummary(connection);
+		processRegulationSummary(connection);*/
 
-		processPathways(connection);
+		processAllPathways(connection);
+		processGenePathways(connection);
 		storePathways();
 
 		if(TEST_LOCAL) {
@@ -588,31 +590,155 @@ public class SgdConverter extends BioDBConverter {
 
 
 	/**
-	 * 
+	 *
 	 * @param connection
 	 * @throws SQLException
 	 * @throws ObjectStoreException
 	 */
-	private void processPathways(Connection connection)
+	private void processAllPathways(Connection connection)
 			throws SQLException, ObjectStoreException {
 
-		System.out.println("Processing Pathways...");
-		ResultSet res = PROCESSOR.getPathways(connection); // ordered by featureNo
+		System.out.println("Processing ALL Pathways...");
+		ResultSet res = PROCESSOR.getAllPathways(connection); // ordered by featureNo
 
-		while (res.next()) {			
-			String geneFeatureNo = res.getString("dbentity_id");
+		while (res.next()) {
+
 			String dbxref_id = res.getString("biocyc_id"); //pathway name
 			String dbxref_name = res.getString("display_name"); //pathway identifier i.e. short name
 			String summary_type = res.getString("summary_type");
 			String text = res.getString("text");
 			String refNo = res.getString("reference_id"); // refs for pathways
 
+			//Item pathway = pathways.get(dbxref_id);
+			//if (pathway != null) {
+			getPathway(dbxref_id, dbxref_name, summary_type, text, refNo);
+			//}
+		}
+	}
+
+
+	private String getPathway(String id, String name, String summaryType, String text, String refNo)
+			throws ObjectStoreException {
+
+		Item crf = pathways.get(id);
+		Item ps = pathwaysummarys.get(id);
+
+		if (crf == null) {
+
+			crf = createItem("Pathway");
+			crf.setAttribute("identifier", id);
+			crf.setAttribute("name", name);
+
+			if(ps == null) {
+				ps = createItem("PathwaySummary");
+				ps.setAttribute("summaryType", summaryType);
+				if (!StringUtils.isEmpty(text)) { ps.setAttribute("text", text);}
+			}else{
+				ps.setAttribute("summaryType", summaryType);
+				if (!StringUtils.isEmpty(text)) { ps.setAttribute("text", text);}
+			}
+
+			Item publication = publications.get(refNo);
+			if(publication == null) {
+				publication = createItem("Publication");
+				publications.put(refNo, publication);
+			}
+			ps.addToCollection("publications", publication);
+			pathwaysummarys.put(id,ps);
+			pathways.put(id, crf);
+		}else{
+
+			if(ps == null) {
+				ps = createItem("PathwaySummary");
+				ps.setAttribute("summaryType", summaryType);
+				if (!StringUtils.isEmpty(text)) { ps.setAttribute("text", text);}
+			}else{
+				ps.setAttribute("summaryType", summaryType);
+				if (!StringUtils.isEmpty(text)) { ps.setAttribute("text", text);}
+			}
+
+			Item publication = publications.get(refNo);
+			if(publication == null) {
+				publication = createItem("Publication");
+				publications.put(refNo, publication);
+			}
+			ps.addToCollection("publications", publication);
+			pathwaysummarys.put(id,ps);
+			pathways.put(id, crf);
+		}
+
+		crf.setReference("summary", ps);
+		String refId = crf.getIdentifier();
+		return refId;
+
+	}
+
+
+	/**
+	 *
+	 * @param connection
+	 * @throws SQLException
+	 * @throws ObjectStoreException
+	 */
+	private void processGenePathways(Connection connection)
+			throws SQLException, ObjectStoreException {
+
+		System.out.println("Processing Pathways...");
+		ResultSet res = PROCESSOR.getGenePathways(connection); // ordered by featureNo
+
+		while (res.next()) {
+			String geneFeatureNo = res.getString("dbentity_id");
+			String dbxref_id = res.getString("biocyc_id"); //pathway name
+			String dbxref_name = res.getString("display_name"); //pathway identifier i.e. short name
+			//String summary_type = res.getString("summary_type");
+			//String text = res.getString("text");
+			String refNo = res.getString("reference_id"); // refs for pathways
+
 			Item item = genes.get(geneFeatureNo);
 			if (item != null) {
-				getPathway(item.getIdentifier(), dbxref_id, dbxref_name, summary_type, text, refNo);
+				getGenePathway(item.getIdentifier(), dbxref_id, dbxref_name, refNo); //summary_type, text,
 			}
 		}
 	}
+
+	private String getGenePathway(String geneIdentifier, String id, String name, String refNo)
+			throws ObjectStoreException {
+
+		Item crf = pathways.get(id);
+		if (crf == null) {
+
+			crf = createItem("Pathway");
+			crf.setAttribute("identifier", id);
+			crf.setAttribute("name", name);
+			//crf.setAttribute("summaryType", summaryType);
+			//if (!StringUtils.isEmpty(text)) { crf.setAttribute("text", text);}
+
+			Item publication = publications.get(refNo);
+			if(publication == null) {
+				publication = createItem("Publication");
+				publications.put(refNo, publication);
+			}
+			crf.addToCollection("publications", publication);
+
+			pathways.put(id, crf);
+
+			crf.addToCollection("genes", geneIdentifier);
+
+		}else{
+			Item publication = publications.get(refNo);
+			if(publication == null) {
+				publication = createItem("Publication");
+				publications.put(refNo, publication);
+			}
+			crf.addToCollection("publications", publication);
+			crf.addToCollection("genes", geneIdentifier);
+		}
+
+		String refId = crf.getIdentifier();
+		return refId;
+
+	}
+
 
 	/**
 	 * 
@@ -1826,6 +1952,13 @@ public class SgdConverter extends BioDBConverter {
 				throw new ObjectStoreException(e);
 			}
 		}
+		for (Item ps : pathwaysummarys.values()) {
+			try {
+				store(ps);
+			} catch (ObjectStoreException e) {
+				throw new ObjectStoreException(e);
+			}
+		}
 	}
 
 	/**
@@ -2695,45 +2828,6 @@ public class SgdConverter extends BioDBConverter {
 			}
 		}
 		return refId;
-	}
-
-
-	private String getPathway(String geneIdentifier, String id, String name, String summaryType, String text, String refNo)
-			throws ObjectStoreException {
-
-		Item crf = pathways.get(id);
-		if (crf == null) {
-
-			crf = createItem("Pathway");
-			crf.setAttribute("identifier", id);
-			crf.setAttribute("name", name);
-			crf.setAttribute("summaryType", summaryType);
-			if (!StringUtils.isEmpty(text)) { crf.setAttribute("text", text);}
-
-			Item publication = publications.get(refNo);
-			if(publication == null) {
-				publication = createItem("Publication");
-				publications.put(refNo, publication);
-			}
-			crf.addToCollection("publications", publication);
-
-			pathways.put(id, crf);
-
-			crf.addToCollection("genes", geneIdentifier);
-
-		}else{
-			Item publication = publications.get(refNo);
-			if(publication == null) {
-				publication = createItem("Publication");
-				publications.put(refNo, publication);
-			}
-			crf.addToCollection("publications", publication);
-			crf.addToCollection("genes", geneIdentifier);
-		}
-
-		String refId = crf.getIdentifier();
-		return refId;
-
 	}
 
 	/**

@@ -452,19 +452,17 @@
 </class>
 <class name="Pathway" is-interface="true">
 	<attribute name="identifier" type="java.lang.String"/>
-	<attribute name="summaryType" type="java.lang.String"/>
-	<attribute name="text" type="java.lang.String"/>
 	<attribute name="name" type="java.lang.String"/>
-	<!--<reference name="summary" referenced-type="PathwaySummary"/>-->
+	<reference name="summary" referenced-type="PathwaySummary"/>
 	<collection name="genes" referenced-type="Gene" reverse-reference="pathways"/>
 	<collection name="dataSets" referenced-type="DataSet"/>
 	<collection name="publications" referenced-type="Publication" reverse-reference="pathways"/>
 </class>
-<!--<class name="PathwaySummary" is-interface="true">
+<class name="PathwaySummary" is-interface="true">
 	<attribute name="summaryType" type="java.lang.String"/>
 	<attribute name="text" type="java.lang.String"/>
-	<collection name="publications" referenced-type="Publication" reverse-reference="pathwaysummary"/>
-</class>-->
+	<collection name="publications" referenced-type="Publication" />
+</class>
 <class name="Phenotype" is-interface="true">
 	<attribute name="mutantType" type="java.lang.String"/>
 	<attribute name="strainBackground" type="java.lang.String"/>

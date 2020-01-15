@@ -346,7 +346,7 @@ public class SgdProcessor
 				+ " left join nex.journal j on j.journal_id = r.journal_id"
 				+ " left join nex.referencedocument rd on  r.dbentity_id = rd.reference_id"
 				+ " left join nex.literatureannotation la on la.reference_id = r.dbentity_id"
-				+ " and rd.document_type = 'Abstract'"
+				+ " where rd.document_type = 'Abstract'"
 				+ " order by r.dbentity_id";
 
 		LOG.info("executing: " + query);
@@ -645,26 +645,39 @@ public class SgdProcessor
 	 * @return the results
 	 * @throws SQLException if there is a database problem
 	 */
-	protected ResultSet getPathways(Connection connection)
+	protected ResultSet getGenePathways(Connection connection)
 			throws SQLException {
 
-		/*String query = "select distinct db.dbentity_id, biocyc_id, db2.display_name, ps.summary_type, ps.text "
-				+ " from nex.dbentity db, nex.pathwaydbentity pdf, nex.pathwayannotation pa, nex.dbentity db2, nex.pathwaysummary ps "
-				+ " where db.dbentity_id = pa.dbentity_id "
-				+ " and ps.pathway_id = pdf.dbentity_id "
-				+ " and pa.pathway_id = pdf.dbentity_id "
-				+ " and pdf.dbentity_id = db2.dbentity_id " 
-				+ " order by 1";*/
-
-		String query = "select distinct db.dbentity_id, biocyc_id, db2.display_name, ps.summary_type, ps.text, pa.reference_id" +
+		String query = "select distinct db.dbentity_id, biocyc_id, db2.display_name, pa.reference_id" +
 				" from nex.dbentity db" +
 				" inner join nex.pathwayannotation pa on db.dbentity_id = pa.dbentity_id" +
 				" inner join nex.pathwaydbentity pdf on pdf.dbentity_id = pa.pathway_id" +
 				" inner join nex.dbentity db2 on db2.dbentity_id = pdf.dbentity_id" +
-				" left join nex.pathwaysummary ps on ps.pathway_id = pdf.dbentity_id" +
 				" order by 1";
 
 		LOG.info("executing: " + query);        
+		Statement stmt = connection.createStatement();
+		ResultSet res = stmt.executeQuery(query);
+		return res;
+	}
+
+
+	/**
+	 * Return the results of getting cross-references from dbxref
+	 * @param connection the connection
+	 * @return the results
+	 * @throws SQLException if there is a database problem
+	 */
+	protected ResultSet getAllPathways(Connection connection)
+			throws SQLException {
+
+		String query = "select biocyc_id, db.display_name, ps.summary_type, ps.text, pss.reference_id" +
+				" from nex.pathwaydbentity pdb " +
+				" inner join nex.dbentity db on db.dbentity_id = pdb.dbentity_id" +
+				" inner join nex.pathwaysummary ps on ps.pathway_id = pdb.dbentity_id" +
+				" left join nex.pathwaysummary_reference pss on pss.summary_id = ps.summary_id";
+
+		LOG.info("executing: " + query);
 		Statement stmt = connection.createStatement();
 		ResultSet res = stmt.executeQuery(query);
 		return res;
