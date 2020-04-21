@@ -1534,7 +1534,8 @@ public class SgdConverter extends BioDBConverter {
 			if (pro != null) protein.setAttribute("pro", pro);					
 			if (ser != null) protein.setAttribute("ser", ser);					
 			if (thr != null) protein.setAttribute("thr", thr);					
-			if (trp != null) protein.setAttribute("trp", trp);					
+			if (trp != null) protein.setAttribute("trp", trp);
+			if (tyr != null) protein.setAttribute("tyr", tyr);
 			if (val != null) protein.setAttribute("val", val);					
 			if (ala != null) protein.setAttribute("ala", ala);					
 			if (arg != null) protein.setAttribute("arg", arg);					
