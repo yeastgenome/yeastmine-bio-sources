@@ -272,7 +272,8 @@ public class SgdProcessor
 				+ " from nex.dbentity db, nex.proteindomainannotation pda, nex.proteindomain pd, nex.proteindomain_url pdu"
 				+ " where pda.dbentity_id = db.dbentity_id"
 				+ " and pd.proteindomain_id = pda.proteindomain_id"
-				+	" and pdu.proteindomain_id = pd.proteindomain_id";
+				+ " and pdu.proteindomain_id = pd.proteindomain_id"
+				+ " and pda.taxonomy_id = 274901";
 
 		LOG.info("executing: " + query);
 		Statement stmt = connection.createStatement();
