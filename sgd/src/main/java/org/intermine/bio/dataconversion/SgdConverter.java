@@ -73,7 +73,7 @@ public class SgdConverter extends BioDBConverter {
 	private static final String TAXON_ID = "4932";
 	private Item organism;
 	private Map<String, String> featureMap = new HashMap();
-	private static final boolean TEST_LOCAL = false;
+	private static final boolean TEST_LOCAL = true;
 	private String licence;
 
 
@@ -114,17 +114,17 @@ public class SgdConverter extends BioDBConverter {
 
 		processChromosomeSequences(connection);
 		processGenes(connection);
-		/*processNISS(connection);
+		processNISS(connection);
 		processAliases(connection);
 		processCrossReferences(connection);
 		processGeneLocations(connection);
 		processGeneChildrenLocations(connection);
-		processProteins(connection);*/
+		processProteins(connection);
 		
 		processAllPubs(connection);
-		processPubsWithFeatures(connection); 
+		processPubsWithFeatures(connection);
 		
-		/*processProteinAbundance(connection);
+		processProteinAbundance(connection);
 		processProteinHalfLife(connection);
 		processProteinDomains(connection);
 		processProteinModifications(connection);
@@ -134,7 +134,7 @@ public class SgdConverter extends BioDBConverter {
 		
 		processFunctionSummary(connection);
 		processRegulation(connection);
-		processRegulationSummary(connection);*/
+		processRegulationSummary(connection);
 
 		processAllPathways(connection);
 		processGenePathways(connection);
@@ -1336,7 +1336,7 @@ public class SgdConverter extends BioDBConverter {
 			String method = res.getString("url_type");
 			String interpro = res.getString("interpro_id");
 
-			Item protein = proteins.get(featureNo);					
+			Item protein = proteins.get(featureNo);
 			Item pdomain = getDomain(domainMatch, domainDesc, sstart, send, runDate, method);
 			protein.addToCollection("proteinDomains", pdomain.getIdentifier());
 

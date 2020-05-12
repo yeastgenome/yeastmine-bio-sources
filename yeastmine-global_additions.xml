@@ -94,15 +94,15 @@
 	<collection name="dataSets" referenced-type="DataSet"/>
 </class>
 <class name="Complex" is-interface="true">
-	<attribute name="properties" type="java.lang.String"/>
 	<attribute name="identifier" type="java.lang.String"/>
 	<attribute name="name" type="java.lang.String"/>
 	<attribute name="systematicName" type="java.lang.String"/>
 	<attribute name="function" type="java.lang.String"/>
-	<collection name="publications" referenced-type="Publication"/>
+	<attribute name="properties" type="java.lang.String"/>
+	<collection name="dataSets" referenced-type="DataSet"/>
 	<collection name="allInteractors" referenced-type="Interactor"/>
 	<collection name="goAnnotation" referenced-type="GOAnnotation"/>
-	<collection name="dataSets" referenced-type="DataSet"/>
+	<collection name="publications" referenced-type="Publication"/>
 </class>
 <class name="CrossReference" is-interface="true">
 	<attribute name="dbxreftype" type="java.lang.String"/>
@@ -262,9 +262,9 @@
 	<reference name="orf" referenced-type="ORF" reverse-reference="inteinencodingregions"/>
 </class>
 <class name="Interaction" is-interface="true">
+	<reference name="participant1" referenced-type="BioEntity" reverse-reference="interactions"/>
 	<reference name="participant2" referenced-type="BioEntity"/>
 	<reference name="complex" referenced-type="Complex"/>
-	<reference name="participant1" referenced-type="BioEntity" reverse-reference="interactions"/>
 	<collection name="details" referenced-type="InteractionDetail" reverse-reference="interaction"/>
 </class>
 <class name="InteractionDetail" is-interface="true">
@@ -628,9 +628,11 @@
 	<collection name="literatureTopics" referenced-type="LiteratureTopic"/>
 	<collection name="genes" referenced-type="Gene" reverse-reference="publicationAnnotations"/>
 </class>
-	<class name="RNA" extends="BioEntity" is-interface="true"/>
+
 <class name="RNA" extends="BioEntity" is-interface="true"/>
+
 <class name="RRNAGene" extends="NcRNAGene" is-interface="true"/>
+
 <class name="RegulationEvidence" extends="OntologyAnnotation" is-interface="true">
 	<collection name="publications" referenced-type="Publication"/>
 </class>
