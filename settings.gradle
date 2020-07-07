@@ -22,8 +22,8 @@ include ':bio-source-cglabrata-homologs',
  ':bio-source-treefam', ':bio-source-homologene',
  ':bio-source-panther',
  ':bio-source-homologene',
- ':bio-source-ensembl-compara', ':bio-source-go-slim' 
-':bio-source-psi-mi-ontology', ':bio-source-psi-complexes'
+ ':bio-source-ensembl-compara', ':bio-source-go-slim',
+ ':bio-source-psi-mi-ontology', ':bio-source-psi-complexes'
 
 
 
