@@ -53,6 +53,30 @@ public class SgdProcessor
 	}
 
 
+	/**
+	 * Return the results of running a query for alleles
+	 * @param connection the connection
+	 * @return the results
+	 * @throws SQLException if there is a database problem
+	 */
+	protected ResultSet getAlleleResults(Connection connection)
+			throws SQLException {
+
+		String query = "select ad.dbentity_id as allele, la.locus_id as locus, ad.description, db.display_name as allele_name, aa.display_name as alias_name, ar.reference_id, rdb.pmid "
+				+ "from nex.alleledbentity ad "
+				+ "inner join nex.dbentity db on ad.dbentity_id = db.dbentity_id "
+				+ "left join nex.locus_allele la on la.allele_id = ad.dbentity_id "
+				+ "left join nex.allele_reference ar on ad.dbentity_id = ar.allele_id "
+				+ "left join nex.allele_alias aa on ad.dbentity_id = aa.allele_id "
+				+ "left join nex.referencedbentity rdb on ar.reference_id = rdb.dbentity_id";
+
+		LOG.info("executing: " + query);
+		Statement stmt = connection.createStatement();
+		ResultSet res = stmt.executeQuery(query);
+		return res;
+	}
+
+
 
 
 	/**
@@ -488,9 +512,7 @@ public class SgdProcessor
 				+ " inner join  nex.referencedbentity rdb on pa.reference_id = rdb.dbentity_id"
 				+ " left join nex.journal j on rdb.journal_id = j.journal_id"
 				+ " inner join nex.dbentity db on  db.dbentity_id = rdb.dbentity_id";
-		
-
-
+				//+ " and (pa.dbentity1_id = 1268334 or pa.dbentity2_id = 1268334)";
 		LOG.info("executing: " + query);
 		Statement stmt = connection.createStatement();
 		ResultSet res = stmt.executeQuery(query);
@@ -515,7 +537,7 @@ public class SgdProcessor
 				+ " inner join nex.referencedbentity rdb on rdb.dbentity_id = ga.reference_id"
 				+ " left join nex.journal j on rdb.journal_id = j.journal_id"
 				+ " inner join nex.dbentity db on  db.dbentity_id = rdb.dbentity_id";
-
+				//+ " and (ga.dbentity1_id = 1268334 or ga.dbentity2_id = 1268334)";
 		LOG.info("executing: " + query);
 		Statement stmt = connection.createStatement();
 		ResultSet res = stmt.executeQuery(query);
@@ -529,12 +551,34 @@ public class SgdProcessor
 	 * @return the results
 	 * @throws SQLException if there is a database problem
 	 */
+	protected ResultSet getGeneticInteractionWithAllelesResults(Connection connection)
+			throws SQLException {
+
+		String query = " select annotation_id, interaction_id, allele1_id, allele2_id, sga_score, pvalue"
+			+ " from nex.geninteractionannotation ga"
+			+ " inner join nex.allele_geninteraction ag  on  ag.interaction_id = ga.annotation_id"
+			+ " order by ga.annotation_id ";
+		    //+ " and (ga.dbentity1_id = 1268334 or ga.dbentity2_id = 1268334)"
+		LOG.info("executing: " + query);
+		Statement stmt = connection.createStatement();
+		ResultSet res = stmt.executeQuery(query);
+		return res;
+	}
+
+
+
+	/**
+	 * Return the results of running a query for CDSs and their sequences
+	 * @param connection the connection
+	 * @return the results
+	 * @throws SQLException if there is a database problem
+	 */
 	protected ResultSet getPhenotypeResults(Connection connection)
 			throws SQLException {
 
 		String query = "  select db.dbentity_id, pa.annotation_id, pac.group_id, p.display_name as phenotype, t.format_name as strain_name, pa.details,"
 				+ " pa.experiment_comment, pa.allele_comment, pa.reporter_comment, a1.display_name as experiment, a2.display_name as mutant,"
-				+ " al.display_name as allele, rp.display_name as reporter, o.display_name as assay, rdb.pmid, rdb.dbentity_id as refNo,"
+				+ " al.dbentity_id as allele, rp.display_name as reporter, o.display_name as assay, rdb.pmid, rdb.dbentity_id as refNo,"
 				+ " array_agg(condition_class) as condclass,"
 				+ " array_agg(condition_name) as condname , array_agg(condition_value) as condvalue,"
 				+ " array_agg(condition_unit) as condunit"
@@ -546,12 +590,12 @@ public class SgdProcessor
 				+ " left join nex.phenotypeannotation_cond pac on pac.annotation_id = pa.annotation_id"
 				+ " left join nex.apo a1 on pa.experiment_id = a1.apo_id"
 				+ " left join nex.apo a2 on pa.mutant_id = a2.apo_id"
-				+ " left join nex.allele al on al.allele_id = pa.allele_id"
+				+ " left join nex.alleledbentity al on al.dbentity_id = pa.allele_id"
 				+ " left join nex.reporter rp on rp.reporter_id = pa.reporter_id"
 				+ " left join nex.obi o on pa.assay_id = o.obi_id"
 				+ " group by  db.dbentity_id, pa.annotation_id, pac.group_id, p.display_name, t.format_name, pa.details,"
 				+ " pa.experiment_comment, pa.allele_comment, pa.reporter_comment, a1.display_name, a2.display_name,"
-				+ " al.display_name, rp.display_name, o.display_name, rdb.pmid, rdb.dbentity_id"
+				+ " al.dbentity_id, rp.display_name, o.display_name, rdb.pmid, rdb.dbentity_id"
 				+ " order by db.dbentity_id, pa.annotation_id, pac.group_id ";
 	
 		LOG.info("executing: " + query);        

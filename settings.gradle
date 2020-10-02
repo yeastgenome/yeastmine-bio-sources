@@ -23,7 +23,7 @@ include ':bio-source-cglabrata-homologs',
  ':bio-source-panther',
  ':bio-source-homologene',
  ':bio-source-ensembl-compara', ':bio-source-go-slim',
- ':bio-source-psi-mi-ontology', ':bio-source-psi-complexes'
+ ':bio-source-sgd-complexes'
 
 
 
@@ -59,8 +59,4 @@ project(':bio-source-treefam').projectDir = new File(settingsDir, './treefam')
 project(':bio-source-panther').projectDir = new File(settingsDir, './panther')
 project(':bio-source-homologene').projectDir = new File(settingsDir, './homologene')
 project(':bio-source-ensembl-compara').projectDir = new File(settingsDir, './ensembl-compara')
-project(':bio-source-psi-mi-ontology').projectDir = new File(settingsDir, './psi-mi-ontology')
-project(':bio-source-psi-complexes').projectDir = new File(settingsDir, './psi-complexes')
-
-
-
+project(':bio-source-sgd-complexes').projectDir = new File(settingsDir, './sgd-complexes')

@@ -51,8 +51,10 @@ public class SgdConverter extends BioDBConverter {
 	private final Map<String, Item> ecoMap = new HashMap<String, Item>(); //regulation data
 	private Map<String, String> literatureTopics = new HashMap();
 	private Map<String, Item> genes = new HashMap();
+	private Map<String, Item> alleles = new HashMap();
 	private Map<String, Item> proteins = new HashMap();
 	private Map<String, Item> genesName = new HashMap();
+	private Map<String, Item> allelesName = new HashMap();
 	private Map<String, String> genesAliases = new HashMap();
 	private Map<String, String> synonyms = new HashMap();
 	private Map<String, Item> publications = new HashMap();
@@ -120,7 +122,9 @@ public class SgdConverter extends BioDBConverter {
 		processGeneLocations(connection);
 		processGeneChildrenLocations(connection);
 		processProteins(connection);
-		
+
+		processAlleles(connection);
+
 		processAllPubs(connection);
 		processPubsWithFeatures(connection);
 		
@@ -139,24 +143,28 @@ public class SgdConverter extends BioDBConverter {
 		processAllPathways(connection);
 		processGenePathways(connection);
 		storePathways();
+		storeAlleles();
 
 		if(TEST_LOCAL) {
 
-			processPhysicalInteractions(connection);
-			processGeneticInteractions(connection);
-			storeInteractionTypes();
-			storeInteractionExperiments();
-			storeInteractions();
+			 processPhysicalInteractions(connection);
+			 processGeneticInteractions(connection);
+			 processGeneticInteractionsWithAlleles(connection);
+			 storeInteractionTypes();
+			 storeInteractionExperiments();
+			 storeInteractionDetails();
+			 storeInteractions();
 
-			processPhenotypes(connection);
-			processPhenotypeSummary(connection);
-			storePhenotypes();
+			 processPhenotypes(connection);
+			 processPhenotypeSummary(connection);
+			 storePhenotypes();
 
 		}
 		storePublications();
 		storeRegulationSummaries();
 		storeGenes();
 		storeProteins();
+
 	}
 
 	/**
@@ -339,6 +347,66 @@ public class SgdConverter extends BioDBConverter {
 				getSynonym(refId, "identifier", secondaryIdentifier);
 			}
 		}
+	}
+
+	/**
+	 *
+	 * @param connection
+	 * @throws SQLException
+	 * @throws ObjectStoreException
+	 */
+
+	private void processAlleles(Connection connection) throws SQLException,
+			ObjectStoreException {
+
+		System.out.println("Processing Alleles...");
+		ResultSet res = PROCESSOR.getAlleleResults(connection);
+
+		while (res.next()) {
+
+			String alleleNo = res.getString("allele");
+			String featureNo = res.getString("locus");
+
+			Item gene = genes.get(featureNo);
+			Item allele = alleles.get(alleleNo);
+
+			if (gene != null) {
+
+				String name = res.getString("allele_name");
+				String description = res.getString("description");
+				String aliasName = res.getString("alias_name");
+				String pmrefNo = res.getString("reference_id");
+				String pmid = res.getString("pmid");
+
+				if (allele == null) {
+
+					allele = createItem("Allele");
+					allele.setAttribute("featureType", "Allele");
+					if (StringUtils.isNotEmpty(name)) allele.setAttribute("name", name);
+					if (StringUtils.isNotEmpty(aliasName)) allele.setAttribute("aliasName", aliasName);
+					if (StringUtils.isNotEmpty(description)) allele.setAttribute("description", description);
+					String refId = allele.getIdentifier();
+
+					if(pmrefNo != null ) {
+						Item publication = publications.get(pmrefNo);
+						if (publication == null) {
+							publication = createItem("Publication");
+							publication.setAttribute("pubMedId", pmid);
+							publications.put(pmrefNo, publication);
+						}
+						allele.addToCollection("publications", publication);
+					}
+					allele.setReference("gene", gene.getIdentifier());
+					alleles.put(alleleNo, allele);
+					allelesName.put(name, allele);
+
+				} //allele
+				gene.addToCollection("alleles", allele);
+
+		  }//gene
+
+		}//while
+		System.out.println("size of alleles:  " + alleles.size());
 	}
 
 	/**
@@ -1864,6 +1932,21 @@ public class SgdConverter extends BioDBConverter {
 	}
 
 	/**
+	 *
+	 * @throws ObjectStoreException
+	 */
+
+	private void storeAlleles() throws ObjectStoreException {
+		for (Item allele : alleles.values()) {
+			try {
+				store(allele);
+			} catch (ObjectStoreException e) {
+				throw new ObjectStoreException(e);
+			}
+		}
+	}
+
+	/**
 	 * 
 	 * @throws ObjectStoreException
 	 */
@@ -2382,7 +2465,7 @@ public class SgdConverter extends BioDBConverter {
 			String dbxrefid = res.getString("sgdid");
 			String note = res.getString("note");
 
-			String interactionRefId = getInteraction(interactionNo,
+			/*String interactionRefId = getInteraction(interactionNo,
 					referenceNo, interactionType, experimentType,
 					annotationType, modification, interactingGene, role1, source,
 					phenotype, citation, gene, pubmed, title, volume, page,
@@ -2395,8 +2478,16 @@ public class SgdConverter extends BioDBConverter {
 						annotationType, modification, gene, role2, source,
 						phenotype, citation, interactingGene, pubmed, title, volume, page,
 						year, issue, abbreviation, dsId, firstAuthor, dbxrefid, note);
-			}
+			}*/
+
+			String interactionRefId = getInteractionNew(interactionNo,
+					referenceNo, interactionType, experimentType,
+					annotationType, modification, interactingGene, role1, role2, source,
+					phenotype, citation, gene, pubmed, title, volume, page,
+					year, issue, abbreviation, dsId, firstAuthor, dbxrefid, note);
+
 		}
+		System.out.println("interaction count is : " + count);
 	}
 
 	/**
@@ -2449,24 +2540,77 @@ public class SgdConverter extends BioDBConverter {
 			String dbxrefid = res.getString("sgdid");
 			String note = res.getString("note");
 
-			String interactionRefId = getInteraction(interactionNo,
+			/*String interactionRefId = getInteraction(interactionNo,
 					referenceNo, interactionType, experimentType,
 					annotationType, modification, interactingGene, role1, source,
 					phenotype, citation, gene, pubmed, title, volume, page,
 					year, issue, abbreviation, dsId, firstAuthor, dbxrefid, note);
 
-			if(!geneFeatureName.equals(interactingGeneFeatureName)) {
-				//store the reverse relationship so that template changes do not have to be made; act1 in gene.X or participant.X
+			if(!geneFeatureName.equals(interactingGeneFeatureName)) {//store the reverse relationship so that template changes do not have to be made; act1 in gene.X or participant.X
+
 				String interactionRefId2 = getInteraction(interactionNo,
 						referenceNo, interactionType, experimentType,
 						annotationType, modification, gene, role2, source,
 						phenotype, citation, interactingGene, pubmed, title, volume, page,
 						year, issue, abbreviation, dsId, firstAuthor, dbxrefid, note);
-			}
+			}*/
+
+			String interactionRefId = getInteractionNew(interactionNo,
+					referenceNo, interactionType, experimentType,
+					annotationType, modification, interactingGene, role1, role2, source,
+					phenotype, citation, gene, pubmed, title, volume, page,
+					year, issue, abbreviation, dsId, firstAuthor, dbxrefid, note);
 
 		}
 	}
 
+	/**
+	 *
+	 * @param connection
+	 * @throws SQLException
+	 * @throws ObjectStoreException
+	 */
+
+	private void processGeneticInteractionsWithAlleles(Connection connection)
+			throws SQLException, ObjectStoreException {
+		System.out.println("Processing Genetic Interactions with Alleles.....");
+		ResultSet res = PROCESSOR.getGeneticInteractionWithAllelesResults(connection);
+
+		while (res.next()) {
+			String interactionNo = res.getString("interaction_id");
+			String annotationNo = res.getString("annotation_id");
+			String allele1_id =  res.getString("allele1_id");
+			String allele2_id = res.getString("allele2_id");
+			String sga_score = res.getString("sga_score");
+			String pvalue =  res.getString("pvalue");
+
+			Item interactionDetail = interactiondetail.get(interactionNo);
+			if(interactionDetail != null){
+
+				Item allint =  createItem("AlleleInteraction");
+
+				if (StringUtils.isNotEmpty(sga_score)) allint.setAttribute("sgaScore", sga_score);
+				if (StringUtils.isNotEmpty(pvalue)) allint.setAttribute("pvalue", pvalue);
+				if (StringUtils.isNotEmpty(allele1_id)) {
+					Item allele1 = alleles.get(allele1_id);
+					allint.setReference("allele1", allele1);
+				}
+				if (StringUtils.isNotEmpty(allele2_id)) {
+					Item allele2 = alleles.get(allele2_id);
+					allint.setReference("allele2", allele2);
+				}
+
+				try {
+					store(allint);
+				} catch (ObjectStoreException e) {
+					throw new ObjectStoreException(e);
+				}
+
+				interactionDetail.addToCollection("alleleinteraction", allint.getIdentifier());
+			}
+
+		}
+	}
 
 	private void processPhenotypes(Connection connection) throws SQLException,
 	ObjectStoreException {
@@ -2486,7 +2630,7 @@ public class SgdConverter extends BioDBConverter {
 			String qualifier_observable = res.getString("phenotype");
 			String strainBackground = res.getString("strain_name");
 			String reporter = res.getString("reporter");
-			String allele = res.getString("allele");
+			String alleledbentity_id = res.getString("allele");
 			String assay = res.getString("assay");
 			String details = res.getString("details");
 			String pmid = res.getString("pmid");
@@ -2536,7 +2680,7 @@ public class SgdConverter extends BioDBConverter {
 			condition = cc[1];				
 			
 			getPhenotype(phenotypeAnnotNo, groupNo, qualifier, observable, experimentType, experimentComment,
-					alleleComment, reporterComment, strain, mutantType, reporter, allele, assay, chemical, condition, details, pmid, refNo, gene);
+					alleleComment, reporterComment, strain, mutantType, reporter, alleledbentity_id, assay, chemical, condition, details, pmid, refNo, gene);
 			
 		}
 
@@ -2603,7 +2747,7 @@ public class SgdConverter extends BioDBConverter {
 	
 
 	private void getPhenotype(String phenotypeAnnotNo, String groupNo, String qualifier, String observable, String experimentType, String experimentComment, 
-			String alleleComment, String reporterComment, String strain_background, String mutantType, String reporter, String allele, 
+			String alleleComment, String reporterComment, String strain_background, String mutantType, String reporter, String alleleId,
 			String assay, String chemical, String condition, String details, String pmid, String refNo, Item gene ) throws ObjectStoreException {
 
 		Item  pheno = createItem("Phenotype");
@@ -2635,8 +2779,11 @@ public class SgdConverter extends BioDBConverter {
 		if (reporter != null && StringUtils.isNotEmpty(reporter)) {
 			pheno.setAttribute("reporter", reporter);
 		}
-		if (allele != null && StringUtils.isNotEmpty(allele)) {
-			pheno.setAttribute("allele", allele);
+		if (alleleId != null && StringUtils.isNotEmpty(alleleId)) {
+			Item allele = alleles.get(alleleId);
+			if (allele != null) {
+				pheno.addToCollection("alleles", allele);
+			}
 		}
 		if (assay != null && StringUtils.isNotEmpty(assay)) {
 			pheno.setAttribute("assay", assay);
@@ -2832,6 +2979,131 @@ public class SgdConverter extends BioDBConverter {
 	}
 
 	/**
+	 *
+	 * @param interactionNo
+	 * @param referenceNo
+	 * @param interactionType
+	 * @param experimentType
+	 * @param annotationType
+	 * @param modification
+	 * @param interactingGene
+	 * @param action
+	 * @param source
+	 * @param phenotype
+	 * @param citation
+	 * @param gene
+	 * @param pubMedId
+	 * @param title
+	 * @param volume
+	 * @param page
+	 * @param year
+	 * @param issue
+	 * @param journal
+	 * @param dsetIdentifier
+	 * @param firstAuthor
+	 * @param dbxrefid
+	 * @return
+	 * @throws ObjectStoreException
+	 */
+	private String getInteractionNew(String interactionNo, String referenceNo,
+								  String interactionType, String experimentType,
+								  String annotationType, String modification, Item interactingGene, String role1, String role2,
+								  String source, String phenotype, String citation, Item gene,
+								  String pubMedId, String title, String volume, String page,
+								  String year, String issue, String journal, String dsetIdentifier, String firstAuthor, String dbxrefid, String note)
+			throws ObjectStoreException {
+
+		Item item = getInteractionItem(gene.getIdentifier(), interactingGene.getIdentifier());
+		Item detail = createItem("InteractionDetail");
+
+		detail.setAttribute("type", interactionType);
+		detail.setAttribute("annotationType", annotationType);
+		if (StringUtils.isNotEmpty(modification)) detail.setAttribute("modification", modification);
+		if (StringUtils.isNotEmpty(phenotype)) detail.setAttribute("phenotype", phenotype);
+		detail.setAttribute("role1", role1);
+		detail.setAttribute("role2", role2);
+		detail.addToCollection("allInteractors", interactingGene.getIdentifier());
+		detail.addToCollection("dataSets", dsetIdentifier);
+
+		String shortType = interactionType.substring(0, interactionType.indexOf(' '));
+		detail.setAttribute("relationshipType", shortType); //interactionType
+		String unqName = firstAuthor+"-"+pubMedId+"-"+experimentType;
+		if (StringUtils.isNotEmpty(note)) detail.setAttribute("note", note);
+
+		//add publication as experiment type
+		Item storedExperimentType = experimenttype.get(unqName);
+		if(storedExperimentType == null) {
+
+			storedExperimentType = createItem("InteractionExperiment");
+			storedExperimentType.setAttribute("name", unqName);
+			experimenttype.put(unqName, storedExperimentType);
+
+			String storedTermId = interactionterms.get(experimentType);
+			if (storedTermId != null) {
+				storedExperimentType.addToCollection("interactionDetectionMethods", storedTermId );
+			} else {
+				storedTermId = getInteractionTerm(experimentType);
+				storedExperimentType.addToCollection("interactionDetectionMethods", storedTermId );
+			}
+		}
+
+		//add publication as reference on experiment
+		Item storedRef = publications.get(referenceNo);
+
+		if (storedRef != null) {
+			storedExperimentType.setReference("publication", storedRef.getIdentifier());
+		} else {
+
+			Item pub = createItem("Publication");
+
+			if (StringUtils.isNotEmpty(pubMedId)) {
+				pub.setAttribute("pubMedId", pubMedId);
+			}
+			if (StringUtils.isNotEmpty(dbxrefid)) {
+				pub.setAttribute("pubXrefId", dbxrefid);
+			}
+			if (StringUtils.isNotEmpty(title)) {
+				pub.setAttribute("title", title);
+			}
+			if (StringUtils.isNotEmpty(citation)) {
+				pub.setAttribute("citation", citation);
+			}
+			if (StringUtils.isNotEmpty(journal)) {
+				pub.setAttribute("journal", journal);
+			}
+			if (StringUtils.isNotEmpty(volume)) {
+				pub.setAttribute("volume", volume);
+			}
+			if (StringUtils.isNotEmpty(page)) {
+				pub.setAttribute("pages", page);
+			}
+			if (StringUtils.isNotEmpty(year)) {
+				pub.setAttribute("year", year);
+			}
+			if (StringUtils.isNotEmpty(issue)) {
+				pub.setAttribute("issue", issue);
+			}
+			publications.put(referenceNo, pub);
+			storedExperimentType.setReference("publication", pub.getIdentifier());
+		}
+
+		detail.setReference("experiment", storedExperimentType.getIdentifier());
+		detail.setReference("interaction", item);
+		interactiondetail.put(interactionNo, detail);
+		System.out.println("size of interaction detail..."+ interactiondetail.size());
+		/*try {
+			store(detail);
+		} catch (ObjectStoreException e) {
+			throw new ObjectStoreException(e);
+		}*/
+
+		interactions.put(item.getIdentifier(), item);
+		System.out.println("size of interaction detail..."+ interactions.size());
+		String refId = item.getIdentifier();
+		return refId;
+	}
+
+	/**
 	 * 
 	 * @param interactionNo
 	 * @param referenceNo
@@ -2941,13 +3213,14 @@ public class SgdConverter extends BioDBConverter {
 
 		detail.setReference("experiment", storedExperimentType.getIdentifier());	
 		detail.setReference("interaction", item);
-		//interactiondetail.put(detail.getIdentifier(), detail);	
+		//System.out.println("ANOT ID:  "+ interactionNo);
+		interactiondetail.put(interactionNo, detail);
 
-		try {
+		/*try {
 			store(detail);
 		} catch (ObjectStoreException e) {
 			throw new ObjectStoreException(e);
-		}
+		}*/
 
 		interactions.put(item.getIdentifier(), item);	
 		String refId = item.getIdentifier();
@@ -2955,6 +3228,8 @@ public class SgdConverter extends BioDBConverter {
 
 
 	}
+
+
 
 	private Item getInteractionItem(String refId, String gene2RefId) throws ObjectStoreException {
 		MultiKey key = new MultiKey(refId, gene2RefId);
