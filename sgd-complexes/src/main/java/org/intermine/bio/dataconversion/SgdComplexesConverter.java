@@ -73,7 +73,7 @@ public class SgdComplexesConverter extends BioDBConverter
     public void process() throws Exception {
         Connection connection = getDatabase().getConnection();
         processComplexes(connection);
-        processComplexInteractions(connection);
+        //processComplexInteractions(connection);
         storeComplexes();
     }
 
@@ -166,7 +166,7 @@ public class SgdComplexesConverter extends BioDBConverter
         }
         //evidence
         String ecoId = getEvidence(eco_id);
-        //complex.setReference("complexEvidence", ecoId);
+        complex.setReference("complexEvidence", ecoId);
 
         complexes.put(accession, complex);
 
