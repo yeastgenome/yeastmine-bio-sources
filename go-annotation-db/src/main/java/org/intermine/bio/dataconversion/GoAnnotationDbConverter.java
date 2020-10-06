@@ -206,7 +206,6 @@ public class GoAnnotationDbConverter extends BioDBConverter
 					String goTermIdentifier = newGoTerm(goId, dataSource, dataSourceCode);
 					Evidence evidence = new Evidence(newStrEvidence, pubRefId, withText, organism,
 							dataSource, dataSourceCode);
-					System.out.print("evidence");
 					allEvidenceForAnnotation = new LinkedHashSet<Evidence>();
 					allEvidenceForAnnotation.add(evidence);
 					goTermGeneToEvidence.put(key, allEvidenceForAnnotation);
@@ -490,8 +489,7 @@ public class GoAnnotationDbConverter extends BioDBConverter
 			if(!annotType.isEmpty()) {item.setAttribute("annotType", annotType); }
 			if(withText != null && !withText.isEmpty()) { item.setAttribute("withText", withText); } 
 			store(item);
-			evidenceCodes.put(combinationcode, item.getIdentifier()); 
-			System.out.println("Code is :  "+ combinationcode);
+			evidenceCodes.put(combinationcode, item.getIdentifier());
 		}
 	}
 
@@ -768,7 +766,6 @@ public class GoAnnotationDbConverter extends BioDBConverter
 							&& pub.equals(go.pub)
 							&& pubxref.equals(go.pubxref);
 				}else{
-					System.out.println("in GoTermToGene...." + annotationExtension);
 					return productId.equals(go.productId)
 							&& goId.equals(go.goId)
 							&& qualifier.equals(go.qualifier)

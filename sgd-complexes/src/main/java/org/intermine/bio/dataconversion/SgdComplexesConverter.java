@@ -49,6 +49,7 @@ public class SgdComplexesConverter extends BioDBConverter
     private Map<String, Item> publications = new HashMap();
     private Map<String, String> terms = new HashMap<String, String>();
     private Map<String, Item> complexes = new HashMap();
+    //private Map<String, Item> complexnames = new HashMap();
     private final Map<String, Item> genes = new HashMap<String, Item>();
     private static final String TAXON_ID = "4932";
     private Item yorganism;
@@ -60,10 +61,11 @@ public class SgdComplexesConverter extends BioDBConverter
      * @param model the Model used by the object store we will write to with the ItemWriter
      * @param writer an ItemWriter used to handle Items created
      */
-    public SgdComplexesConverter(Database database, Model model, ItemWriter writer) {
+    public SgdComplexesConverter(Database database, Model model, ItemWriter writer) throws ObjectStoreException{
         super(database, model, writer, DATA_SOURCE_NAME, DATASET_TITLE);
         yorganism = createItem("Organism");
         yorganism.setAttribute("taxonId", TAXON_ID);
+        store(yorganism);
     }
 
 
@@ -73,7 +75,8 @@ public class SgdComplexesConverter extends BioDBConverter
     public void process() throws Exception {
         Connection connection = getDatabase().getConnection();
         processComplexes(connection);
-        //processComplexInteractions(connection);
+        processComplexInteractions(connection);
+        storeGenes();
         storeComplexes();
     }
 
@@ -194,9 +197,7 @@ public class SgdComplexesConverter extends BioDBConverter
             } catch (ObjectStoreException e) {
                 throw new ObjectStoreException(e);
             }
-
             return goAnnotation;
-
     }
 
     /**
@@ -244,7 +245,6 @@ public class SgdComplexesConverter extends BioDBConverter
             }
             evidence.setReference("ontologyTerm", eco.getIdentifier());
         }
-
 
         try {
             store(evidence);
@@ -316,8 +316,9 @@ public class SgdComplexesConverter extends BioDBConverter
 
             Item gene1 = getGeneItem(dbentity1);
             Item gene2 = null;
-            if(dbentity2 != null) {  gene2 = getGeneItem(dbentity2); }
-
+            if(dbentity2 != null) {
+                gene2 = getGeneItem(dbentity2);
+            }
             processInteractions(complex_accession, gene1, gene2, range_start, range_end,
                     stochiometry, role, type);
         }
@@ -338,6 +339,7 @@ public class SgdComplexesConverter extends BioDBConverter
     private void processInteractions(String complexacc, Item ref, Item binderRef, String range_start, String range_end,
                 String stochiometry, String role, String type) throws ObjectStoreException {
 
+                Item complex = complexes.get(complexacc);
                 Item interactor = createItem("Interactor");
                 //interactor.setAttribute("annotations", annotations.toString());
                 if (StringUtils.isNotEmpty(role)) { interactor.setAttribute("biologicalRole", role);}
@@ -350,7 +352,7 @@ public class SgdComplexesConverter extends BioDBConverter
                 if (binderRef != null) {
                     interaction.setReference("participant2", binderRef);
                 }
-                interaction.setReference("complex", complexacc);
+                interaction.setReference("complex", complex);
                 store(interaction);
                 interactor.addToCollection("interactions", interaction);
 
@@ -372,7 +374,6 @@ public class SgdComplexesConverter extends BioDBConverter
                 store(interactor);
                 //detail.addInteractor(interactor.getIdentifier());
 
-                Item complex = complexes.get(complexacc);
                 if (complex != null) {
                     complex.addToCollection("allInteractors", interactor);
                 }
@@ -436,6 +437,20 @@ public class SgdComplexesConverter extends BioDBConverter
 
     /**
      *
+     * @throws ObjectStoreException
+     */
+
+    private void storeGenes() throws ObjectStoreException {
+        for (Item gene : genes.values()) {
+            try {
+                store(gene);
+            } catch (ObjectStoreException e) {
+                throw new ObjectStoreException(e);
+            }
+        }
+    }
+    /**
+     *
      * @param geneId
      * @return
      * @throws ObjectStoreException
@@ -446,7 +461,7 @@ public class SgdComplexesConverter extends BioDBConverter
         Item gene = genes.get(geneId);
 
         if (gene == null) {
-            gene = createItem("Gene");
+            gene = createItem("Protein");
             genes.put(geneId, gene);
             gene.setAttribute("primaryIdentifier", geneId);
             gene.setReference("organism", yorganism);
