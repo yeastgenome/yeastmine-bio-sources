@@ -14,6 +14,7 @@ import java.sql.*;
 import java.sql.Array;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ArrayList;
 
 import org.intermine.objectstore.ObjectStoreException;
 import org.intermine.dataconversion.ItemWriter;
@@ -50,7 +51,7 @@ public class SgdComplexesConverter extends BioDBConverter
     private Map<String, String> terms = new HashMap<String, String>();
     private Map<String, Item> complexes = new HashMap();
     //private Map<String, Item> complexnames = new HashMap();
-    private final Map<String, Item> genes = new HashMap<String, Item>();
+    private final Map<String, Item> proteins = new HashMap<String, Item>();
     private static final String TAXON_ID = "4932";
     private Item yorganism;
 
@@ -76,7 +77,7 @@ public class SgdComplexesConverter extends BioDBConverter
         Connection connection = getDatabase().getConnection();
         processComplexes(connection);
         processComplexInteractions(connection);
-        storeGenes();
+        storeProteins();
         storeComplexes();
     }
 
@@ -299,10 +300,13 @@ public class SgdComplexesConverter extends BioDBConverter
     private void processComplexInteractions(Connection connection) throws ObjectStoreException, SQLException {
 
         ResultSet res = PROCESSOR.getComplexInteractions(connection);
+        boolean firstrow = true;
+        String prevDbEntityId = "";
+        ArrayList<String> hm = new ArrayList<String>();
 
         while (res.next()) {
 
-            String productId = res.getString("dbentity_id");
+            String dbentityId = res.getString("dbentity_id");
             String complex_accession = res.getString("complex_accession");
             String dbentity1 = res.getString("sgdid_1");
             String dbentity2 = res.getString("sgdid_2");
@@ -312,16 +316,53 @@ public class SgdComplexesConverter extends BioDBConverter
             String role = res.getString("role");
             String type = res.getString("type");
 
-            System.out.println("productId is " + productId);
+            if(firstrow){
+                prevDbEntityId = dbentityId;
+                firstrow = false;
+            }
 
-            Item gene1 = getGeneItem(dbentity1);
+            if(!dbentityId.equalsIgnoreCase(prevDbEntityId)){
+                hm.clear();
+            }
+
+            Item gene1 = getProteinItem(dbentity1);
             Item gene2 = null;
             if(dbentity2 != null) {
-                gene2 = getGeneItem(dbentity2);
+                String c1 = dbentity1+":"+dbentity2;
+                String c2 = dbentity2+":"+dbentity1;
+                if(!hm.contains(c1) && !hm.contains(c2)) {
+                    hm.add(new String(c1));
+                    hm.add(new String(c2));
+                    gene2 = getProteinItem(dbentity2);
+                    Item interactor = processParticipants(gene1, stochiometry, role, type);
+                    processInteractions(complex_accession, gene1, gene2, range_start, range_end, interactor);
+                }
+            }else{
+                Item interactor = processParticipants(gene1, stochiometry, role, type);
+                processInteractions(complex_accession, gene1, gene2, range_start, range_end, interactor);
             }
-            processInteractions(complex_accession, gene1, gene2, range_start, range_end,
-                    stochiometry, role, type);
+
+            prevDbEntityId = dbentityId;
         }
+    }
+
+    /**
+     *
+     * @param ref
+     * @param role
+     * @param stochiometry
+     * @param type
+     * @return
+     * @throws ObjectStoreException
+     */
+    private Item processParticipants(Item ref, String stochiometry, String role,  String type) throws ObjectStoreException{
+        Item interactor = createItem("Interactor");
+        interactor.setReference("participant", ref);
+        if (StringUtils.isNotEmpty(role)) { interactor.setAttribute("biologicalRole", role);}
+        if (stochiometry != null) { interactor.setAttribute("stoichiometry", stochiometry); }
+        interactor.setAttribute("type", type);
+        store(interactor);
+        return interactor;
     }
 
     /**
@@ -331,22 +372,15 @@ public class SgdComplexesConverter extends BioDBConverter
      * @param binderRef
      * @param range_start
      * @param range_end
-     * @param stochiometry
-     * @param role
-     * @param type
+     * @param interactor
      * @throws ObjectStoreException
      */
     private void processInteractions(String complexacc, Item ref, Item binderRef, String range_start, String range_end,
-                String stochiometry, String role, String type) throws ObjectStoreException {
+                Item interactor) throws ObjectStoreException {
 
                 Item complex = complexes.get(complexacc);
-                Item interactor = createItem("Interactor");
-                //interactor.setAttribute("annotations", annotations.toString());
-                if (StringUtils.isNotEmpty(role)) { interactor.setAttribute("biologicalRole", role);}
 
-                //String refId = processProtein(modelledParticipant.getInteractor());
-                interactor.setReference("participant", ref);
-
+                //Interaction
                 Item interaction = createItem("Interaction");
                 interaction.setReference("participant1", ref);
                 if (binderRef != null) {
@@ -356,28 +390,18 @@ public class SgdComplexesConverter extends BioDBConverter
                 store(interaction);
                 interactor.addToCollection("interactions", interaction);
 
+                //Detail
                 Item detailItem = createItem("InteractionDetail");
-                detailItem.setAttribute("type", type);
-                //detailItem.setAttribute("relationshipType", detail.getRelationshipType());
+                //detailItem.setAttribute("type", type);
                 detailItem.setReference("interaction", interaction);
-                //detailItem.setCollection("allInteractors", detail.getAllInteractors());
 
                 processRegions(range_start, range_end, detailItem, ref, binderRef);
 
                 store(detailItem);
 
-                if (stochiometry != null) {
-                    interactor.setAttribute("stoichiometry", stochiometry);
-                }
-                interactor.setAttribute("type", type);
-
-                store(interactor);
-                //detail.addInteractor(interactor.getIdentifier());
-
                 if (complex != null) {
                     complex.addToCollection("allInteractors", interactor);
                 }
-
     }
 
     private void processRegions(String startPosition, String endPosition, Item detail, Item ref,
@@ -401,25 +425,6 @@ public class SgdComplexesConverter extends BioDBConverter
 
     }
 
-/**
- *
- */
-
-    private String processProtein(String primaryIdentifier) throws ObjectStoreException {
-
-        String accession = null;
-        System.out.println("primary Identifier....."+ primaryIdentifier);
-        String refId = interactors.get(primaryIdentifier);
-            System.out.println("Interactor Type....."+ primaryIdentifier);
-            Item protein = createItem("Protein");
-            protein.setAttribute("primaryIdentifier", primaryIdentifier);
-            store(protein);
-            refId = protein.getIdentifier();
-            interactors.put(primaryIdentifier, refId);
-
-        return refId;
-    }
-
     /**
      *
      * @throws ObjectStoreException
@@ -440,10 +445,10 @@ public class SgdComplexesConverter extends BioDBConverter
      * @throws ObjectStoreException
      */
 
-    private void storeGenes() throws ObjectStoreException {
-        for (Item gene : genes.values()) {
+    private void storeProteins() throws ObjectStoreException {
+        for (Item protein : proteins.values()) {
             try {
-                store(gene);
+                store(protein);
             } catch (ObjectStoreException e) {
                 throw new ObjectStoreException(e);
             }
@@ -451,25 +456,26 @@ public class SgdComplexesConverter extends BioDBConverter
     }
     /**
      *
-     * @param geneId
+     * @param proteinId
      * @return
      * @throws ObjectStoreException
      */
-    private Item getGeneItem(String geneId)
+    private Item getProteinItem(String proteinId)
             throws ObjectStoreException {
 
-        Item gene = genes.get(geneId);
+        Item protein = proteins.get(proteinId);
 
-        if (gene == null) {
-            gene = createItem("Protein");
-            genes.put(geneId, gene);
-            gene.setAttribute("primaryIdentifier", geneId);
-            gene.setReference("organism", yorganism);
+        if (protein == null) {
+            protein = createItem("Protein");
+            proteins.put(proteinId, protein);
+            protein.setAttribute("primaryIdentifier", proteinId);
+            protein.setReference("organism", yorganism);
         }
 
-        return gene;
+        return protein;
 
     }
+
     /**
      * {@inheritDoc}
      */
