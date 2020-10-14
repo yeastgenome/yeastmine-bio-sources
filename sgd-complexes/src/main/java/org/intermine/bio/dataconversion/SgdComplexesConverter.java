@@ -15,6 +15,7 @@ import java.sql.Array;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import org.intermine.objectstore.ObjectStoreException;
 import org.intermine.dataconversion.ItemWriter;
@@ -50,11 +51,9 @@ public class SgdComplexesConverter extends BioDBConverter
     private Map<String, Item> publications = new HashMap();
     private Map<String, String> terms = new HashMap<String, String>();
     private Map<String, Item> complexes = new HashMap();
-    //private Map<String, Item> complexnames = new HashMap();
     private final Map<String, Item> proteins = new HashMap<String, Item>();
     private static final String TAXON_ID = "4932";
     private Item yorganism;
-
 
     /**
      * Construct a new SgdComplexesConverter.
@@ -173,12 +172,6 @@ public class SgdComplexesConverter extends BioDBConverter
         complex.setReference("complexEvidence", ecoId);
 
         complexes.put(accession, complex);
-
-       /* try {
-            store(complex);
-        } catch (ObjectStoreException e) {
-            throw new ObjectStoreException(e);
-        }*/
 
     }
 
@@ -302,7 +295,8 @@ public class SgdComplexesConverter extends BioDBConverter
         ResultSet res = PROCESSOR.getComplexInteractions(connection);
         boolean firstrow = true;
         String prevDbEntityId = "";
-        ArrayList<String> hm = new ArrayList<String>();
+        String prevComplexAccession = "";
+        HashMap<String, Item> hm = new HashMap<String, Item>();
 
         while (res.next()) {
 
@@ -318,32 +312,38 @@ public class SgdComplexesConverter extends BioDBConverter
 
             if(firstrow){
                 prevDbEntityId = dbentityId;
+                prevComplexAccession = complex_accession;
                 firstrow = false;
             }
 
             if(!dbentityId.equalsIgnoreCase(prevDbEntityId)){
+                processParticipants(complex_accession, hm);
                 hm.clear();
             }
 
             Item gene1 = getProteinItem(dbentity1);
             Item gene2 = null;
-            if(dbentity2 != null) {
-                String c1 = dbentity1+":"+dbentity2;
-                String c2 = dbentity2+":"+dbentity1;
-                if(!hm.contains(c1) && !hm.contains(c2)) {
-                    hm.add(new String(c1));
-                    hm.add(new String(c2));
-                    gene2 = getProteinItem(dbentity2);
-                    Item interactor = processParticipants(gene1, stochiometry, role, type);
-                    processInteractions(complex_accession, gene1, gene2, range_start, range_end, interactor);
-                }
-            }else{
-                Item interactor = processParticipants(gene1, stochiometry, role, type);
-                processInteractions(complex_accession, gene1, gene2, range_start, range_end, interactor);
+
+            //participants as BioEntity
+            if(!hm.containsKey(dbentity1)) {
+                hm.put(dbentity1, gene1);
             }
 
+            //interactions both ways
+            if(dbentity2 != null) {
+                gene2 = getProteinItem(dbentity2);
+                if(!hm.containsKey(dbentity2)) {
+                    hm.put(dbentity2, gene2);
+                }
+            }
+
+            processInteractions(complex_accession, gene1, gene2, range_start, range_end, stochiometry, role, type);
             prevDbEntityId = dbentityId;
+            prevComplexAccession = complex_accession;
         }
+        //process last
+        processParticipants(prevComplexAccession, hm);
+        hm.clear();
     }
 
     /**
@@ -355,14 +355,15 @@ public class SgdComplexesConverter extends BioDBConverter
      * @return
      * @throws ObjectStoreException
      */
-    private Item processParticipants(Item ref, String stochiometry, String role,  String type) throws ObjectStoreException{
-        Item interactor = createItem("Interactor");
-        interactor.setReference("participant", ref);
-        if (StringUtils.isNotEmpty(role)) { interactor.setAttribute("biologicalRole", role);}
-        if (stochiometry != null) { interactor.setAttribute("stoichiometry", stochiometry); }
-        interactor.setAttribute("type", type);
-        store(interactor);
-        return interactor;
+    private void processParticipants(String acc, HashMap hmap) throws ObjectStoreException{
+        Item complex = complexes.get(acc);
+
+        Iterator iterator = hmap.entrySet().iterator();
+        while (iterator.hasNext()) {
+            Map.Entry me2 = (Map.Entry) iterator.next();
+            Item ref = (Item) me2.getValue();
+            complex.addToCollection("participants", ref);
+        }
     }
 
     /**
@@ -376,32 +377,33 @@ public class SgdComplexesConverter extends BioDBConverter
      * @throws ObjectStoreException
      */
     private void processInteractions(String complexacc, Item ref, Item binderRef, String range_start, String range_end,
-                Item interactor) throws ObjectStoreException {
+                String stochiometry, String role, String type) throws ObjectStoreException {
 
-                Item complex = complexes.get(complexacc);
+        Item complex = complexes.get(complexacc);
 
-                //Interaction
-                Item interaction = createItem("Interaction");
-                interaction.setReference("participant1", ref);
-                if (binderRef != null) {
-                    interaction.setReference("participant2", binderRef);
-                }
-                interaction.setReference("complex", complex);
-                store(interaction);
-                interactor.addToCollection("interactions", interaction);
+        //Interaction
+        Item interaction = createItem("Interaction");
+        interaction.setReference("participant1", ref);
+        if (binderRef != null) {
+            interaction.setReference("participant2", binderRef);
+        }
+        interaction.setReference("complex", complex);
+        store(interaction);
 
-                //Detail
-                Item detailItem = createItem("InteractionDetail");
-                //detailItem.setAttribute("type", type);
-                detailItem.setReference("interaction", interaction);
+        //Detail
+        Item detailItem = createItem("InteractionDetail");
+        detailItem.setAttribute("type", type);
+        detailItem.setReference("interaction", interaction);
+        if (StringUtils.isNotEmpty(role)) { detailItem.setAttribute("biologicalRole", role);}
+        if (stochiometry != null) { detailItem.setAttribute("stoichiometry", stochiometry); }
 
-                processRegions(range_start, range_end, detailItem, ref, binderRef);
+        processRegions(range_start, range_end, detailItem, ref, binderRef);
 
-                store(detailItem);
+        store(detailItem);
 
-                if (complex != null) {
-                    complex.addToCollection("allInteractors", interactor);
-                }
+        if (complex != null) {
+            complex.addToCollection("interactions", interaction);
+        }
     }
 
     private void processRegions(String startPosition, String endPosition, Item detail, Item ref,

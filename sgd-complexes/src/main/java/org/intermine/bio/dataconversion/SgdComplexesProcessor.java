@@ -31,7 +31,7 @@ public class SgdComplexesProcessor {
                 " left join nex.complex_go cg on cg.complex_id = cd.dbentity_id" +
                 " left join nex.go go on go.go_id = cg.go_id" +
                 //" and ca.alias_type = 'Synonym'" +
-                //" where cd.dbentity_id = 1985541"+
+                //" where cd.dbentity_id = 1982875"+
                 " group by cd.dbentity_id, complex_accession, intact_id, cd.systematic_name, cd.description, properties,  db.display_name,  ea.eco_id "+
                 " order by cd.dbentity_id";
 
@@ -63,7 +63,7 @@ public class SgdComplexesProcessor {
                 " left join nex.psimi psi on psi.psimi_id = cba.binding_type_id" +
                 " left join nex.psimi psimi on psimi.psimi_id = i.type_id" +
                 " left join nex.psimi psimi2 on psimi2.psimi_id = ib.role_id" +
-                //" where cd.dbentity_id = 1985541"+
+                //" where cd.dbentity_id = 1982875"+
                 " group by cd.dbentity_id, complex_accession," +
                 " ldb.sgdid,  ldb2.sgdid, range_start, range_end, stoichiometry, psimi2.display_name, psimi.display_name" +
                 " order by cd.dbentity_id";

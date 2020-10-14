@@ -118,7 +118,9 @@
 	<reference name="complexEvidence" referenced-type="ComplexEvidence"/>
 	<collection name="dataSets" referenced-type="DataSet"/>
 	<collection name="synonyms" referenced-type="Synonym"/>
-	<collection name="allInteractors" referenced-type="Interactor"/>
+	<!--<collection name="allInteractors" referenced-type="Interactor"/>-->
+	<collection name="interactions" referenced-type="Interaction"/>
+	<collection name="participants" referenced-type="BioEntity"/>
 	<collection name="goAnnotation" referenced-type="GOAnnotation"/>
 	<collection name="publications" referenced-type="Publication"/>
 </class>
@@ -287,6 +289,7 @@
 	<reference name="complex" referenced-type="Complex"/>
 	<collection name="details" referenced-type="InteractionDetail" reverse-reference="interaction"/>
 </class>
+
 <class name="InteractionDetail" is-interface="true">
 	<attribute name="phenotype" type="java.lang.String"/>
 	<attribute name="role2" type="java.lang.String"/>
@@ -300,6 +303,10 @@
 	<attribute name="relationshipType" type="java.lang.String"/>
 	<attribute name="shortName" type="java.lang.String"/>
 	<attribute name="modification" type="java.lang.String"/>
+	<attribute name="annotations" type="java.lang.String"/>
+	<attribute name="type" type="java.lang.String"/>
+	<attribute name="stoichiometry" type="java.lang.Integer"/>
+	<attribute name="biologicalRole" type="java.lang.String"/>
 	<reference name="experiment" referenced-type="InteractionExperiment" reverse-reference="interactions"/>
 	<reference name="interaction" referenced-type="Interaction" reverse-reference="details"/>
 	<collection name="alleleinteraction" referenced-type="AlleleInteraction"/>
