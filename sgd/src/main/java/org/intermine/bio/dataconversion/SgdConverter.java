@@ -118,18 +118,16 @@ public class SgdConverter extends BioDBConverter {
 		processChromosomeSequences(connection);
 		processGenes(connection);
 		processNISS(connection);
-		//processAliases(connection);
-		//processCrossReferences(connection);
-		//processGeneLocations(connection);
-		//processGeneChildrenLocations(connection);
-		//processProteins(connection);
-
+		processAliases(connection);
+		processCrossReferences(connection);
+		processGeneLocations(connection);
+		processGeneChildrenLocations(connection);
+		processProteins(connection);
 		processAlleles(connection);
-
-		//processAllPubs(connection);
-		//processPubsWithFeatures(connection);
+		processAllPubs(connection);
+		processPubsWithFeatures(connection);
 		
-		/*processProteinAbundance(connection);
+		processProteinAbundance(connection);
 		processProteinHalfLife(connection);
 		processProteinDomains(connection);
 		processProteinModifications(connection);
@@ -143,7 +141,7 @@ public class SgdConverter extends BioDBConverter {
 
 		processAllPathways(connection);
 		processGenePathways(connection);
-		storePathways();*/
+		storePathways();
 		storeAlleles();
 
 		if(TEST_LOCAL) {
@@ -156,15 +154,15 @@ public class SgdConverter extends BioDBConverter {
 			 //storeInteractionDetails();
 			 storeInteractions();
 
-			 //processPhenotypes(connection);
-			 //processPhenotypeSummary(connection);
-			 //storePhenotypes();
+			 processPhenotypes(connection);
+			 processPhenotypeSummary(connection);
+			 storePhenotypes();
 
 		}
 		storePublications();
-		//storeRegulationSummaries();
+		storeRegulationSummaries();
 		storeGenes();
-		//storeProteins();
+		storeProteins();
 
 	}
 
