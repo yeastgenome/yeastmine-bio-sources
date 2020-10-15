@@ -46,7 +46,7 @@ public class SgdConverter extends BioDBConverter {
 	private Map<String, String> plasmids = new HashMap();
 	private Map<String, String> sequences = new HashMap();
 	private Map<String, Item> interactions = new HashMap();
-	private Map<String, Item> interactionitems = new HashMap();
+	private Map<String, String> interactionitems = new HashMap();
 	private Map<String, String> interactionterms = new HashMap<String, String>();
 	private Map<MultiKey, Item> interactionsnew = new HashMap<MultiKey, Item>();
 	private final Map<String, Item> ecoMap = new HashMap<String, Item>(); //regulation data
@@ -2544,16 +2544,22 @@ public class SgdConverter extends BioDBConverter {
 					annotationType, modification, interactingGene, role1, source,
 					phenotype, citation, gene, pubmed, title, volume, page,
 					year, issue, abbreviation, dsId, firstAuthor, dbxrefid, note);
-
+			String interactionRefId2 = "";
 			if(!geneFeatureName.equals(interactingGeneFeatureName)) {//store the reverse relationship so that template changes do not have to be made; act1 in gene.X or participant.X
 
-				String interactionRefId2 = getInteraction(interactionNo,
+				 interactionRefId2 = getInteraction(interactionNo,
 						referenceNo, interactionType, experimentType,
 						annotationType, modification, gene, role2, source,
 						phenotype, citation, interactingGene, pubmed, title, volume, page,
 						year, issue, abbreviation, dsId, firstAuthor, dbxrefid, note);
 			}
-
+			String both = "";
+			if(!interactionRefId2.isEmpty()) {
+				both = interactionRefId+":"+interactionRefId2;
+			}else {
+				both = interactionRefId;
+			}
+			interactionitems.put(interactionNo, both);
 			/*String interactionRefId = getInteractionNew(interactionNo,
 					referenceNo, interactionType, experimentType,
 					annotationType, modification, interactingGene, role1, role2, source,
@@ -2584,7 +2590,18 @@ public class SgdConverter extends BioDBConverter {
 			String sga_score = res.getString("sga_score");
 			String pvalue =  res.getString("pvalue");
 
-			Item interaction= interactionitems.get(interactionNo);
+			Item interaction = null;
+			Item interaction2 = null;
+
+			String b = interactionitems.get(interactionNo);
+			if(b.contains(":")){
+				String[] bo = b.split(":");
+				 interaction = interactions.get(bo[0]);
+				 interaction2 = interactions.get(bo[1]);
+			}else{
+				interaction = interactions.get(b);
+			}
+
 			if(interaction != null){
 
 				Item allint =  createItem("AlleleInteraction");
@@ -2607,6 +2624,30 @@ public class SgdConverter extends BioDBConverter {
 				}
 
 				interaction.addToCollection("alleleinteractions", allint.getIdentifier());
+			}
+
+			if(interaction2 != null){
+
+				Item allint2 =  createItem("AlleleInteraction");
+
+				if (StringUtils.isNotEmpty(sga_score)) allint2.setAttribute("sgaScore", sga_score);
+				if (StringUtils.isNotEmpty(pvalue)) allint2.setAttribute("pvalue", pvalue);
+				if (StringUtils.isNotEmpty(allele1_id)) {
+					Item allele1 = alleles.get(allele1_id);
+					allint2.setReference("allele1", allele1);
+				}
+				if (StringUtils.isNotEmpty(allele2_id)) {
+					Item allele2 = alleles.get(allele2_id);
+					allint2.setReference("allele2", allele2);
+				}
+
+				try {
+					store(allint2);
+				} catch (ObjectStoreException e) {
+					throw new ObjectStoreException(e);
+				}
+
+				interaction2.addToCollection("alleleinteractions", allint2.getIdentifier());
 			}
 
 		}
@@ -3223,7 +3264,7 @@ public class SgdConverter extends BioDBConverter {
 		}
 
 		interactions.put(item.getIdentifier(), item);
-		interactionitems.put(interactionNo, item);
+		//interactionitems.put(interactionNo, item);
 		String refId = item.getIdentifier();
 		return refId;
 
