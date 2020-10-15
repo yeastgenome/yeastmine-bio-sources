@@ -46,6 +46,7 @@ public class SgdConverter extends BioDBConverter {
 	private Map<String, String> plasmids = new HashMap();
 	private Map<String, String> sequences = new HashMap();
 	private Map<String, Item> interactions = new HashMap();
+	private Map<String, Item> interactionitems = new HashMap();
 	private Map<String, String> interactionterms = new HashMap<String, String>();
 	private Map<MultiKey, Item> interactionsnew = new HashMap<MultiKey, Item>();
 	private final Map<String, Item> ecoMap = new HashMap<String, Item>(); //regulation data
@@ -117,18 +118,18 @@ public class SgdConverter extends BioDBConverter {
 		processChromosomeSequences(connection);
 		processGenes(connection);
 		processNISS(connection);
-		processAliases(connection);
-		processCrossReferences(connection);
-		processGeneLocations(connection);
-		processGeneChildrenLocations(connection);
-		processProteins(connection);
+		//processAliases(connection);
+		//processCrossReferences(connection);
+		//processGeneLocations(connection);
+		//processGeneChildrenLocations(connection);
+		//processProteins(connection);
 
 		processAlleles(connection);
 
-		processAllPubs(connection);
-		processPubsWithFeatures(connection);
+		//processAllPubs(connection);
+		//processPubsWithFeatures(connection);
 		
-		processProteinAbundance(connection);
+		/*processProteinAbundance(connection);
 		processProteinHalfLife(connection);
 		processProteinDomains(connection);
 		processProteinModifications(connection);
@@ -142,7 +143,7 @@ public class SgdConverter extends BioDBConverter {
 
 		processAllPathways(connection);
 		processGenePathways(connection);
-		storePathways();
+		storePathways();*/
 		storeAlleles();
 
 		if(TEST_LOCAL) {
@@ -152,18 +153,18 @@ public class SgdConverter extends BioDBConverter {
 			 processGeneticInteractionsWithAlleles(connection);
 			 storeInteractionTypes();
 			 storeInteractionExperiments();
-			 storeInteractionDetails();
+			 //storeInteractionDetails();
 			 storeInteractions();
 
-			 processPhenotypes(connection);
-			 processPhenotypeSummary(connection);
-			 storePhenotypes();
+			 //processPhenotypes(connection);
+			 //processPhenotypeSummary(connection);
+			 //storePhenotypes();
 
 		}
 		storePublications();
-		storeRegulationSummaries();
+		//storeRegulationSummaries();
 		storeGenes();
-		storeProteins();
+		//storeProteins();
 
 	}
 
@@ -2465,7 +2466,7 @@ public class SgdConverter extends BioDBConverter {
 			String dbxrefid = res.getString("sgdid");
 			String note = res.getString("note");
 
-			/*String interactionRefId = getInteraction(interactionNo,
+			String interactionRefId = getInteraction(interactionNo,
 					referenceNo, interactionType, experimentType,
 					annotationType, modification, interactingGene, role1, source,
 					phenotype, citation, gene, pubmed, title, volume, page,
@@ -2478,13 +2479,13 @@ public class SgdConverter extends BioDBConverter {
 						annotationType, modification, gene, role2, source,
 						phenotype, citation, interactingGene, pubmed, title, volume, page,
 						year, issue, abbreviation, dsId, firstAuthor, dbxrefid, note);
-			}*/
+			}
 
-			String interactionRefId = getInteractionNew(interactionNo,
+			/*String interactionRefId = getInteractionNew(interactionNo,
 					referenceNo, interactionType, experimentType,
 					annotationType, modification, interactingGene, role1, role2, source,
 					phenotype, citation, gene, pubmed, title, volume, page,
-					year, issue, abbreviation, dsId, firstAuthor, dbxrefid, note);
+					year, issue, abbreviation, dsId, firstAuthor, dbxrefid, note);*/
 
 		}
 		System.out.println("interaction count is : " + count);
@@ -2540,7 +2541,7 @@ public class SgdConverter extends BioDBConverter {
 			String dbxrefid = res.getString("sgdid");
 			String note = res.getString("note");
 
-			/*String interactionRefId = getInteraction(interactionNo,
+			String interactionRefId = getInteraction(interactionNo,
 					referenceNo, interactionType, experimentType,
 					annotationType, modification, interactingGene, role1, source,
 					phenotype, citation, gene, pubmed, title, volume, page,
@@ -2553,13 +2554,13 @@ public class SgdConverter extends BioDBConverter {
 						annotationType, modification, gene, role2, source,
 						phenotype, citation, interactingGene, pubmed, title, volume, page,
 						year, issue, abbreviation, dsId, firstAuthor, dbxrefid, note);
-			}*/
+			}
 
-			String interactionRefId = getInteractionNew(interactionNo,
+			/*String interactionRefId = getInteractionNew(interactionNo,
 					referenceNo, interactionType, experimentType,
 					annotationType, modification, interactingGene, role1, role2, source,
 					phenotype, citation, gene, pubmed, title, volume, page,
-					year, issue, abbreviation, dsId, firstAuthor, dbxrefid, note);
+					year, issue, abbreviation, dsId, firstAuthor, dbxrefid, note);*/
 
 		}
 	}
@@ -2577,6 +2578,7 @@ public class SgdConverter extends BioDBConverter {
 		ResultSet res = PROCESSOR.getGeneticInteractionWithAllelesResults(connection);
 
 		while (res.next()) {
+
 			String interactionNo = res.getString("interaction_id");
 			String annotationNo = res.getString("annotation_id");
 			String allele1_id =  res.getString("allele1_id");
@@ -2584,8 +2586,8 @@ public class SgdConverter extends BioDBConverter {
 			String sga_score = res.getString("sga_score");
 			String pvalue =  res.getString("pvalue");
 
-			Item interactionDetail = interactiondetail.get(interactionNo);
-			if(interactionDetail != null){
+			Item interaction= interactionitems.get(interactionNo);
+			if(interaction != null){
 
 				Item allint =  createItem("AlleleInteraction");
 
@@ -2606,7 +2608,7 @@ public class SgdConverter extends BioDBConverter {
 					throw new ObjectStoreException(e);
 				}
 
-				interactionDetail.addToCollection("alleleinteraction", allint.getIdentifier());
+				interaction.addToCollection("alleleinteractions", allint.getIdentifier());
 			}
 
 		}
@@ -3214,15 +3216,16 @@ public class SgdConverter extends BioDBConverter {
 		detail.setReference("experiment", storedExperimentType.getIdentifier());	
 		detail.setReference("interaction", item);
 		//System.out.println("ANOT ID:  "+ interactionNo);
-		interactiondetail.put(interactionNo, detail);
+		//interactiondetail.put(interactionNo, item);
 
-		/*try {
+		try {
 			store(detail);
 		} catch (ObjectStoreException e) {
 			throw new ObjectStoreException(e);
-		}*/
+		}
 
-		interactions.put(item.getIdentifier(), item);	
+		interactions.put(item.getIdentifier(), item);
+		interactionitems.put(interactionNo, item);
 		String refId = item.getIdentifier();
 		return refId;
 

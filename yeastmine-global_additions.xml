@@ -288,6 +288,7 @@
 	<reference name="participant2" referenced-type="BioEntity"/>
 	<reference name="complex" referenced-type="Complex"/>
 	<collection name="details" referenced-type="InteractionDetail" reverse-reference="interaction"/>
+	<collection name="alleleinteractions" referenced-type="AlleleInteraction"/>
 </class>
 
 <class name="InteractionDetail" is-interface="true">
@@ -309,14 +310,13 @@
 	<attribute name="biologicalRole" type="java.lang.String"/>
 	<reference name="experiment" referenced-type="InteractionExperiment" reverse-reference="interactions"/>
 	<reference name="interaction" referenced-type="Interaction" reverse-reference="details"/>
-	<collection name="alleleinteraction" referenced-type="AlleleInteraction"/>
 	<collection name="interactingRegions" referenced-type="InteractionRegion" reverse-reference="interaction"/>
 	<collection name="allInteractors" referenced-type="Interactor"/>
 	<collection name="dataSets" referenced-type="DataSet"/>
 </class>
 	<class name="AlleleInteraction" is-interface="true">
-		<attribute name="pvalue" type="java.lang.String"/>
-		<attribute name="sgaScore" type="java.lang.String"/>
+		<attribute name="pvalue" type="java.lang.Float"/>
+		<attribute name="sgaScore" type="java.lang.Float"/>
 		<reference name="allele1" referenced-type="Allele"/>
 		<reference name="allele2" referenced-type="Allele"/>
 	</class>

@@ -557,8 +557,9 @@ public class SgdProcessor
 		String query = " select annotation_id, interaction_id, allele1_id, allele2_id, sga_score, pvalue"
 			+ " from nex.geninteractionannotation ga"
 			+ " inner join nex.allele_geninteraction ag  on  ag.interaction_id = ga.annotation_id"
-			+ " order by ga.annotation_id ";
 		    //+ " and (ga.dbentity1_id = 1268334 or ga.dbentity2_id = 1268334)"
+			+ " order by ga.annotation_id ";
+
 		LOG.info("executing: " + query);
 		Statement stmt = connection.createStatement();
 		ResultSet res = stmt.executeQuery(query);
