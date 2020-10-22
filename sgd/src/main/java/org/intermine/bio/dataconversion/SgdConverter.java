@@ -151,7 +151,7 @@ public class SgdConverter extends BioDBConverter {
 			 processGeneticInteractionsWithAlleles(connection);
 			 storeInteractionTypes();
 			 storeInteractionExperiments();
-			 //storeInteractionDetails();
+			 //storeInteractionDetails(); <--keep commented
 			 storeInteractions();
 
 			 processPhenotypes(connection);
@@ -2537,7 +2537,14 @@ public class SgdConverter extends BioDBConverter {
 			String abbreviation = res.getString("med_abbr");
 			String firstAuthor = res.getString("first_author");
 			String dbxrefid = res.getString("sgdid");
-			String note = res.getString("note");
+			String desc = res.getString("note");
+			String note = "";
+			if(desc.contains("|")){
+				String[]t = desc.split("|");
+				note = t[0];
+			}else{
+				note = desc;
+			}
 
 			String interactionRefId = getInteraction(interactionNo,
 					referenceNo, interactionType, experimentType,
@@ -2823,7 +2830,8 @@ public class SgdConverter extends BioDBConverter {
 		if (alleleId != null && StringUtils.isNotEmpty(alleleId)) {
 			Item allele = alleles.get(alleleId);
 			if (allele != null) {
-				pheno.addToCollection("alleles", allele);
+				//pheno.addToCollection("alleles", allele);
+				pheno.setReference("allele", allele);
 			}
 		}
 		if (assay != null && StringUtils.isNotEmpty(assay)) {

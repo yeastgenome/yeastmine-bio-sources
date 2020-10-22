@@ -51,8 +51,8 @@ public class SgdComplexesProcessor {
     protected ResultSet getComplexInteractions(Connection connection) throws SQLException {
 
         String query = "select cd.dbentity_id, complex_accession," +
-                " ldb.sgdid as sgdid_1,  ldb2.sgdid as sgdid_2," +
-                " range_start, range_end, stoichiometry, psimi2.display_name as role, psimi.display_name as type" +
+                " range_start, range_end, stoichiometry, psimi2.display_name as role, psimi.display_name as type," +
+                " ldb.sgdid as sgdid_1,  array_agg(ldb2.sgdid) as sgdid_2" +
                 " from nex.complexdbentity cd " +
                 " inner join nex.complexbindingannotation cba on cd.dbentity_id = cba.complex_id" +
                 " inner join nex.taxonomy t on t.taxonomy_id = cba.taxonomy_id" +
@@ -65,8 +65,8 @@ public class SgdComplexesProcessor {
                 " left join nex.psimi psimi2 on psimi2.psimi_id = ib.role_id" +
                 //" where cd.dbentity_id = 1982773"+
                 " group by cd.dbentity_id, complex_accession," +
-                " ldb.sgdid,  ldb2.sgdid, range_start, range_end, stoichiometry, psimi2.display_name, psimi.display_name" +
-                " order by cd.dbentity_id";
+                " range_start, range_end, stoichiometry, psimi2.display_name, psimi.display_name,ldb.sgdid" +
+                " order by cd.dbentity_id, ldb.sgdid";
 
         LOG.info("executing: " + query);
         Statement stmt = connection.createStatement();
