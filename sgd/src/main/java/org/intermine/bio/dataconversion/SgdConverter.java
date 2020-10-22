@@ -2539,7 +2539,7 @@ public class SgdConverter extends BioDBConverter {
 			String dbxrefid = res.getString("sgdid");
 			String desc = res.getString("note");
 			String note = "";
-			if(desc.contains("|")){
+			if(desc != null && desc.contains("|")){
 				String[]t = desc.split("|");
 				note = t[0];
 			}else{
