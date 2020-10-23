@@ -530,14 +530,14 @@ public class SgdProcessor
 
 		String query = "select annotation_id, dbentity1_id, dbentity2_id, biogrid_experimental_system, p.display_name as phenotype, bait_hit, s.display_name as source, annotation_type,"
 				+ " citation, pmid, rdb.title, volume, page, year, issue, med_abbr, reference_id, substring(citation, 0, position( ')' in citation)+1) as first_author, db.sgdid, "
-				+ " ga.description as note"
+				+ " split_part(ga.description, '|', 1) as note"
 				+ " from nex.geninteractionannotation ga"
 				+ " left join nex.phenotype p on p.phenotype_id = ga.phenotype_id"
 				+ " inner join nex.source s on s.source_id = ga.source_id"
 				+ " inner join nex.referencedbentity rdb on rdb.dbentity_id = ga.reference_id"
 				+ " left join nex.journal j on rdb.journal_id = j.journal_id"
-				+ " inner join nex.dbentity db on  db.dbentity_id = rdb.dbentity_id"
-				+ " and (ga.dbentity1_id = 1268334 or ga.dbentity2_id = 1268334)";
+				+ " inner join nex.dbentity db on  db.dbentity_id = rdb.dbentity_id";
+				//+ " and (ga.dbentity1_id = 1268334 or ga.dbentity2_id = 1268334)";
 		LOG.info("executing: " + query);
 		Statement stmt = connection.createStatement();
 		ResultSet res = stmt.executeQuery(query);
@@ -557,7 +557,7 @@ public class SgdProcessor
 		String query = " select annotation_id, interaction_id, allele1_id, allele2_id, sga_score, pvalue"
 			+ " from nex.geninteractionannotation ga"
 			+ " inner join nex.allele_geninteraction ag  on  ag.interaction_id = ga.annotation_id"
-		    + " and (ga.dbentity1_id = 1268334 or ga.dbentity2_id = 1268334)"
+		    //+ " and (ga.dbentity1_id = 1268334 or ga.dbentity2_id = 1268334)"
 			+ " order by ga.annotation_id ";
 
 		LOG.info("executing: " + query);

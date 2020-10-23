@@ -2537,14 +2537,7 @@ public class SgdConverter extends BioDBConverter {
 			String abbreviation = res.getString("med_abbr");
 			String firstAuthor = res.getString("first_author");
 			String dbxrefid = res.getString("sgdid");
-			String desc = res.getString("note");
-			String note = "";
-			if(desc != null && desc.contains("|")){
-				String[]t = desc.split("|");
-				note = t[0];
-			}else{
-				note = desc;
-			}
+			String note = res.getString("note");
 
 			String interactionRefId = getInteraction(interactionNo,
 					referenceNo, interactionType, experimentType,
