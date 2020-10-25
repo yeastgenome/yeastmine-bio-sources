@@ -3132,7 +3132,6 @@ public class SgdConverter extends BioDBConverter {
 		detail.setReference("experiment", storedExperimentType.getIdentifier());
 		detail.setReference("interaction", item);
 		interactiondetail.put(interactionNo, detail);
-		System.out.println("size of interaction detail..."+ interactiondetail.size());
 		/*try {
 			store(detail);
 		} catch (ObjectStoreException e) {
@@ -3255,8 +3254,6 @@ public class SgdConverter extends BioDBConverter {
 
 		detail.setReference("experiment", storedExperimentType.getIdentifier());	
 		detail.setReference("interaction", item);
-		//System.out.println("ANOT ID:  "+ interactionNo);
-		//interactiondetail.put(interactionNo, item);
 
 		try {
 			store(detail);
@@ -3268,7 +3265,6 @@ public class SgdConverter extends BioDBConverter {
 		//interactionitems.put(interactionNo, item);
 		String refId = item.getIdentifier();
 		return refId;
-
 
 	}
 
