@@ -376,6 +376,7 @@ public class SgdConverter extends BioDBConverter {
 				String aliasName = res.getString("alias_name");
 				String pmrefNo = res.getString("reference_id");
 				String pmid = res.getString("pmid");
+				String aclass = res.getString("allele_class");
 
 				if (allele == null) {
 
@@ -384,6 +385,7 @@ public class SgdConverter extends BioDBConverter {
 					if (StringUtils.isNotEmpty(name)) allele.setAttribute("name", name);
 					if (StringUtils.isNotEmpty(aliasName)) allele.setAttribute("aliasName", aliasName);
 					if (StringUtils.isNotEmpty(description)) allele.setAttribute("description", description);
+					if (StringUtils.isNotEmpty(aclass)) allele.setAttribute("alleleClass", aclass);
 					String refId = allele.getIdentifier();
 
 					if(pmrefNo != null ) {
