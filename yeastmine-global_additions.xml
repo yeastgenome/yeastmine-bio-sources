@@ -607,12 +607,13 @@
 	<attribute name="source" type="java.lang.String"/>
 	<attribute name="category" type="java.lang.String"/>
 	<attribute name="modificationType" type="java.lang.String"/>
+	<attribute name="modifier" type="java.lang.String"/>
 	<attribute name="experimentalNterminalSequence" type="java.lang.String"/>
 	<attribute name="experimentalNterminalSite" type="java.lang.String"/>
 	<attribute name="modificationSite" type="java.lang.String"/>
 	<reference name="publication" referenced-type="Publication"/>
 	<collection name="proteins" referenced-type="Protein" reverse-reference="proteinModificationSites"/>
-	<collection name="modifier" referenced-type="Gene"/>
+	<!--<collection name="modifier" referenced-type="Gene"/>-->
 </class>
 <class name="ProteinProperty" is-interface="true">
 	<attribute name="location" type="java.lang.String"/>

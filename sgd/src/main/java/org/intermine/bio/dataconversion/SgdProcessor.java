@@ -317,7 +317,7 @@ public class SgdProcessor
 	protected ResultSet getProteinModificationResults(Connection connection)
 			throws SQLException {
 
-		String query = "select db.dbentity_id, site_index, site_residue, p.display_name, m.dbentity_id as modifier, pmid, rdb.dbentity_id as referencedbentity"
+		String query = "select db.dbentity_id, site_index, site_residue, p.display_name, m.format_name as modifier_name, pmid, rdb.dbentity_id as referencedbentity"
 				+ " from nex.dbentity db"
 				+ " inner join nex.posttranslationannotation pda on pda.dbentity_id = db.dbentity_id"
 				+ " inner join nex.referencedbentity rdb on rdb.dbentity_id = pda.reference_id"

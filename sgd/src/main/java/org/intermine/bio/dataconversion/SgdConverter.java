@@ -1441,7 +1441,7 @@ public class SgdConverter extends BioDBConverter {
 			String siteindex = res.getString("site_index");
 			String siteresidue = res.getString("site_residue");
 			String modType = res.getString("display_name");
-			String modifier = res.getString("modifier");
+			String modifier = res.getString("modifier_name");
 			String modSite = siteresidue+siteindex;
 			String source =  "SGD";
 			String pmid = res.getString("pmid");
@@ -1471,8 +1471,9 @@ public class SgdConverter extends BioDBConverter {
 		item.setAttribute("source", source);
 
 		if (!StringUtils.isEmpty(modifier)) {
-			Item gene = genes.get(modifier);
-			item.addToCollection("modifier", gene.getIdentifier());
+			//Item gene = genes.get(modifier);
+			//item.addToCollection("modifier", gene.getIdentifier());
+			item.setAttribute("modifier", modifier);
 		}
 
 		Item publication = publications.get(refNo);
