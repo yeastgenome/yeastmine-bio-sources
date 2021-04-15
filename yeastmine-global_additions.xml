@@ -374,6 +374,9 @@
 	<attribute name="threePrimeDataSet" type="java.lang.String"/>
 	<attribute name="galactoseCount" type="java.lang.String"/>
 	<attribute name="fivePrimeScore" type="java.lang.String"/>
+	<attribute name="in_gal" type="java.lang.String"/>
+	<attribute name="in_ypd" type="java.lang.String"/>
+	<attribute name="in_ncbi" type="java.lang.String"/>
 </class>
 <class name="MatingTypeRegion" extends="SequenceFeature" is-interface="true">
 	<reference name="X_regions" referenced-type="X_region" reverse-reference="matingtyperegion"/>

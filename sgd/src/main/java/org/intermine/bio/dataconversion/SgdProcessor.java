@@ -79,6 +79,27 @@ public class SgdProcessor
 	}
 
 
+	/**
+	 * Return the results of running a query for alleles
+	 * @param connection the connection
+	 * @return the results
+	 * @throws SQLException if there is a database problem
+	 */
+	protected ResultSet getTranscriptResults(Connection connection)
+			throws SQLException {
+
+		String query = "select ad.dbentity_id as transcript, format_name, in_gal, in_ypd, in_ncbi, reference_id, pmid "
+				+ "from nex.transcriptdbentity ad "
+				+ "inner join nex.dbentity db on ad.dbentity_id = db.dbentity_id "
+				+ "left join nex.transcript_reference ar on ad.dbentity_id = ar.transcript_id "
+				+ "left join nex.referencedbentity rdb on ar.reference_id = rdb.dbentity_id";
+
+		LOG.info("executing: " + query);
+		Statement stmt = connection.createStatement();
+		ResultSet res = stmt.executeQuery(query);
+		return res;
+	}
+
 
 
 	/**

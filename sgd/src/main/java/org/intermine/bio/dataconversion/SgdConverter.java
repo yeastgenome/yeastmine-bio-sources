@@ -53,6 +53,7 @@ public class SgdConverter extends BioDBConverter {
 	private Map<String, String> literatureTopics = new HashMap();
 	private Map<String, Item> genes = new HashMap();
 	private Map<String, Item> alleles = new HashMap();
+	private Map<String, Item> transcripts = new HashMap();
 	private Map<String, Item> proteins = new HashMap();
 	private Map<String, Item> genesName = new HashMap();
 	private Map<String, Item> allelesName = new HashMap();
@@ -124,6 +125,7 @@ public class SgdConverter extends BioDBConverter {
 		processGeneChildrenLocations(connection);
 		processProteins(connection);
 		processAlleles(connection);
+		processTranscripts(connection);
 		processAllPubs(connection);
 		processPubsWithFeatures(connection);
 		
@@ -143,6 +145,7 @@ public class SgdConverter extends BioDBConverter {
 		processGenePathways(connection);
 		storePathways();
 		storeAlleles();
+		storeTranscripts();
 
 		if(TEST_LOCAL) {
 
@@ -409,6 +412,62 @@ public class SgdConverter extends BioDBConverter {
 		}//while
 		System.out.println("size of alleles:  " + alleles.size());
 	}
+
+
+	/**
+	 *
+	 * @param connection
+	 * @throws SQLException
+	 * @throws ObjectStoreException
+	 */
+
+	private void processTranscripts(Connection connection) throws SQLException,
+			ObjectStoreException {
+
+		System.out.println("Processing Transcripts...");
+		ResultSet res = PROCESSOR.getTranscriptResults(connection);
+
+		while (res.next()) {
+
+			String transcriptNo = res.getString("transcript");
+			String name = res.getString("format_name");  //YAL009W_id006
+			String [] n = name.split("_");
+			String geneSecondaryId =  n[0];
+
+			Item gene = genesName.get(geneSecondaryId);
+			Item transcript = transcripts.get(transcriptNo);
+
+			if (gene != null) {
+				String in_gal = res.getString("in_gal");
+				String in_ypd = res.getString("in_ypd");
+				String in_ncbi = res.getString("in_ncbi");
+				String pmrefNo = res.getString("reference_id");
+				String pmid = res.getString("pmid");
+				if (transcript == null) {
+					transcript = createItem("MRNA");
+					transcript.setAttribute("featureType", "mRNA");
+					if (StringUtils.isNotEmpty(name)) transcript.setAttribute("name", name);
+					if (StringUtils.isNotEmpty(in_gal)) transcript.setAttribute("in_gal", in_gal);
+					if (StringUtils.isNotEmpty(in_ypd)) transcript.setAttribute("in_ypd", in_ypd);
+					if (StringUtils.isNotEmpty(in_ncbi)) transcript.setAttribute("in_ncbi", in_ncbi);
+
+					if(pmrefNo != null ) {
+						Item publication = publications.get(pmrefNo);
+						if (publication == null) {
+							publication = createItem("Publication");
+							publication.setAttribute("pubMedId", pmid);
+							publications.put(pmrefNo, publication);
+						}
+						transcript.addToCollection("publications", publication);
+					}
+					transcript.setReference("gene", gene.getIdentifier());
+					transcripts.put(transcriptNo, transcript);
+				}
+			} //gene
+		}//while
+		System.out.println("size of transcripts:  " + transcripts.size());
+	}
+
 
 	/**
 	 * 
@@ -1942,6 +2001,21 @@ public class SgdConverter extends BioDBConverter {
 		for (Item allele : alleles.values()) {
 			try {
 				store(allele);
+			} catch (ObjectStoreException e) {
+				throw new ObjectStoreException(e);
+			}
+		}
+	}
+
+	/**
+	 *
+	 * @throws ObjectStoreException
+	 */
+
+	private void storeTranscripts() throws ObjectStoreException {
+		for (Item transcript : transcripts.values()) {
+			try {
+				store(transcript);
 			} catch (ObjectStoreException e) {
 				throw new ObjectStoreException(e);
 			}
