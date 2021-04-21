@@ -114,7 +114,7 @@ public class SgdGffUtrConverter extends BioFileConverter
 				continue;
 			}
 		    
-			System.out.println("Processing line..." + geneId + "   "+ transcriptId);
+			//System.out.println("Processing line..." + geneId + "   "+ transcriptId);
 			getUTRs(geneId, transcriptId, chromosome, geneStart, transcriptStart, geneEnd, transcriptEnd, strand);
 
 		}

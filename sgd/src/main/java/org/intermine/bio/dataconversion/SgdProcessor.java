@@ -88,9 +88,10 @@ public class SgdProcessor
 	protected ResultSet getTranscriptResults(Connection connection)
 			throws SQLException {
 
-		String query = "select ad.dbentity_id as transcript, format_name, in_gal, in_ypd, in_ncbi, reference_id, pmid "
+		String query = "select ad.dbentity_id as transcript, db.format_name, start_index, end_index, strand, in_gal, in_ypd, in_ncbi, ar.reference_id, pmid "
 				+ "from nex.transcriptdbentity ad "
 				+ "inner join nex.dbentity db on ad.dbentity_id = db.dbentity_id "
+				+ "inner join nex.dnasequenceannotation dsa on dsa.dbentity_id = ad.dbentity_id "
 				+ "left join nex.transcript_reference ar on ad.dbentity_id = ar.transcript_id "
 				+ "left join nex.referencedbentity rdb on ar.reference_id = rdb.dbentity_id";
 
@@ -132,15 +133,15 @@ public class SgdProcessor
 	 */
 	protected ResultSet getChromosomalFeatureLocationResults(Connection connection)
 			throws SQLException {
-
-		String query = "select c.contig_id, c.format_name, s.display_name as feature_type, l.dbentity_id, l.gene_name, a.strand, a.end_index, a.start_index, a.residues, length(a.residues) "
+		String query = "select c.contig_id, c.format_name, s.display_name as feature_type, l.dbentity_id, l.gene_name, l.systematic_name, a.strand, a.end_index, a.start_index, a.residues, length(a.residues) "
 				+ " from nex.locusdbentity l, nex.contig c, nex.dnasequenceannotation a, nex.so s "
 				+ " where C.contig_id = A.contig_id "
 				+ " and (C.format_name like 'Chromosome_%' OR  C.format_name like '2-micron%')"
 				+ " and A.dbentity_id = L.dbentity_id "
 				+ " and S.so_id = c.so_id "
-				+ " and a.taxonomy_id = 274901 "			 
+				+ " and a.taxonomy_id = 274901 "
 				+ " and a.dna_type = 'GENOMIC'";
+
 
 		LOG.info("executing: " + query);
 		Statement stmt = connection.createStatement();

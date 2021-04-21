@@ -56,6 +56,7 @@ public class SgdConverter extends BioDBConverter {
 	private Map<String, Item> transcripts = new HashMap();
 	private Map<String, Item> proteins = new HashMap();
 	private Map<String, Item> genesName = new HashMap();
+	private Map<String, String> genesChromosomes = new HashMap();
 	private Map<String, Item> allelesName = new HashMap();
 	private Map<String, String> genesAliases = new HashMap();
 	private Map<String, String> synonyms = new HashMap();
@@ -77,7 +78,7 @@ public class SgdConverter extends BioDBConverter {
 	private static final String TAXON_ID = "4932";
 	private Item organism;
 	private Map<String, String> featureMap = new HashMap();
-	private static final boolean TEST_LOCAL = true;
+	private static final boolean TEST_LOCAL = false;
 	private String licence;
 
 
@@ -126,7 +127,7 @@ public class SgdConverter extends BioDBConverter {
 		processProteins(connection);
 		processAlleles(connection);
 		processTranscripts(connection);
-		processAllPubs(connection);
+		/*processAllPubs(connection);
 		processPubsWithFeatures(connection);
 		
 		processProteinAbundance(connection);
@@ -143,7 +144,7 @@ public class SgdConverter extends BioDBConverter {
 
 		processAllPathways(connection);
 		processGenePathways(connection);
-		storePathways();
+		storePathways();*/
 		storeAlleles();
 		storeTranscripts();
 
@@ -256,6 +257,10 @@ public class SgdConverter extends BioDBConverter {
 					item = createItem("MatingTypeRegion");
 				}else if (feature_type.equalsIgnoreCase("intein encoding region")) {
 					item = createItem("InteinEncodingRegion");
+				} else if (feature_type.equalsIgnoreCase("recombination enhancer")) {
+					item = createItem("RecombinationEnhancer");
+				}else if (feature_type.equalsIgnoreCase("non transcribed region")) {
+					item = createItem("NonTranscribedRegion");
 				}
 
 				// set for all types, so you can use LSF to query for these
@@ -438,6 +443,17 @@ public class SgdConverter extends BioDBConverter {
 			Item transcript = transcripts.get(transcriptNo);
 
 			if (gene != null) {
+				String start_index = res.getString("start_index");
+				String end_index = res.getString("end_index");
+				String strand = res.getString("strand");
+				String newstrand = "";
+				if (strand.equals("+")) {
+					newstrand = "1";
+				} else if (strand.equals("-")) {
+					newstrand = "-1";
+				} else if (strand.equals("0")) {
+					newstrand = "0";
+				}
 				String in_gal = res.getString("in_gal");
 				String in_ypd = res.getString("in_ypd");
 				String in_ncbi = res.getString("in_ncbi");
@@ -446,7 +462,7 @@ public class SgdConverter extends BioDBConverter {
 				if (transcript == null) {
 					transcript = createItem("MRNA");
 					transcript.setAttribute("featureType", "mRNA");
-					if (StringUtils.isNotEmpty(name)) transcript.setAttribute("name", name);
+					if (StringUtils.isNotEmpty(name)) transcript.setAttribute("primaryIdentifier", name);
 					if (StringUtils.isNotEmpty(in_gal)) transcript.setAttribute("in_gal", in_gal);
 					if (StringUtils.isNotEmpty(in_ypd)) transcript.setAttribute("in_ypd", in_ypd);
 					if (StringUtils.isNotEmpty(in_ncbi)) transcript.setAttribute("in_ncbi", in_ncbi);
@@ -461,6 +477,13 @@ public class SgdConverter extends BioDBConverter {
 						transcript.addToCollection("publications", publication);
 					}
 					transcript.setReference("gene", gene.getIdentifier());
+
+					//location
+					String refId = genesChromosomes.get(geneSecondaryId);
+					transcript.setReference("chromosome", refId);
+					String locationRefId = getLocation(transcript, refId, start_index, end_index, newstrand);
+					transcript.setReference("chromosomeLocation", locationRefId);
+
 					transcripts.put(transcriptNo, transcript);
 				}
 			} //gene
@@ -711,7 +734,7 @@ public class SgdConverter extends BioDBConverter {
 			String geneFeatureNo = anEntry.getKey();
 			String alias = anEntry.getValue();
 			Item item = genes.get(geneFeatureNo);
-			item.setAttribute("sgdAlias", alias);
+			if(StringUtils.isNotEmpty(alias)){ item.setAttribute("sgdAlias", alias); }
 		}
 
 	}
@@ -1059,8 +1082,9 @@ public class SgdConverter extends BioDBConverter {
 			String featureType = res.getString("feature_type");
 			String geneFeatureNo = res.getString("dbentity_id");
 			String geneFeatureName = res.getString("gene_name");
+			String secondaryIdentifier = res.getString("systematic_name");
 			String strand = res.getString("strand");
-			String seq_length = res.getString(10);
+			String seq_length = res.getString(11);
 
 			String newstrand = "";
 			if (strand.equals("+")) {
@@ -1095,6 +1119,8 @@ public class SgdConverter extends BioDBConverter {
 			String seqRefId = getSequence(geneFeatureNo, res.getString("residues"), seq_length);
 			item.setReference("sequence", seqRefId);
 			item.setAttribute("length", seq_length);
+
+			genesChromosomes.put(secondaryIdentifier, refId);
 
 		}
 		res.close();
@@ -3216,7 +3242,6 @@ public class SgdConverter extends BioDBConverter {
 		}*/
 
 		interactions.put(item.getIdentifier(), item);
-		System.out.println("size of interaction detail..."+ interactions.size());
 		String refId = item.getIdentifier();
 		return refId;
 	}

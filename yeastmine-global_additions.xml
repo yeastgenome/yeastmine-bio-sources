@@ -52,6 +52,7 @@
 	<collection name="locatedFeatures" referenced-type="Location" reverse-reference="locatedOn"/>
 </class>
 <class name="BiologicalRegion" extends="SequenceFeature" is-interface="true"/>
+
 	<class name="BlockedReadingFrame" extends="ProteinCodingGene" is-interface="true">
 	<!--<attribute name="phenotypeSummary" type="java.lang.String"/>
 	<collection name="CDSs" referenced-type="CDS" reverse-reference="blockedreadingframe"/>-->
@@ -631,6 +632,8 @@
 	<!--<collection name="CDSs" referenced-type="CDS" reverse-reference="pseudogene"/>-->
 	<collection name="plus1translationalframeshifts" referenced-type="Plus1TranslationalFrameshift" reverse-reference="pseudogene"/>
 </class>
+	<class name="RecombinationEnhancer" extends="Gene" is-interface="true">
+	</class>
 <class name="Publication" is-interface="true">
 	<attribute name="year" type="java.lang.Integer"/>
 	<attribute name="citation" type="java.lang.String"/>
