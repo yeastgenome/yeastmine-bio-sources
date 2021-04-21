@@ -60,3 +60,5 @@ project(':bio-source-panther').projectDir = new File(settingsDir, './panther')
 project(':bio-source-homologene').projectDir = new File(settingsDir, './homologene')
 project(':bio-source-ensembl-compara').projectDir = new File(settingsDir, './ensembl-compara')
 project(':bio-source-sgd-complexes').projectDir = new File(settingsDir, './sgd-complexes')
+include ':bio-source-sgd-db-utr'
+project(':bio-source-sgd-db-utr').projectDir = new File(settingsDir, './sgd-db-utr')
