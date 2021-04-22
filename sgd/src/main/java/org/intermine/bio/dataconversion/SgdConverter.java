@@ -127,7 +127,7 @@ public class SgdConverter extends BioDBConverter {
 		processProteins(connection);
 		processAlleles(connection);
 		processTranscripts(connection);
-		/*processAllPubs(connection);
+		processAllPubs(connection);
 		processPubsWithFeatures(connection);
 		
 		processProteinAbundance(connection);
@@ -144,7 +144,7 @@ public class SgdConverter extends BioDBConverter {
 
 		processAllPathways(connection);
 		processGenePathways(connection);
-		storePathways();*/
+		storePathways();
 		storeAlleles();
 		storeTranscripts();
 
