@@ -78,7 +78,7 @@ public class SgdConverter extends BioDBConverter {
 	private static final String TAXON_ID = "4932";
 	private Item organism;
 	private Map<String, String> featureMap = new HashMap();
-	private static final boolean TEST_LOCAL = false;
+	private static final boolean TEST_LOCAL = true;
 	private String licence;
 
 
@@ -457,15 +457,33 @@ public class SgdConverter extends BioDBConverter {
 				String in_gal = res.getString("in_gal");
 				String in_ypd = res.getString("in_ypd");
 				String in_ncbi = res.getString("in_ncbi");
+				String ingal = "";
+				if (in_gal.equals("t")) {
+					ingal = "true";
+				} else if (in_gal.equals("f")) {
+					ingal = "false";
+				}
+				String inypd = "";
+				if (in_ypd.equals("t")) {
+					inypd = "true";
+				} else if (in_ypd.equals("f")) {
+					inypd = "false";
+				}
+				String incbi = "";
+				if (in_ncbi.equals("t")) {
+					incbi = "true";
+				} else if (in_ncbi.equals("f")) {
+					incbi = "false";
+				}
 				String pmrefNo = res.getString("reference_id");
 				String pmid = res.getString("pmid");
 				if (transcript == null) {
 					transcript = createItem("MRNA");
 					transcript.setAttribute("featureType", "mRNA");
 					if (StringUtils.isNotEmpty(name)) transcript.setAttribute("primaryIdentifier", name);
-					if (StringUtils.isNotEmpty(in_gal)) transcript.setAttribute("in_gal", in_gal);
-					if (StringUtils.isNotEmpty(in_ypd)) transcript.setAttribute("in_ypd", in_ypd);
-					if (StringUtils.isNotEmpty(in_ncbi)) transcript.setAttribute("in_ncbi", in_ncbi);
+					if (StringUtils.isNotEmpty(in_gal)) transcript.setAttribute("in_gal", ingal);
+					if (StringUtils.isNotEmpty(in_ypd)) transcript.setAttribute("in_ypd", inypd);
+					if (StringUtils.isNotEmpty(in_ncbi)) transcript.setAttribute("in_ncbi", incbi);
 
 					if(pmrefNo != null ) {
 						Item publication = publications.get(pmrefNo);
