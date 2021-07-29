@@ -199,6 +199,11 @@ public class SgdDbUtrConverter extends BioFileConverter
         String start = startCoord;
         String end = stopCoord;
 
+        if(new Integer(start) > new Integer(end)){
+            start = stopCoord;
+            end =  startCoord;
+        }
+
         if (!StringUtils.isEmpty(start) && !StringUtils.isEmpty(end)) {
             subject.setAttribute("length", getLength(start, end));
         }
