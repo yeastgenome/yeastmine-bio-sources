@@ -400,7 +400,7 @@ public class SgdConverter extends BioDBConverter {
 						Item publication = publications.get(pmrefNo);
 						if (publication == null) {
 							publication = createItem("Publication");
-							publication.setAttribute("pubMedId", pmid);
+							if (StringUtils.isNotEmpty(pmid)) publication.setAttribute("pubMedId", pmid);
 							publications.put(pmrefNo, publication);
 						}
 						allele.addToCollection("publications", publication);
