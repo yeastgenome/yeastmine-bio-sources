@@ -62,3 +62,5 @@ project(':bio-source-ensembl-compara').projectDir = new File(settingsDir, './ens
 project(':bio-source-sgd-complexes').projectDir = new File(settingsDir, './sgd-complexes')
 include ':bio-source-sgd-db-utr'
 project(':bio-source-sgd-db-utr').projectDir = new File(settingsDir, './sgd-db-utr')
+include ':bio-source-diopt-orthologs'
+project(':bio-source-diopt-orthologs').projectDir = new File(settingsDir, './diopt-orthologs')

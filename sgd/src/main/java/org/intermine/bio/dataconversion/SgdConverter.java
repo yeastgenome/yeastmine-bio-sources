@@ -78,7 +78,7 @@ public class SgdConverter extends BioDBConverter {
 	private static final String TAXON_ID = "4932";
 	private Item organism;
 	private Map<String, String> featureMap = new HashMap();
-	private static final boolean TEST_LOCAL = true;
+	private static final boolean TEST_LOCAL = false;
 	private String licence;
 
 
@@ -117,10 +117,10 @@ public class SgdConverter extends BioDBConverter {
 		// a database has been initialized from properties starting with db.sgd
 		Connection connection = getDatabase().getConnection();
 
-		processChromosomeSequences(connection);
+		//processChromosomeSequences(connection);
 		processGenes(connection);
 		processNISS(connection);
-		processAliases(connection);
+		/*processAliases(connection);
 		processCrossReferences(connection);
 		processGeneLocations(connection);
 		processGeneChildrenLocations(connection);
@@ -146,7 +146,7 @@ public class SgdConverter extends BioDBConverter {
 		processGenePathways(connection);
 		storePathways();
 		storeAlleles();
-		storeTranscripts();
+		storeTranscripts();*/
 
 		if(TEST_LOCAL) {
 

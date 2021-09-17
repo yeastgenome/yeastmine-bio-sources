@@ -265,7 +265,7 @@
 	<reference name="gene" referenced-type="Gene" reverse-reference="flankingRegions"/>
 </class>
 <class name="GeneGroup" extends="SequenceFeature" is-interface="true"/>
-<class name="Homologue" is-interface="true">
+<!--<class name="Homologue" is-interface="true">
 	<attribute name="source" type="java.lang.String"/>
 	<attribute name="type" type="java.lang.String"/>
 	<attribute name="bootstrapScore" type="java.lang.Integer"/>
@@ -275,7 +275,21 @@
 	<collection name="evidence" referenced-type="OrthologueEvidence"/>
 	<collection name="crossReferences" referenced-type="CrossReference"/>
 	<collection name="dataSets" referenced-type="DataSet"/>
-</class>
+</class>-->
+	<class name="Homologue" is-interface="true">
+		<attribute name="source" type="java.lang.String"/>
+		<attribute name="algorithms" type="java.lang.String"/>
+		<attribute name="algorithmsMatch" type="java.lang.String"/>
+		<attribute name="algorithmsAttempted" type="java.lang.String"/>
+		<attribute name="isBestScore" type="java.lang.String"/>
+		<attribute name="isBestReverseScore" type="java.lang.String"/>
+		<reference name="gene" referenced-type="Gene" reverse-reference="homologues"/>
+		<reference name="publication" referenced-type="Publication"/>
+		<reference name="homologue" referenced-type="Gene"/>
+		<collection name="evidence" referenced-type="OrthologueEvidence"/>
+		<collection name="crossReferences" referenced-type="CrossReference"/>
+		<collection name="dataSets" referenced-type="DataSet"/>
+	</class>
 <class name="Insertion" extends="BiologicalRegion" is-interface="true">
 	<reference name="xelementcombinatorialrepeat" referenced-type="XElementCombinatorialRepeat" reverse-reference="insertions"/>
 </class>
