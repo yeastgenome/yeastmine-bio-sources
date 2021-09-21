@@ -278,6 +278,7 @@
 </class>-->
 	<class name="Homologue" is-interface="true">
 		<attribute name="source" type="java.lang.String"/>
+		<attribute name="type" type="java.lang.String"/>
 		<attribute name="algorithms" type="java.lang.String"/>
 		<attribute name="algorithmsMatch" type="java.lang.String"/>
 		<attribute name="algorithmsAttempted" type="java.lang.String"/>

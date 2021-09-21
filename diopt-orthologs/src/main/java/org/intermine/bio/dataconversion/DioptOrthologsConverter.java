@@ -33,7 +33,7 @@ import org.apache.commons.collections.map.MultiKeyMap;
  */
 public class DioptOrthologsConverter extends BioFileConverter {
 
-    private static final String DATASET_TITLE = "DiOPT Orthologs data set from Alliance downloads site";
+    private static final String DATASET_TITLE = "DiOPT Orthologs data set";
     private static final String DATA_SOURCE_NAME = "DiOPT";
     private String licence;
     private Map<String, Item> genes = new HashMap();
@@ -80,6 +80,15 @@ public class DioptOrthologsConverter extends BioFileConverter {
             String totalCount = line[10].trim();
             String bestScore = line[11].trim();
             String revScore = line[12].trim();
+
+            if(gene1id.startsWith("SGD:")){
+                String id =gene1id.substring(4);
+                gene1id = id;
+            }
+            if(gene2id.startsWith("SGD:")){
+                String id =gene2id.substring(4);
+                gene2id = id;
+            }
 
             processHomologues(gene1id, org1, gene2id, org2, algorithms, matchCount, totalCount, bestScore, revScore);
 
