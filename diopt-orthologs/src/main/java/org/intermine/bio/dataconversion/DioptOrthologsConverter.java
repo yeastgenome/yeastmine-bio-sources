@@ -148,7 +148,11 @@ public class DioptOrthologsConverter extends BioFileConverter {
         if(gene == null) {
             System.out.println("creating new gene..." + g);
             gene = createItem("Gene");
-            gene.setAttribute("primaryIdentifier", g);
+            if(g.startsWith("HGNC:")){
+                gene.setAttribute("secondaryIdentifier", g);
+            }else {
+                gene.setAttribute("primaryIdentifier", g);
+            }
             gene.setReference("organism", org);
             genes.put(g, gene);
         }

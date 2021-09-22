@@ -157,12 +157,16 @@ public class NcbiGeneConverter extends BioFileConverter
         // xref
         for (String key : record.xrefs.keySet()) {
             for (String id : record.xrefs.get(key)) {
-                createCrossReference(gene.getIdentifier(), id, key, true);
+                if(key.startsWith("HGNC")){
+                    gene.setAttribute("secondaryIdentifier", id);
+                }else {
+                    createCrossReference(gene.getIdentifier(), id, key, true);
+                }
             }
         }
 
         for (String ensemblId : record.ensemblIds) {
-            gene.setAttribute("secondaryIdentifier", ensemblId);
+            //gene.setAttribute("secondaryIdentifier", ensemblId);
             createCrossReference(gene.getIdentifier(), ensemblId, "Ensembl", true);
         }
 
