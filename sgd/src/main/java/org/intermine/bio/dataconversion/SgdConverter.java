@@ -52,6 +52,7 @@ public class SgdConverter extends BioDBConverter {
 	private final Map<String, Item> ecoMap = new HashMap<String, Item>(); //regulation data
 	private Map<String, String> literatureTopics = new HashMap();
 	private Map<String, Item> genes = new HashMap();
+	private Map<String, Item> hgncgenes = new HashMap();
 	private Map<String, Item> alleles = new HashMap();
 	private Map<String, Item> transcripts = new HashMap();
 	private Map<String, Item> proteins = new HashMap();
@@ -76,7 +77,9 @@ public class SgdConverter extends BioDBConverter {
 	private Map<String, Item> regulationSummary = new HashMap<String, Item>();
 
 	private static final String TAXON_ID = "4932";
+	private static final String H_TAXON_ID = "9606";
 	private Item organism;
+	private Item horganism;
 	private Map<String, String> featureMap = new HashMap();
 	private static final boolean TEST_LOCAL = false;
 	private String licence;
@@ -107,6 +110,9 @@ public class SgdConverter extends BioDBConverter {
 		organism.setAttribute("name", "Saccharomyces cerevisiae");
 		organism.setAttribute("shortName", "S. cerevisiae");
 		store(organism);
+		horganism = createItem("Organism");
+		horganism.setAttribute("taxonId", H_TAXON_ID);
+		store(horganism);
 	}
 
 	/**
@@ -117,10 +123,10 @@ public class SgdConverter extends BioDBConverter {
 		// a database has been initialized from properties starting with db.sgd
 		Connection connection = getDatabase().getConnection();
 
-		//processChromosomeSequences(connection);
+		processChromosomeSequences(connection);
 		processGenes(connection);
 		processNISS(connection);
-		/*processAliases(connection);
+		processAliases(connection);
 		processCrossReferences(connection);
 		processGeneLocations(connection);
 		processGeneChildrenLocations(connection);
@@ -137,6 +143,7 @@ public class SgdConverter extends BioDBConverter {
 		processProteinInfo(connection);
 		
 		processParalogs(connection);
+		processComplements(connection);
 		
 		processFunctionSummary(connection);
 		processRegulation(connection);
@@ -146,7 +153,7 @@ public class SgdConverter extends BioDBConverter {
 		processGenePathways(connection);
 		storePathways();
 		storeAlleles();
-		storeTranscripts();*/
+		storeTranscripts();
 
 		if(TEST_LOCAL) {
 
@@ -547,6 +554,102 @@ public class SgdConverter extends BioDBConverter {
 		}
 	}
 
+	/**
+	 *
+	 * @param connection
+	 * @throws SQLException
+	 * @throws ObjectStoreException
+	 */
+
+	private void processComplements(Connection connection) throws SQLException,
+			ObjectStoreException {
+
+		System.out.println("Processing Functional Complements...");
+		ResultSet res = PROCESSOR.getComplements(connection); // ordered by featureNo
+
+		while (res.next()) {
+
+			String featureNo = res.getString("dbentity_id");
+			String refNo = res.getString("reference_id");
+			String source= res.getString("format_name");
+			String direction = res.getString("direction");
+			String dbxref_id = res.getString("dbxref_id");
+			String notes = res.getString("curator_comment");
+
+			Item pmid = getExistingPub(refNo);
+			Item ygene = genes.get(featureNo);
+			Item hgene = hgncgenes.get(dbxref_id);
+			if(hgene == null){
+				hgene = getGeneItem(dbxref_id, "secondaryIdentifier", horganism);
+			}
+
+			System.out.println("Processing line..." + featureNo + "   "+ dbxref_id);
+
+			if(ygene != null && hgene != null) {
+				getComplement(notes, direction, source, pmid.getIdentifier(), ygene, hgene);
+				getComplement(notes, direction, source, pmid.getIdentifier(), hgene, ygene);
+			}
+
+		}
+	}
+
+	/**
+	 *
+	 * @param c
+	 * @param n
+	 * @param source
+	 * @param pmid
+	 * @return
+	 * @throws ObjectStoreException
+	 */
+	private void getComplement(String n, String d, String s, String pub,
+							   Item yg, Item hg) throws ObjectStoreException {
+
+		/*Item pub = publications.get(pmid);
+		if (pub == null) {
+			pub = createItem("Publication");
+			pub.setAttribute("pubMedId", pmid);
+			publications.put(pmid, pub);
+			store(pub);
+		}*/
+
+		Item comp = createItem("Complement");
+
+		if(StringUtils.isNotEmpty(n)) comp.setAttribute("notes", n);
+		comp.setAttribute("source", s);
+		comp.setAttribute("direction", d);
+		comp.setReference("publication", pub);
+		comp.setReference("gene", yg);
+		comp.setReference("complement", hg);
+		store(comp);
+
+	}
+
+	/**
+	 *
+	 * @param geneId
+	 * @return
+	 * @throws ObjectStoreException
+	 */
+	private Item getGeneItem(String geneId, String identifier, Item org)
+			throws ObjectStoreException {
+
+		Item gene = genes.get(geneId);
+
+		if (gene == null) {
+			gene = createItem("Gene");
+			hgncgenes.put(geneId, gene);
+			gene.setAttribute(identifier, geneId);
+			gene.setReference("organism", org);
+			try{
+				store(gene);
+			}catch (ObjectStoreException e) {
+				throw new ObjectStoreException(e);
+			}
+		}
+		return gene;
+
+	}
 	/**
 	 * 
 	 * @param connection
