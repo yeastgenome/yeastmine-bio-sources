@@ -694,7 +694,8 @@ public class SgdProcessor
 				+ "from nex.dbentity db "
 				+ "inner join nex.functionalcomplementannotation fca on fca.dbentity_id = db.dbentity_id "
 				+ "inner join nex.referencedbentity rdb on rdb.dbentity_id = fca.reference_id "
-				+ "inner join nex.source s on s.source_id = fca.source_id";
+				+ "inner join nex.source s on s.source_id = fca.source_id ";
+				//+ "and db.dbentity_id = (select dbentity_id from nex.locusdbentity where gene_name = 'CLN1')";
 				//+ "inner join nex.ro r  on r.ro_id = fca.ro_id "
 				//+ "inner join nex.eco e on e.eco_id = fca.eco_id";
 

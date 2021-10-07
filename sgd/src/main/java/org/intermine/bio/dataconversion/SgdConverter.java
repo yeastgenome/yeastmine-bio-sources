@@ -112,6 +112,10 @@ public class SgdConverter extends BioDBConverter {
 		store(organism);
 		horganism = createItem("Organism");
 		horganism.setAttribute("taxonId", H_TAXON_ID);
+		horganism.setAttribute("genus", "Homo");
+		horganism.setAttribute("species", "sapiens");
+		horganism.setAttribute("name", "Homo sapiens");
+		horganism.setAttribute("shortName", "H. sapiens");
 		store(horganism);
 	}
 
@@ -126,26 +130,26 @@ public class SgdConverter extends BioDBConverter {
 		processChromosomeSequences(connection);
 		processGenes(connection);
 		processNISS(connection);
-		processAliases(connection);
+		/*processAliases(connection);
 		processCrossReferences(connection);
 		processGeneLocations(connection);
 		processGeneChildrenLocations(connection);
 		processProteins(connection);
 		processAlleles(connection);
-		processTranscripts(connection);
+		processTranscripts(connection);*/
 		processAllPubs(connection);
 		processPubsWithFeatures(connection);
 		
-		processProteinAbundance(connection);
+		/*processProteinAbundance(connection);
 		processProteinHalfLife(connection);
 		processProteinDomains(connection);
 		processProteinModifications(connection);
 		processProteinInfo(connection);
 		
-		processParalogs(connection);
+		processParalogs(connection);*/
 		processComplements(connection);
 		
-		processFunctionSummary(connection);
+		/*processFunctionSummary(connection);
 		processRegulation(connection);
 		processRegulationSummary(connection);
 
@@ -153,7 +157,7 @@ public class SgdConverter extends BioDBConverter {
 		processGenePathways(connection);
 		storePathways();
 		storeAlleles();
-		storeTranscripts();
+		storeTranscripts();*/
 
 		if(TEST_LOCAL) {
 
@@ -578,14 +582,14 @@ public class SgdConverter extends BioDBConverter {
 
 			Item pmid = getExistingPub(refNo);
 			Item ygene = genes.get(featureNo);
-			Item hgene = hgncgenes.get(dbxref_id);
+			Item hgene = null;
+			hgene = hgncgenes.get(dbxref_id);
 			if(hgene == null){
 				hgene = getGeneItem(dbxref_id, "secondaryIdentifier", horganism);
 			}
 
-			System.out.println("Processing line..." + featureNo + "   "+ dbxref_id);
-
 			if(ygene != null && hgene != null) {
+				System.out.println("Processing line..." + featureNo + "   "+ dbxref_id);
 				getComplement(notes, direction, source, pmid.getIdentifier(), ygene, hgene);
 				getComplement(notes, direction, source, pmid.getIdentifier(), hgene, ygene);
 			}
@@ -638,9 +642,9 @@ public class SgdConverter extends BioDBConverter {
 
 		if (gene == null) {
 			gene = createItem("Gene");
-			hgncgenes.put(geneId, gene);
 			gene.setAttribute(identifier, geneId);
 			gene.setReference("organism", org);
+			hgncgenes.put(geneId, gene);
 			try{
 				store(gene);
 			}catch (ObjectStoreException e) {
