@@ -23,7 +23,7 @@ include ':bio-source-cglabrata-homologs',
  ':bio-source-panther',
  ':bio-source-homologene',
  ':bio-source-ensembl-compara', ':bio-source-go-slim',
- ':bio-source-sgd-complexes'
+ ':bio-source-sgd-complexes', ':bio-source-sgd-complementation-db'
 
 
 
@@ -64,3 +64,5 @@ include ':bio-source-sgd-db-utr'
 project(':bio-source-sgd-db-utr').projectDir = new File(settingsDir, './sgd-db-utr')
 include ':bio-source-diopt-orthologs'
 project(':bio-source-diopt-orthologs').projectDir = new File(settingsDir, './diopt-orthologs')
+include ':bio-source-sgd-complementation-db'
+project(':bio-source-sgd-complementation-db').projectDir = new File(settingsDir, './sgd-complementation-db')
