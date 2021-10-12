@@ -679,7 +679,6 @@ public class SgdProcessor
 		return res;
 	}
 
-
 	/**
 	 * Return the results of getting cross-references from dbxref
 	 * @param connection the connection

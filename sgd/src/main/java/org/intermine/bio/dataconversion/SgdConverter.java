@@ -52,6 +52,7 @@ public class SgdConverter extends BioDBConverter {
 	private final Map<String, Item> ecoMap = new HashMap<String, Item>(); //regulation data
 	private Map<String, String> literatureTopics = new HashMap();
 	private Map<String, Item> genes = new HashMap();
+	private Map<String, Item> hgncgenes = new HashMap();
 	private Map<String, Item> alleles = new HashMap();
 	private Map<String, Item> transcripts = new HashMap();
 	private Map<String, Item> proteins = new HashMap();
@@ -76,9 +77,10 @@ public class SgdConverter extends BioDBConverter {
 	private Map<String, Item> regulationSummary = new HashMap<String, Item>();
 
 	private static final String TAXON_ID = "4932";
+	private static final String H_TAXON_ID = "9606";
 	private Item organism;
 	private Map<String, String> featureMap = new HashMap();
-	private static final boolean TEST_LOCAL = true;
+	private static final boolean TEST_LOCAL = false;
 	private String licence;
 
 
@@ -137,7 +139,6 @@ public class SgdConverter extends BioDBConverter {
 		processProteinInfo(connection);
 		
 		processParalogs(connection);
-		
 		processFunctionSummary(connection);
 		processRegulation(connection);
 		processRegulationSummary(connection);
