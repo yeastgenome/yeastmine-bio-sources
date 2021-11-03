@@ -6,6 +6,7 @@
 		<attribute name="name" type="java.lang.String"/>
 		<attribute name="aliasName" type="java.lang.String"/>
 		<reference name="gene" referenced-type="Gene" reverse-reference="alleles"/>
+		<reference name="ori" referenced-type="OriginOfReplication" reverse-reference="alleles"/>
 		<reference name="publication" referenced-type="Publication"/>
 		<collection name="phenotypes" referenced-type="Phenotype" reverse-reference="allele"/>
 	</class>
@@ -488,7 +489,9 @@
 	<attribute name="commonName" type="java.lang.String"/>
 	<attribute name="shortName" type="java.lang.String"/>
 </class>
-<class name="OriginOfReplication" extends="BiologicalRegion" is-interface="true"/>
+<class name="OriginOfReplication" extends="BiologicalRegion" is-interface="true">
+	<collection name="alleles" referenced-type="Allele" reverse-reference="ori"/>
+</class>
 <class name="OrthologueEvidence" is-interface="true">
 	<reference name="evidenceCode" referenced-type="OrthologueEvidenceCode"/>
 	<collection name="publications" referenced-type="Publication"/>
