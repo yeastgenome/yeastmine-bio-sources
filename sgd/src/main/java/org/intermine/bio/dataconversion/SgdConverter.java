@@ -2945,8 +2945,13 @@ public class SgdConverter extends BioDBConverter {
 		if (alleleId != null && StringUtils.isNotEmpty(alleleId)) {
 			Item allele = alleles.get(alleleId);
 			if (allele != null) {
-				//pheno.addToCollection("alleles", allele);
-				pheno.setReference("allele", allele);
+				pheno.setAttribute("allele", allele.getAttribute("name").getValue());
+				if (allele.getAttribute("description") != null) {
+					String description = allele.getAttribute("description").getValue();
+					if( description != null && StringUtils.isNotEmpty(description)) {
+						pheno.setAttribute("alleleDescription", description);
+					}
+				}
 			}
 		}
 		if (assay != null && StringUtils.isNotEmpty(assay)) {
