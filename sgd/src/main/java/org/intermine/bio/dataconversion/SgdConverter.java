@@ -80,7 +80,7 @@ public class SgdConverter extends BioDBConverter {
 	private static final String H_TAXON_ID = "9606";
 	private Item organism;
 	private Map<String, String> featureMap = new HashMap();
-	private static final boolean TEST_LOCAL = false;
+	private static final boolean TEST_LOCAL = true;
 	private String licence;
 
 
