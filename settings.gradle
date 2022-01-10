@@ -6,9 +6,9 @@ include ':bio-source-cglabrata-homologs',
  ':bio-source-eco',
  ':bio-source-fungi-homologs',
  ':bio-source-go-annotation-db',
+ ':bio-source-go-slim',
  ':bio-source-homolog-genes',
  ':bio-source-pombe-homologs',
- ':bio-source-sgd-complementation',
  ':bio-source-sgd-gff-utr',
  ':bio-source-sgd-gff',
  ':bio-source-sgd-protein-ntermini',
@@ -19,12 +19,10 @@ include ':bio-source-cglabrata-homologs',
  ':bio-source-mgi-identifiers',
  ':bio-source-rgd-identifiers',
  ':bio-source-omim',
- ':bio-source-treefam', ':bio-source-homologene',
- ':bio-source-panther',
- ':bio-source-homologene',
- ':bio-source-ensembl-compara', ':bio-source-go-slim',
- ':bio-source-sgd-complexes', ':bio-source-sgd-complementation-db'
-
+ ':bio-source-sgd-complexes',
+ ':bio-source-sgd-db-utr',
+ ':bio-source-diopt-orthologs',
+ ':bio-source-sgd-complementation-db'
 
 
 project(':bio-source-cglabrata-homologs').projectDir = new File(settingsDir, './cglabrata-homologs')
@@ -36,7 +34,6 @@ project(':bio-source-go-annotation-db').projectDir = new File(settingsDir, './go
 project(':bio-source-go-slim').projectDir = new File(settingsDir, './go-slim')
 project(':bio-source-homolog-genes').projectDir = new File(settingsDir, './homolog-genes')
 project(':bio-source-pombe-homologs').projectDir = new File(settingsDir, './pombe-homologs')
-project(':bio-source-sgd-complementation').projectDir = new File(settingsDir, './sgd-complementation')
 project(':bio-source-sgd-gff-utr').projectDir = new File(settingsDir, './sgd-gff-utr')
 project(':bio-source-sgd-gff').projectDir = new File(settingsDir, './sgd-gff')
 project(':bio-source-sgd-protein-ntermini').projectDir = new File(settingsDir, './sgd-protein-ntermini')
@@ -47,22 +44,7 @@ project(':bio-source-ncbi-gene').projectDir = new File(settingsDir, './ncbi-gene
 project(':bio-source-mgi-identifiers').projectDir = new File(settingsDir, './mgi-identifiers')
 project(':bio-source-rgd-identifiers').projectDir = new File(settingsDir, './rgd-identifiers')
 project(':bio-source-omim').projectDir = new File(settingsDir, './omim')
-project(':bio-source-treefam').projectDir = new File(settingsDir, './treefam')
-project(':bio-source-panther').projectDir = new File(settingsDir, './panther')
-project(':bio-source-homologene').projectDir = new File(settingsDir, './homologene')
-project(':bio-source-ensembl-compara').projectDir = new File(settingsDir, './ensembl_compara')
-project(':bio-source-ncbi-gene').projectDir = new File(settingsDir, './ncbi-gene')
-project(':bio-source-mgi-identifiers').projectDir = new File(settingsDir, './mgi-identifiers')
-project(':bio-source-rgd-identifiers').projectDir = new File(settingsDir, './rgd-identifiers')
-project(':bio-source-omim').projectDir = new File(settingsDir, './omim')
-project(':bio-source-treefam').projectDir = new File(settingsDir, './treefam')
-project(':bio-source-panther').projectDir = new File(settingsDir, './panther')
-project(':bio-source-homologene').projectDir = new File(settingsDir, './homologene')
-project(':bio-source-ensembl-compara').projectDir = new File(settingsDir, './ensembl-compara')
 project(':bio-source-sgd-complexes').projectDir = new File(settingsDir, './sgd-complexes')
-include ':bio-source-sgd-db-utr'
 project(':bio-source-sgd-db-utr').projectDir = new File(settingsDir, './sgd-db-utr')
-include ':bio-source-diopt-orthologs'
 project(':bio-source-diopt-orthologs').projectDir = new File(settingsDir, './diopt-orthologs')
-include ':bio-source-sgd-complementation-db'
 project(':bio-source-sgd-complementation-db').projectDir = new File(settingsDir, './sgd-complementation-db')
