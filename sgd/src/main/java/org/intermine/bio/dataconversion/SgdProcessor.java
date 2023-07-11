@@ -68,7 +68,7 @@ public class SgdProcessor
 				+ "inner join nex.dbentity db on ad.dbentity_id = db.dbentity_id "
 				+ "inner join nex.so s on ad.so_id = s.so_id "
 				+ "left join nex.locus_allele la on la.allele_id = ad.dbentity_id "
-				+ "left join nex.allele_reference ar on ad.dbentity_id = ar.allele_id "
+				+ "left join nex.literatureannotation ar on ad.dbentity_id = ar.dbentity_id "
 				+ "left join nex.allele_alias aa on ad.dbentity_id = aa.allele_id "
 				+ "left join nex.referencedbentity rdb on ar.reference_id = rdb.dbentity_id";
 
@@ -77,6 +77,31 @@ public class SgdProcessor
 		ResultSet res = stmt.executeQuery(query);
 		return res;
 	}
+
+	/**
+	 * Return the results of running a query for alleles
+	 * @param connection the connection
+	 * @return the results
+	 * @throws SQLException if there is a database problem
+	 */
+	protected ResultSet getAlleleAliasesResults(Connection connection)
+			throws SQLException {
+
+		String query = "select ad.dbentity_id as allele, db.display_name as allele_name, "
+				+ "array_agg (aa.display_name) as alias_name "
+				+ "from nex.alleledbentity ad "
+				+ "inner join nex.dbentity db on ad.dbentity_id = db.dbentity_id "
+				+ "left join nex.allele_alias aa on ad.dbentity_id = aa.allele_id "
+				+ "where aa.display_name is not null "
+				+ "group by ad.dbentity_id , db.display_name "
+				+ "order by ad.dbentity_id";
+
+		LOG.info("executing: " + query);
+		Statement stmt = connection.createStatement();
+		ResultSet res = stmt.executeQuery(query);
+		return res;
+	}
+
 
 
 	/**

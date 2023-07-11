@@ -7,8 +7,6 @@
 		<attribute name="aliasName" type="java.lang.String"/>
 		<reference name="gene" referenced-type="Gene" reverse-reference="alleles"/>
 		<reference name="ori" referenced-type="OriginOfReplication" reverse-reference="alleles"/>
-		<reference name="publication" referenced-type="Publication"/>
-		<!--<collection name="phenotypes" referenced-type="Phenotype" reverse-reference="allele"/>-->
 	</class>
 
 	<class name="ARS" extends="OriginOfReplication" is-interface="true">
@@ -676,7 +674,7 @@
 	<collection name="crossReferences" referenced-type="DatabaseReference" reverse-reference="subject"/>
 	<collection name="meshTerms" referenced-type="MeshTerm" reverse-reference="publications"/>
 	<collection name="pathways" referenced-type="Pathway" reverse-reference="publications"/>
-	<!--<collection name="pathwaysummary" referenced-type="Phenotype" reverse-reference="publications"/>-->
+	<!--<collection name="alleles" referenced-type="Allele" reverse-reference="publications"/>-->
 </class>
 <class name="PublicationAnnotation" is-interface="true">
 	<reference name="publication" referenced-type="Publication"/>

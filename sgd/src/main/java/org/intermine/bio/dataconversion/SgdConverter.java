@@ -60,6 +60,7 @@ public class SgdConverter extends BioDBConverter {
 	private Map<String, String> genesChromosomes = new HashMap();
 	private Map<String, Item> allelesName = new HashMap();
 	private Map<String, String> genesAliases = new HashMap();
+	private Map<String, String> alleleAliases = new HashMap();
 	private Map<String, String> synonyms = new HashMap();
 	private Map<String, Item> publications = new HashMap();
 	private Map<String, Item> interactiontype = new HashMap();
@@ -80,7 +81,7 @@ public class SgdConverter extends BioDBConverter {
 	private static final String H_TAXON_ID = "9606";
 	private Item organism;
 	private Map<String, String> featureMap = new HashMap();
-	private static final boolean TEST_LOCAL = true;
+	private static final boolean NOT_LOCAL = true;
 	private String licence;
 
 
@@ -128,6 +129,7 @@ public class SgdConverter extends BioDBConverter {
 		processGeneChildrenLocations(connection);
 		processProteins(connection);
 		processAlleles(connection);
+		processAlleleAliases(connection);
 		processTranscripts(connection);
 		processAllPubs(connection);
 		processPubsWithFeatures(connection);
@@ -149,7 +151,7 @@ public class SgdConverter extends BioDBConverter {
 		storeAlleles();
 		storeTranscripts();
 
-		if(TEST_LOCAL) {
+		if(NOT_LOCAL) {
 
 			 processPhysicalInteractions(connection);
 			 processGeneticInteractions(connection);
@@ -382,20 +384,18 @@ public class SgdConverter extends BioDBConverter {
 
 				String name = res.getString("allele_name");
 				String description = res.getString("description");
+				String aclass = res.getString("allele_class");
 				String aliasName = res.getString("alias_name");
 				String pmrefNo = res.getString("reference_id");
 				String pmid = res.getString("pmid");
-				String aclass = res.getString("allele_class");
 
 				if (allele == null) {
 
 					allele = createItem("Allele");
 					allele.setAttribute("featureType", "Allele");
 					if (StringUtils.isNotEmpty(name)) allele.setAttribute("name", name);
-					if (StringUtils.isNotEmpty(aliasName)) allele.setAttribute("aliasName", aliasName);
 					if (StringUtils.isNotEmpty(description)) allele.setAttribute("description", description);
 					if (StringUtils.isNotEmpty(aclass)) allele.setAttribute("alleleClass", aclass);
-					String refId = allele.getIdentifier();
 
 					if(pmrefNo != null ) {
 						Item publication = publications.get(pmrefNo);
@@ -406,11 +406,22 @@ public class SgdConverter extends BioDBConverter {
 						}
 						allele.addToCollection("publications", publication);
 					}
-					allele.setReference("gene", gene.getIdentifier());
 					alleles.put(alleleNo, allele);
-					allelesName.put(name, allele);
 
-				} //allele
+				} else{
+					
+					if(pmrefNo != null ) {
+						Item publication = publications.get(pmrefNo);
+						if (publication == null) {
+							publication = createItem("Publication");
+							if (StringUtils.isNotEmpty(pmid)) publication.setAttribute("pubMedId", pmid);
+							publications.put(pmrefNo, publication);
+						}
+						allele.addToCollection("publications", publication);
+					}
+				}
+				//if (StringUtils.isNotEmpty(concatAliasName)) { allele.setAttribute("aliasName", concatAliasName); }
+				allele.setReference("gene", gene.getIdentifier());
 				gene.addToCollection("alleles", allele);
 
 		  }//gene
@@ -418,7 +429,6 @@ public class SgdConverter extends BioDBConverter {
 		}//while
 		System.out.println("size of alleles:  " + alleles.size());
 	}
-
 
 	/**
 	 *
@@ -754,6 +764,38 @@ public class SgdConverter extends BioDBConverter {
 			String alias = anEntry.getValue();
 			Item item = genes.get(geneFeatureNo);
 			if(StringUtils.isNotEmpty(alias)){ item.setAttribute("sgdAlias", alias); }
+		}
+
+	}
+
+
+	/**
+	 *
+	 * @param connection
+	 * @throws SQLException
+	 * @throws ObjectStoreException
+	 */
+
+	private void processAlleleAliases(Connection connection) throws SQLException, ObjectStoreException {
+
+		ResultSet res = PROCESSOR.getAlleleAliasesResults(connection);
+
+		System.out.println("Processing Alleles ALiases...");
+		while (res.next()) {
+			String alleleFeatureNo = res.getString("allele");
+			String allele_name = res.getString("allele_name");
+			String alias_name = res.getString("alias_name");
+			String s1 = alias_name.replace("\"", "");
+			String s2 = s1.replace("{", "");
+			String s3 = s2.replace("}", "");
+
+
+			Item item = alleles.get(alleleFeatureNo);
+			if (item != null) {
+				if (StringUtils.isNotEmpty(s3)) {
+					item.setAttribute("aliasName", s3);
+				}
+			}
 		}
 
 	}
