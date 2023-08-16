@@ -62,7 +62,7 @@ public class SgdProcessor
 	protected ResultSet getAlleleResults(Connection connection)
 			throws SQLException {
 
-		String query = "select ad.dbentity_id as allele, la.locus_id as locus, ad.description, db.display_name as allele_name, "
+		String query = "select ad.dbentity_id as allele, db.sgdid as allelesgdid, la.locus_id as locus, ad.description, db.display_name as allele_name, "
 			    + " aa.display_name as alias_name, ar.reference_id, rdb.pmid, s.display_name as allele_class "
 				+ "from nex.alleledbentity ad "
 				+ "inner join nex.dbentity db on ad.dbentity_id = db.dbentity_id "

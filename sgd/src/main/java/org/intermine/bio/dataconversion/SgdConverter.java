@@ -81,7 +81,7 @@ public class SgdConverter extends BioDBConverter {
 	private static final String H_TAXON_ID = "9606";
 	private Item organism;
 	private Map<String, String> featureMap = new HashMap();
-	private static final boolean NOT_LOCAL = true;
+	private static final boolean NOT_LOCAL = false;
 	private String licence;
 
 
@@ -388,6 +388,7 @@ public class SgdConverter extends BioDBConverter {
 				String aliasName = res.getString("alias_name");
 				String pmrefNo = res.getString("reference_id");
 				String pmid = res.getString("pmid");
+				String alleleSgdid = res.getString("allelesgdid");
 
 				if (allele == null) {
 
@@ -396,6 +397,8 @@ public class SgdConverter extends BioDBConverter {
 					if (StringUtils.isNotEmpty(name)) allele.setAttribute("name", name);
 					if (StringUtils.isNotEmpty(description)) allele.setAttribute("description", description);
 					if (StringUtils.isNotEmpty(aclass)) allele.setAttribute("alleleClass", aclass);
+					if (StringUtils.isNotEmpty(alleleSgdid)) allele.setAttribute("alleleSgdid", alleleSgdid);
+					if (StringUtils.isNotEmpty(aliasName)) allele.setAttribute("aliasName", aliasName);
 
 					if(pmrefNo != null ) {
 						Item publication = publications.get(pmrefNo);
@@ -409,7 +412,7 @@ public class SgdConverter extends BioDBConverter {
 					alleles.put(alleleNo, allele);
 
 				} else{
-					
+
 					if(pmrefNo != null ) {
 						Item publication = publications.get(pmrefNo);
 						if (publication == null) {
