@@ -48,3 +48,5 @@ project(':bio-source-sgd-complexes').projectDir = new File(settingsDir, './sgd-c
 project(':bio-source-sgd-db-utr').projectDir = new File(settingsDir, './sgd-db-utr')
 project(':bio-source-diopt-orthologs').projectDir = new File(settingsDir, './diopt-orthologs')
 project(':bio-source-sgd-complementation-db').projectDir = new File(settingsDir, './sgd-complementation-db')
+include ':bio-source-spell-expression-file'
+project(':bio-source-spell-expression-file').projectDir = new File(settingsDir, './spell-expression-file')
