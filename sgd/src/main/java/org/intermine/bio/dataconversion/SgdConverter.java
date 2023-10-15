@@ -81,7 +81,7 @@ public class SgdConverter extends BioDBConverter {
 	private static final String H_TAXON_ID = "9606";
 	private Item organism;
 	private Map<String, String> featureMap = new HashMap();
-	private static final boolean NOT_LOCAL = true;
+	private static final boolean LOCAL = true;
 	private String licence;
 
 
@@ -151,7 +151,7 @@ public class SgdConverter extends BioDBConverter {
 		storeAlleles();
 		storeTranscripts();
 
-		if(NOT_LOCAL) {
+		if(LOCAL) {
 
 			 processPhysicalInteractions(connection);
 			 processGeneticInteractions(connection);
