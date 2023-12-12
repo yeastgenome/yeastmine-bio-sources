@@ -7,6 +7,7 @@
 		<attribute name="name" type="java.lang.String"/>
 		<attribute name="aliasName" type="java.lang.String"/>
 		<reference name="gene" referenced-type="Gene" reverse-reference="alleles"/>
+		<reference name="centromere" referenced-type="Centromere" reverse-reference="alleles"/>
 		<reference name="ori" referenced-type="OriginOfReplication" reverse-reference="alleles"/>
 	</class>
 
@@ -71,7 +72,8 @@
 	<reference name="type" referenced-type="OntologyTerm"/>
 	<reference name="feature" referenced-type="BioEntity"/>
 </class>
-	<class name="Centromere" extends="BiologicalRegion" is-interface="true">
+	<class name="Centromere" extends="SequenceFeature" is-interface="true">
+		<collection name="alleles" referenced-type="Allele" reverse-reference="centromere"/>
 	<reference name="centromereDNAElementIs" referenced-type="CentromereDNAElementI" reverse-reference="centromere"/>
 	<reference name="centromereDNAElementIIIs" referenced-type="CentromereDNAElementIII" reverse-reference="centromere"/>
 	<reference name="centromereDNAElementIIs" referenced-type="CentromereDNAElementII" reverse-reference="centromere"/>
