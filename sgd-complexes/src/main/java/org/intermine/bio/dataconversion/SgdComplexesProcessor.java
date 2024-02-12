@@ -52,20 +52,20 @@ public class SgdComplexesProcessor {
 
         String query = "select cd.dbentity_id, complex_accession," +
                 " range_start, range_end, stoichiometry, psimi2.display_name as role, psimi.display_name as type," +
-                " ldb.sgdid as sgdid_1,  array_agg(ldb2.sgdid) as sgdid_2" +
+                " ldb.sgdid as sgdid_1,  array_agg(ldb2.sgdid) as sgdid_2, i.display_name as interactordisplay, i.format_name as interactorid, ib.display_name" +
                 " from nex.complexdbentity cd " +
                 " inner join nex.complexbindingannotation cba on cd.dbentity_id = cba.complex_id" +
                 " inner join nex.taxonomy t on t.taxonomy_id = cba.taxonomy_id" +
                 " inner join nex.interactor i on  cba.interactor_id = i.interactor_id" +
                 " left join nex.interactor ib on cba.binding_interactor_id = ib.interactor_id" +
-                " inner join nex.dbentity ldb on ldb.dbentity_id = i.locus_id" +
+                " left join nex.dbentity ldb on ldb.dbentity_id = i.locus_id" +
                 " left join nex.dbentity ldb2 on ldb2.dbentity_id = ib.locus_id" +
                 " left join nex.psimi psi on psi.psimi_id = cba.binding_type_id" +
                 " left join nex.psimi psimi on psimi.psimi_id = i.type_id" +
                 " left join nex.psimi psimi2 on psimi2.psimi_id = ib.role_id" +
-                //" where cd.dbentity_id = 1982773"+
+                //" where cd.dbentity_id = 1983195"+
                 " group by cd.dbentity_id, complex_accession," +
-                " range_start, range_end, stoichiometry, psimi2.display_name, psimi.display_name,ldb.sgdid" +
+                " range_start, range_end, stoichiometry, psimi2.display_name, psimi.display_name,ldb.sgdid, i.display_name, i.format_name, ib.display_name" +
                 " order by cd.dbentity_id, ldb.sgdid";
 
         LOG.info("executing: " + query);

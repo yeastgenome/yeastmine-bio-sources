@@ -52,6 +52,8 @@ public class SgdComplexesConverter extends BioDBConverter
     private Map<String, String> terms = new HashMap<String, String>();
     private Map<String, Item> complexes = new HashMap();
     private final Map<String, Item> proteins = new HashMap<String, Item>();
+    private final Map<String, Item> otherinteractors = new HashMap<String, Item>();
+
     private static final String TAXON_ID = "4932";
     private Item yorganism;
 
@@ -77,6 +79,7 @@ public class SgdComplexesConverter extends BioDBConverter
         processComplexes(connection);
         processComplexInteractions(connection);
         storeProteins();
+        storeOtherBioentities();
         storeComplexes();
     }
 
@@ -299,7 +302,6 @@ public class SgdComplexesConverter extends BioDBConverter
             String dbentityId = res.getString("dbentity_id");
             String complex_accession = res.getString("complex_accession");
             String dbentity1 = res.getString("sgdid_1");
-            //String dbentity2 = res.getString("sgdid_2");
 
             Array interactions = res.getArray("sgdid_2");
             String[] str_interactions = (String[])interactions.getArray();
@@ -309,9 +311,17 @@ public class SgdComplexesConverter extends BioDBConverter
             String stochiometry = res.getString("stoichiometry");
             String role = res.getString("role");
             String type = res.getString("type");
+            String int_display_name = res.getString("interactordisplay");
+            String int_format_name = res.getString("interactorid");
 
-            Item gene1 = getProteinItem(dbentity1);
+            Item gene1 = null;
 
+            if(type.equalsIgnoreCase("protein") && dbentity1 != null){
+                System.out.println("in type equals protein" + "   "+dbentity1 + "   "+ complex_accession);
+                gene1 = getProteinItem(dbentity1);
+            }else{
+                gene1 = getOtherItem(type, int_display_name, int_format_name);
+            }
             processInteractions(complex_accession, gene1, range_start, range_end, stochiometry, role, type, str_interactions);
 
         }
@@ -422,6 +432,24 @@ public class SgdComplexesConverter extends BioDBConverter
             }
         }
     }
+
+
+    /**
+     *
+     * @throws ObjectStoreException
+     */
+
+    private void storeOtherBioentities() throws ObjectStoreException {
+        for (Item item : otherinteractors.values()) {
+            try {
+                store(item);
+            } catch (ObjectStoreException e) {
+                throw new ObjectStoreException(e);
+            }
+        }
+    }
+
+
     /**
      *
      * @param proteinId
@@ -443,6 +471,30 @@ public class SgdComplexesConverter extends BioDBConverter
         return protein;
 
     }
+
+    /**
+     *
+     * @param proteinId
+     * @return
+     * @throws ObjectStoreException
+     */
+    private Item getOtherItem(String type, String interactor_dname, String interactor_fname)
+            throws ObjectStoreException {
+
+        Item item = otherinteractors.get(interactor_dname);
+
+        if (item == null) {
+            item = createItem("BioEntity");
+            otherinteractors.put(interactor_dname, item);
+            item.setAttribute("primaryIdentifier", interactor_fname);
+            item.setAttribute("name", interactor_dname);
+            item.setReference("organism", yorganism);
+        }
+
+        return item;
+
+    }
+
 
     /**
      * {@inheritDoc}
