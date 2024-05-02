@@ -1,6 +1,17 @@
 <model name="genomic" package="org.intermine.model.bio">
 
-	<class name="Allele" extends="SequenceCollection SequenceFeature" is-interface="true" term="http://purl.obolibrary.org/obo/SO:0001023">
+	<class name="ARS" extends="OriginOfReplication" is-interface="true">
+	<attribute name="geneSummary" type="java.lang.String"/>
+	<collection name="arsconsensussequences" referenced-type="ARSConsensusSequence" reverse-reference="ars"/>
+</class>
+
+	<class name="ARSConsensusSequence" extends="SequenceFeature" is-interface="true">
+	<reference name="xelement" referenced-type="XElement" reverse-reference="arsconsensussequences"/>
+	<reference name="ars" referenced-type="ARS" reverse-reference="arsconsensussequences"/>
+	<reference name="yprimeelement" referenced-type="YPrimeElement" reverse-reference="arsconsensussequences"/>
+</class>
+
+<class name="Allele" extends="SequenceCollection SequenceFeature" is-interface="true" term="http://purl.obolibrary.org/obo/SO:0001023">
 		<attribute name="alleleClass" type="java.lang.String"/>
 		<attribute name="alleleSgdid" type="java.lang.String"/>
 		<attribute name="description" type="java.lang.String"/>
@@ -10,17 +21,12 @@
 		<reference name="centromere" referenced-type="Centromere" reverse-reference="alleles"/>
 		<reference name="ori" referenced-type="OriginOfReplication" reverse-reference="alleles"/>
 	</class>
-
-	<class name="ARS" extends="OriginOfReplication" is-interface="true">
-	<attribute name="geneSummary" type="java.lang.String"/>
-	<collection name="arsconsensussequences" referenced-type="ARSConsensusSequence" reverse-reference="ars"/>
-</class>
-
-<class name="ARSConsensusSequence" extends="SequenceFeature" is-interface="true">
-	<reference name="xelement" referenced-type="XElement" reverse-reference="arsconsensussequences"/>
-	<reference name="ars" referenced-type="ARS" reverse-reference="arsconsensussequences"/>
-	<reference name="yprimeelement" referenced-type="YPrimeElement" reverse-reference="arsconsensussequences"/>
-</class>
+<class name="AlleleInteraction" is-interface="true">
+		<attribute name="pvalue" type="java.lang.Float"/>
+		<attribute name="sgaScore" type="java.lang.Float"/>
+		<reference name="allele1" referenced-type="Allele"/>
+		<reference name="allele2" referenced-type="Allele"/>
+	</class>
 <class name="Annotatable" is-interface="true">
 		<attribute name="primaryIdentifier" type="java.lang.String"/>
 		<collection name="ontologyAnnotations" referenced-type="OntologyAnnotation" reverse-reference="subject"/>
@@ -37,7 +43,7 @@
 	<reference name="regulator" referenced-type="Gene"/>
 	<reference name="xelement" referenced-type="XElement" reverse-reference="bindingsites"/>
 </class>
-<class name="BioEntity"  extends="Annotatable" is-interface="true">
+<class name="BioEntity" extends="Annotatable" is-interface="true">
 	<attribute name="sgdAlias" type="java.lang.String"/>
 	<attribute name="symbol" type="java.lang.String"/>
 	<attribute name="name" type="java.lang.String"/>
@@ -52,8 +58,8 @@
 	<collection name="dataSets" referenced-type="DataSet" reverse-reference="bioEntities"/>
 	<collection name="locatedFeatures" referenced-type="Location" reverse-reference="locatedOn"/>
 </class>
-<class name="BiologicalRegion" extends="SequenceFeature" is-interface="true"/>
 
+	<class name="BiologicalRegion" extends="SequenceFeature" is-interface="true"/>
 	<class name="BlockedReadingFrame" extends="ProteinCodingGene" is-interface="true">
 	<!--<attribute name="phenotypeSummary" type="java.lang.String"/>
 	<collection name="CDSs" referenced-type="CDS" reverse-reference="blockedreadingframe"/>-->
@@ -72,16 +78,17 @@
 	<reference name="type" referenced-type="OntologyTerm"/>
 	<reference name="feature" referenced-type="BioEntity"/>
 </class>
+
 	<class name="Centromere" extends="SequenceFeature" is-interface="true">
-		<collection name="alleles" referenced-type="Allele" reverse-reference="centromere"/>
+	<collection name="alleles" referenced-type="Allele" reverse-reference="centromere"/>
 	<reference name="centromereDNAElementIs" referenced-type="CentromereDNAElementI" reverse-reference="centromere"/>
 	<reference name="centromereDNAElementIIIs" referenced-type="CentromereDNAElementIII" reverse-reference="centromere"/>
 	<reference name="centromereDNAElementIIs" referenced-type="CentromereDNAElementII" reverse-reference="centromere"/>
 </class>
-
-	<class name="CentromereDNAElementI" extends="SequenceFeature" is-interface="true">
+<class name="CentromereDNAElementI" extends="SequenceFeature" is-interface="true">
 	<reference name="centromere" referenced-type="Centromere" reverse-reference="centromereDNAElementIs"/>
 </class>
+
 <class name="CentromereDNAElementII" extends="SequenceFeature" is-interface="true">
 	<reference name="centromere" referenced-type="Centromere" reverse-reference="centromereDNAElementIIs"/>
 </class>
@@ -89,12 +96,12 @@
 <class name="CentromereDNAElementIII" extends="SequenceFeature" is-interface="true">
 	<reference name="centromere" referenced-type="Centromere" reverse-reference="centromereDNAElementIIIs"/>
 </class>
-
 <class name="Chromosome" extends="BiologicalRegion" is-interface="true"/>
 <class name="Comment" is-interface="true">
 	<attribute name="description" type="java.lang.String"/>
 	<attribute name="type" type="java.lang.String"/>
 </class>
+
 <class name="Complement" is-interface="true">
 	<attribute name="source" type="java.lang.String"/>
 	<attribute name="direction" type="java.lang.String"/>
@@ -105,10 +112,6 @@
 	<reference name="complement" referenced-type="Gene"/>
 	<collection name="crossReferences" referenced-type="CrossReference"/>
 	<collection name="dataSets" referenced-type="DataSet"/>
-</class>
-
-<class name="ComplexEvidence" extends="OntologyAnnotation" is-interface="true">
-	<collection name="publications" referenced-type="Publication"/>
 </class>
 
 <class name="Complex" is-interface="true">
@@ -126,6 +129,9 @@
 	<collection name="publications" referenced-type="Publication"/>
 </class>
 
+<class name="ComplexEvidence" extends="OntologyAnnotation" is-interface="true">
+	<collection name="publications" referenced-type="Publication"/>
+</class>
 <class name="CrossReference" is-interface="true">
 	<attribute name="dbxreftype" type="java.lang.String"/>
 	<attribute name="identifier" type="java.lang.String"/>
@@ -164,14 +170,14 @@
 </class>
 <class name="DiseaseAnnotation" extends="OntologyAnnotation" is-interface="true">
 	</class>
-<class name="DiseaseEvidence"  extends="OntologyEvidence" is-interface="true">
+<class name="DiseaseEvidence" extends="OntologyEvidence" is-interface="true">
 		<collection name="with" referenced-type="BioEntity"/>
 		<attribute name="withText" type="java.lang.String"/>
 		<attribute name="annotType" type="java.lang.String"/>
 		<reference name="code" referenced-type="DiseaseEvidenceCode"/>
 		<collection name="publications" referenced-type="Publication"/>
 	</class>
-<class name="DiseaseEvidenceCode"  extends="OntologyAnnotationEvidenceCode" is-interface="true">
+<class name="DiseaseEvidenceCode" extends="OntologyAnnotationEvidenceCode" is-interface="true">
 		<attribute name="code" type="java.lang.String"/>
 </class>
 <class name="ECOTerm" extends="OntologyTerm" is-interface="true"/>
@@ -266,19 +272,9 @@
 	<attribute name="includeGene" type="java.lang.Boolean"/>
 	<reference name="gene" referenced-type="Gene" reverse-reference="flankingRegions"/>
 </class>
+
 <class name="GeneGroup" extends="SequenceFeature" is-interface="true"/>
-<!--<class name="Homologue" is-interface="true">
-	<attribute name="source" type="java.lang.String"/>
-	<attribute name="type" type="java.lang.String"/>
-	<attribute name="bootstrapScore" type="java.lang.Integer"/>
-	<reference name="gene" referenced-type="Gene" reverse-reference="homologues"/>
-	<reference name="publication" referenced-type="Publication"/>
-	<reference name="homologue" referenced-type="Gene"/>
-	<collection name="evidence" referenced-type="OrthologueEvidence"/>
-	<collection name="crossReferences" referenced-type="CrossReference"/>
-	<collection name="dataSets" referenced-type="DataSet"/>
-</class>-->
-	<class name="Homologue" is-interface="true">
+<class name="Homologue" is-interface="true">
 		<attribute name="source" type="java.lang.String"/>
 		<attribute name="type" type="java.lang.String"/>
 		<attribute name="algorithms" type="java.lang.String"/>
@@ -299,6 +295,7 @@
 <class name="InteinEncodingRegion" extends="Gene" is-interface="true">
 	<reference name="orf" referenced-type="ORF" reverse-reference="inteinencodingregions"/>
 </class>
+
 <class name="Interaction" is-interface="true">
 	<reference name="participant1" referenced-type="BioEntity" reverse-reference="interactions"/>
 	<reference name="participant2" referenced-type="BioEntity"/>
@@ -306,8 +303,7 @@
 	<collection name="details" referenced-type="InteractionDetail" reverse-reference="interaction"/>
 	<collection name="alleleinteractions" referenced-type="AlleleInteraction"/>
 </class>
-
-<class name="InteractionDetail" is-interface="true">
+	<class name="InteractionDetail" is-interface="true">
 	<attribute name="phenotype" type="java.lang.String"/>
 	<attribute name="role2" type="java.lang.String"/>
 	<attribute name="type" type="java.lang.String"/>
@@ -326,12 +322,6 @@
 	<collection name="allInteractors" referenced-type="Interactor"/>
 	<collection name="dataSets" referenced-type="DataSet"/>
 </class>
-	<class name="AlleleInteraction" is-interface="true">
-		<attribute name="pvalue" type="java.lang.Float"/>
-		<attribute name="sgaScore" type="java.lang.Float"/>
-		<reference name="allele1" referenced-type="Allele"/>
-		<reference name="allele2" referenced-type="Allele"/>
-	</class>
 <class name="InteractionExperiment" is-interface="true">
 	<attribute name="description" type="java.lang.String"/>
 	<attribute name="hostOrganism" type="java.lang.String"/>
@@ -443,17 +433,17 @@
 	<collection name="evidence" referenced-type="OntologyEvidence"/>
 </class>
 
-	<class name="OntologyEvidence" is-interface="true">
-		<reference name="code" referenced-type="OntologyAnnotationEvidenceCode"/>
-		<collection name="publications" referenced-type="Publication"/>
-	</class>
-
 	<class name="OntologyAnnotationEvidenceCode" is-interface="true">
 		<attribute name="code" type="java.lang.String"/>
 		<attribute name="withText" type="java.lang.String"/>
 		<attribute name="annotType" type="java.lang.String"/>
 		<attribute name="name" type="java.lang.String"/>
 		<attribute name="url" type="java.lang.String"/>
+	</class>
+
+	<class name="OntologyEvidence" is-interface="true">
+		<reference name="code" referenced-type="OntologyAnnotationEvidenceCode"/>
+		<collection name="publications" referenced-type="Publication"/>
 	</class>
 
 
@@ -512,7 +502,7 @@
 <class name="PathwaySummary" is-interface="true">
 	<attribute name="summaryType" type="java.lang.String"/>
 	<attribute name="text" type="java.lang.String"/>
-	<collection name="publications" referenced-type="Publication" />
+	<collection name="publications" referenced-type="Publication"/>
 </class>
 <class name="Phenotype" is-interface="true">
 	<attribute name="mutantType" type="java.lang.String"/>
@@ -652,9 +642,7 @@
 	<!--<collection name="CDSs" referenced-type="CDS" reverse-reference="pseudogene"/>-->
 	<collection name="plus1translationalframeshifts" referenced-type="Plus1TranslationalFrameshift" reverse-reference="pseudogene"/>
 </class>
-	<class name="RecombinationEnhancer" extends="Gene" is-interface="true">
-	</class>
-<class name="Publication" is-interface="true">
+	<class name="Publication" is-interface="true">
 	<attribute name="year" type="java.lang.Integer"/>
 	<attribute name="citation" type="java.lang.String"/>
 	<attribute name="issue" type="java.lang.String"/>
@@ -684,10 +672,12 @@
 	<collection name="literatureTopics" referenced-type="LiteratureTopic"/>
 	<collection name="genes" referenced-type="Gene" reverse-reference="publicationAnnotations"/>
 </class>
-
 <class name="RNA" extends="BioEntity" is-interface="true"/>
 
 <class name="RRNAGene" extends="NcRNAGene" is-interface="true"/>
+
+<class name="RecombinationEnhancer" extends="Gene" is-interface="true">
+	</class>
 
 <class name="RegulationEvidence" extends="OntologyAnnotation" is-interface="true">
 	<collection name="publications" referenced-type="Publication"/>

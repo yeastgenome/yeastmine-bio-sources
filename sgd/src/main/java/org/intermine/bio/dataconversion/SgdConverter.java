@@ -81,7 +81,7 @@ public class SgdConverter extends BioDBConverter {
 	private static final String H_TAXON_ID = "9606";
 	private Item organism;
 	private Map<String, String> featureMap = new HashMap();
-	private static final boolean LOCAL = true;
+	private static final boolean LOCAL = false;
 	private String licence;
 
 
@@ -151,7 +151,7 @@ public class SgdConverter extends BioDBConverter {
 		storeAlleles();
 		storeTranscripts();
 
-		if(LOCAL) {
+		if(!LOCAL) {
 
 			 processPhysicalInteractions(connection);
 			 processGeneticInteractions(connection);
@@ -376,6 +376,8 @@ public class SgdConverter extends BioDBConverter {
 
 			String alleleNo = res.getString("allele");
 			String featureNo = res.getString("locus");
+
+			System.out.println(alleleNo + "\t"+featureNo);
 
 			Item gene = genes.get(featureNo);
 			Item allele = alleles.get(alleleNo);
@@ -2653,7 +2655,7 @@ public class SgdConverter extends BioDBConverter {
 					year, issue, abbreviation, dsId, firstAuthor, dbxrefid, note);*/
 
 		}
-		System.out.println("interaction count is : " + count);
+		System.out.println("physical interaction count is : " + count);
 	}
 
 	/**
@@ -2734,6 +2736,7 @@ public class SgdConverter extends BioDBConverter {
 					year, issue, abbreviation, dsId, firstAuthor, dbxrefid, note);*/
 
 		}
+		System.out.println("genetic interaction count is : " + count);
 	}
 
 	/**
@@ -2745,11 +2748,13 @@ public class SgdConverter extends BioDBConverter {
 
 	private void processGeneticInteractionsWithAlleles(Connection connection)
 			throws SQLException, ObjectStoreException {
+
 		System.out.println("Processing Genetic Interactions with Alleles.....");
 		ResultSet res = PROCESSOR.getGeneticInteractionWithAllelesResults(connection);
+		int count = 0;
 
 		while (res.next()) {
-
+	        count++;
 			String interactionNo = res.getString("interaction_id");
 			String annotationNo = res.getString("annotation_id");
 			String allele1_id =  res.getString("allele1_id");
@@ -2818,6 +2823,7 @@ public class SgdConverter extends BioDBConverter {
 			}
 
 		}
+		System.out.println("genetic allele interaction count is : " + count);
 	}
 
 	private void processPhenotypes(Connection connection) throws SQLException,
